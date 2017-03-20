@@ -61,7 +61,7 @@ class OystUser implements OystArrayInterface
     /**
      * @return string
      */
-    private function getFirstName()
+    public function getFirstName()
     {
         return $this->firstName;
     }
@@ -81,7 +81,7 @@ class OystUser implements OystArrayInterface
     /**
      * @return string
      */
-    private function getLastName()
+    public function getLastName()
     {
         return $this->lastName;
     }
@@ -101,7 +101,7 @@ class OystUser implements OystArrayInterface
     /**
      * @return string
      */
-    private function getEmail()
+    public function getEmail()
     {
         return $this->email;
     }
@@ -121,7 +121,7 @@ class OystUser implements OystArrayInterface
     /**
      * @return string
      */
-    private function getPhone()
+    public function getPhone()
     {
         return $this->phone;
     }
@@ -141,7 +141,7 @@ class OystUser implements OystArrayInterface
     /**
      * @return string
      */
-    private function getLanguage()
+    public function getLanguage()
     {
         return $this->language;
     }
@@ -161,7 +161,7 @@ class OystUser implements OystArrayInterface
     /**
      * @return array
      */
-    private function getAdditionalData()
+    public function getAdditionalData()
     {
         return $this->additionalData;
     }
@@ -181,9 +181,9 @@ class OystUser implements OystArrayInterface
     /**
      * @return array
      */
-    private function getAddresses()
+    public function getAddresses()
     {
-        return OystCollectionHelper::collectionToArray($this->addresses);
+        return $this->addresses;
     }
 
     /**
@@ -213,9 +213,9 @@ class OystUser implements OystArrayInterface
     /**
      * @return array
      */
-    private function getBillingAddresses()
+    public function getBillingAddresses()
     {
-        return OystCollectionHelper::collectionToArray($this->billingAddresses);
+        return $this->billingAddresses;
     }
 
     /**
@@ -248,14 +248,14 @@ class OystUser implements OystArrayInterface
     public function toArray()
     {
         $user = array(
-            'first_name'        => $this->getFirstName(),
-            'last_name'         => $this->getLastName(),
-            'language'          => $this->getLanguage(),
-            'email'             => $this->getEmail(),
-            'phone'             => $this->getPhone(),
-            'additional_data'   => $this->getAdditionalData(),
-            'addresses'         => $this->getAddresses(),
-            'billing_addresses' => $this->getBillingAddresses(),
+            'first_name'        => $this->firstName,
+            'last_name'         => $this->lastName,
+            'language'          => $this->language,
+            'email'             => $this->email,
+            'phone'             => $this->phone,
+            'additional_data'   => $this->additionalData,
+            'addresses'         => OystCollectionHelper::collectionToArray($this->addresses),
+            'billing_addresses' => OystCollectionHelper::collectionToArray($this->billingAddresses),
         );
 
         return $user;

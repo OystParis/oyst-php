@@ -39,7 +39,7 @@ class OystPrice implements OystArrayInterface
     /**
      * @return int
      */
-    private function getValue()
+    public function getValue()
     {
         return $this->value;
     }
@@ -51,7 +51,7 @@ class OystPrice implements OystArrayInterface
      */
     public function setValue($value)
     {
-        $this->value = $value;
+        $this->value = (int) $value * 100;
 
         return $this;
     }
@@ -59,7 +59,7 @@ class OystPrice implements OystArrayInterface
     /**
      * @return string
      */
-    private function getCurrency()
+    public function getCurrency()
     {
         return $this->currency;
     }
@@ -82,8 +82,8 @@ class OystPrice implements OystArrayInterface
     public function toArray()
     {
         $tax = array(
-            'value'    => $this->getValue(),
-            'currency' => $this->getCurrency()
+            'value'    => $this->value,
+            'currency' => $this->currency,
         );
 
         return $tax;

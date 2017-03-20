@@ -65,7 +65,7 @@ class OystAddress implements OystArrayInterface
     /**
      * @return string
      */
-    private function getFirstName()
+    public function getFirstName()
     {
         return $this->firstName;
     }
@@ -85,7 +85,7 @@ class OystAddress implements OystArrayInterface
     /**
      * @return string
      */
-    private function getLastName()
+    public function getLastName()
     {
         return $this->lastName;
     }
@@ -105,7 +105,7 @@ class OystAddress implements OystArrayInterface
     /**
      * @return string
      */
-    private function getCompanyName()
+    public function getCompanyName()
     {
         return $this->companyName;
     }
@@ -125,7 +125,7 @@ class OystAddress implements OystArrayInterface
     /**
      * @return string
      */
-    private function getLabel()
+    public function getLabel()
     {
         return $this->label;
     }
@@ -145,7 +145,7 @@ class OystAddress implements OystArrayInterface
     /**
      * @return string
      */
-    private function getStreet()
+    public function getStreet()
     {
         return $this->street;
     }
@@ -165,7 +165,7 @@ class OystAddress implements OystArrayInterface
     /**
      * @return string
      */
-    private function getComplementary()
+    public function getComplementary()
     {
         return $this->complementary;
     }
@@ -185,7 +185,7 @@ class OystAddress implements OystArrayInterface
     /**
      * @return string
      */
-    private function getCity()
+    public function getCity()
     {
         return $this->city;
     }
@@ -205,7 +205,7 @@ class OystAddress implements OystArrayInterface
     /**
      * @return string
      */
-    private function getPostCode()
+    public function getPostCode()
     {
         return $this->postCode;
     }
@@ -225,7 +225,7 @@ class OystAddress implements OystArrayInterface
     /**
      * @return string
      */
-    private function getRegion()
+    public function getRegion()
     {
         return $this->region;
     }
@@ -245,7 +245,7 @@ class OystAddress implements OystArrayInterface
     /**
      * @return string
      */
-    private function getCountry()
+    public function getCountry()
     {
         return $this->country;
     }
@@ -268,16 +268,16 @@ class OystAddress implements OystArrayInterface
     public function toArray()
     {
         $address = array(
-            'first_name'    => $this->getFirstName(),
-            'last_name'     => $this->getLastName(),
-            'company_name'  => $this->getCompanyName(),
-            'label'         => $this->getLabel(),
-            'street'        => $this->getStreet(),
-            'complementary' => $this->getComplementary(),
-            'postcode'      => $this->getPostCode(),
-            'city'          => $this->getCity(),
-            'region'        => $this->getRegion(),
-            'country'       => $this->getCountry(),
+            'first_name'    => $this->firstName,
+            'last_name'     => $this->lastName,
+            'company_name'  => $this->companyName,
+            'label'         => $this->label,
+            'street'        => $this->street,
+            'complementary' => $this->complementary,
+            'postcode'      => $this->postCode,
+            'city'          => $this->city,
+            'region'        => $this->region,
+            'country'       => $this->country,
         );
 
         return $address;

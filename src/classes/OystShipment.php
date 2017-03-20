@@ -40,7 +40,7 @@ class OystShipment implements OystArrayInterface
     /**
      * @return string
      */
-    private function getZone()
+    public function getZone()
     {
         return $this->zone;
     }
@@ -60,7 +60,7 @@ class OystShipment implements OystArrayInterface
     /**
      * @return string
      */
-    private function getCarrier()
+    public function getCarrier()
     {
         return $this->carrier;
     }
@@ -80,7 +80,7 @@ class OystShipment implements OystArrayInterface
     /**
      * @return string
      */
-    private function getDelay()
+    public function getDelay()
     {
         return $this->delay;
     }
@@ -100,7 +100,7 @@ class OystShipment implements OystArrayInterface
     /**
      * @return string
      */
-    private function getValue()
+    public function getValue()
     {
         return $this->value;
     }
@@ -120,7 +120,7 @@ class OystShipment implements OystArrayInterface
     /**
      * @return string
      */
-    private function getCurrency()
+    public function getCurrency()
     {
         return $this->currency;
     }
@@ -143,12 +143,12 @@ class OystShipment implements OystArrayInterface
     public function toArray()
     {
         $shipment = array(
-            'zone'    => $this->getZone(),
-            'carrier' => $this->getCarrier(),
-            'delay'   => $this->getDelay(),
+            'zone'    => $this->zone,
+            'carrier' => $this->carrier,
+            'delay'   => $this->delay,
             'amount'  => array(
-                'value'    => $this->getValue(),
-                'currency' => $this->getCurrency(),
+                'value'    => $this->value,
+                'currency' => $this->currency,
             ),
         );
 

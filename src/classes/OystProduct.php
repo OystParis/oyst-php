@@ -195,7 +195,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return string
      */
-    private function getRef()
+    public function getRef()
     {
         return $this->ref;
     }
@@ -215,7 +215,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return bool
      */
-    private function isActive()
+    public function isActive()
     {
         return $this->active;
     }
@@ -235,7 +235,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return bool
      */
-    private function isMaterialized()
+    public function isMaterialized()
     {
         return $this->materialized;
     }
@@ -255,7 +255,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return string
      */
-    private function getTitle()
+    public function getTitle()
     {
         return $this->title;
     }
@@ -275,7 +275,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return string
      */
-    private function getCondition()
+    public function getCondition()
     {
         return $this->condition;
     }
@@ -295,7 +295,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return string
      */
-    private function getShortDescription()
+    public function getShortDescription()
     {
         return $this->shortDescription;
     }
@@ -315,7 +315,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return string
      */
-    private function getDescription()
+    public function getDescription()
     {
         return $this->description;
     }
@@ -335,7 +335,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return array
      */
-    private function getTags()
+    public function getTags()
     {
         return $this->tags;
     }
@@ -367,7 +367,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return OystPrice
      */
-    private function getAmountIncludingTax()
+    public function getAmountIncludingTax()
     {
         return $this->amountIncludingTax;
     }
@@ -387,7 +387,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return string
      */
-    private function getUrl()
+    public function getUrl()
     {
         return $this->url;
     }
@@ -407,9 +407,9 @@ class OystProduct implements OystArrayInterface
     /**
      * @return array
      */
-    private function getCategories()
+    public function getCategories()
     {
-        return OystCollectionHelper::collectionToArray($this->categories);
+        return $this->categories;
     }
 
     /**
@@ -439,7 +439,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return string
      */
-    private function getManufacturer()
+    public function getManufacturer()
     {
         return $this->manufacturer;
     }
@@ -459,9 +459,9 @@ class OystProduct implements OystArrayInterface
     /**
      * @return array
      */
-    private function getShipments()
+    public function getShipments()
     {
-        return OystCollectionHelper::collectionToArray($this->shipments);
+        return $this->shipments;
     }
 
     /**
@@ -493,7 +493,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return string
      */
-    private function getSize()
+    public function getSize()
     {
         return $this->size;
     }
@@ -513,7 +513,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return int
      */
-    private function getAvailableQuantity()
+    public function getAvailableQuantity()
     {
         return $this->availableQuantity;
     }
@@ -533,7 +533,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return string
      */
-    private function getWeight()
+    public function getWeight()
     {
         return $this->weight;
     }
@@ -553,7 +553,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return bool
      */
-    private function isDiscounted()
+    public function isDiscounted()
     {
         return $this->discounted;
     }
@@ -573,7 +573,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return string
      */
-    private function getEan()
+    public function getEan()
     {
         return $this->ean;
     }
@@ -593,7 +593,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return string
      */
-    private function getUpc()
+    public function getUpc()
     {
         return $this->upc;
     }
@@ -613,7 +613,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return string
      */
-    private function getIsbn()
+    public function getIsbn()
     {
         return $this->isbn;
     }
@@ -633,7 +633,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return array
      */
-    private function getImages()
+    public function getImages()
     {
         return $this->images;
     }
@@ -667,7 +667,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return array
      */
-    private function getInformation()
+    public function getInformation()
     {
         return $this->information;
     }
@@ -689,7 +689,7 @@ class OystProduct implements OystArrayInterface
     /**
      * @return array
      */
-    private function getRelatedProducts()
+    public function getRelatedProducts()
     {
         return $this->relatedProducts;
     }
@@ -721,9 +721,9 @@ class OystProduct implements OystArrayInterface
     /**
      * @return array
      */
-    private function getVariations()
+    public function getVariations()
     {
-        return OystCollectionHelper::collectionToArray($this->variations);
+        return $this->variations;
     }
 
     /**
@@ -758,30 +758,30 @@ class OystProduct implements OystArrayInterface
     public function toArray()
     {
         $product = array(
-            'reference'              => $this->getRef(),
-            'is_active'              => $this->isActive(),
-            'is_materialized'        => $this->isMaterialized(),
-            'title'                  => $this->getTitle(),
-            'condition'              => $this->getCondition(),
-            'short_description'      => $this->getShortDescription(),
-            'description'            => $this->getDescription(),
-            'tags'                   => $this->getTags(),
-            'amount_including_taxes' => $this->getAmountIncludingTax(),
-            'url'                    => $this->getUrl(),
-            'categories'             => $this->getCategories(),
-            'manufacturer'           => $this->getManufacturer(),
-            'shipments'              => $this->getShipments(),
-            'size'                   => $this->getSize(),
-            'available_quantity'     => $this->getAvailableQuantity(),
-            'weight'                 => $this->getWeight(),
-            'is_discounted'          => $this->isDiscounted(),
-            'ean'                    => $this->getEan(),
-            'upc'                    => $this->getUpc(),
-            'isbn'                   => $this->getIsbn(),
-            'images'                 => $this->getImages(),
-            'informations'           => $this->getInformation(),
-            'related_products'       => $this->getRelatedProducts(),
-            'variations'             => $this->getVariations(),
+            'reference'              => $this->ref,
+            'is_active'              => $this->active,
+            'is_materialized'        => $this->materialized,
+            'title'                  => $this->title,
+            'condition'              => $this->condition,
+            'short_description'      => $this->shortDescription,
+            'description'            => $this->description,
+            'tags'                   => $this->tags,
+            'amount_including_taxes' => $this->amountIncludingTax ? $this->amountIncludingTax->toArray() : array(),
+            'url'                    => $this->url,
+            'categories'             => OystCollectionHelper::collectionToArray($this->categories),
+            'manufacturer'           => $this->manufacturer,
+            'shipments'              => OystCollectionHelper::collectionToArray($this->shipments),
+            'size'                   => $this->size,
+            'available_quantity'     => $this->availableQuantity,
+            'weight'                 => $this->weight,
+            'is_discounted'          => $this->discounted,
+            'ean'                    => $this->ean,
+            'upc'                    => $this->upc,
+            'isbn'                   => $this->isbn,
+            'images'                 => $this->images,
+            'informations'           => $this->information,
+            'related_products'       => $this->relatedProducts,
+            'variations'             => OystCollectionHelper::collectionToArray($this->variations),
         );
 
         return $product;

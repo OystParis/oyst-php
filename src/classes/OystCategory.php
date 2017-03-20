@@ -48,7 +48,7 @@ class OystCategory implements OystArrayInterface
     /**
      * @return string
      */
-    private function getRef()
+    public function getRef()
     {
         return $this->ref;
     }
@@ -88,7 +88,7 @@ class OystCategory implements OystArrayInterface
     /**
      * @return string
      */
-    private function getTitle()
+    public function getTitle()
     {
         return $this->title;
     }
@@ -111,9 +111,9 @@ class OystCategory implements OystArrayInterface
     public function toArray()
     {
         $category = array(
-            'reference' => $this->getRef(),
-            'is_main'   => $this->isMain(),
-            'title'     => $this->getTitle(),
+            'reference' => $this->ref,
+            'is_main'   => $this->main,
+            'title'     => $this->title,
         );
 
         return $category;
