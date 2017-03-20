@@ -1,12 +1,22 @@
 <?php
 
+/**
+ * Class OystConfigurationLoader
+ *
+ * PHP version 5.2
+ *
+ * @category Oyst
+ * @author   Oyst <dev@oyst.com>
+ * @license  Copyright 2017, Oyst
+ * @link     http://www.oyst.com
+ */
 class OystConfigurationLoader
 {
     /** @var  string */
     private $configurationFile;
 
     /**
-     * @var Yampee_Yaml_Parser
+     * @var \Symfony\Component\Yaml\Parser
      */
     private $yamlParser;
 
@@ -14,8 +24,7 @@ class OystConfigurationLoader
     private $parameters;
 
     /**
-     * OystConfigurationLoader constructor
-     * @param Yampee_Yaml_Parser $yamlParser
+     * @param \Symfony\Component\Yaml\Parser $yamlParser
      */
     public function __construct(Yampee_Yaml_Parser $yamlParser)
     {
