@@ -25,6 +25,7 @@ class OystCatalogAPI extends OystAPIHelper
      */
     public function __construct(OystProductApiConfigurationLoader $oystProductApiConfigurationLoader, $apiKey, $userAgent)
     {
+        $oystProductApiConfigurationLoader->setEntity('catalog');
         parent::__construct($oystProductApiConfigurationLoader, $apiKey, $userAgent);
     }
 

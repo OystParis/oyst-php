@@ -1,25 +1,40 @@
 api:
-    prod:
-        url: https://api.staging.oyst.eu
+    url:
+      preprod:
+        catalog: https://api.staging.oyst.eu/catalog
+        order: https://api.staging.oyst.eu/order
+      prod:
+        catalog: https://api.oyst.com/catalog
+        order: https://api.oyst.com/order
+      integration:
+        catalog: https://catalog-api-integration.herokuapp.com
+        order: https://order-api-integration.herokuapp.com
 
-    dev:
-        url: https://api.oyst.com
+    default:
+      version: 1
+      environment: integration
+
+    settings:
+      allowed_versions: [1]
+      allowed_environments: [preprod, prod, integration]
+      allowed_entities: [catalog, order]
 
     endpoints:
+      v1:
         catalog:
-            addProducts:
-                method: POST
-                endpoint: /catalog/products
-            updateProducts:
-                method: PATCH
-                endpoint: /catalog/products
-            getProducts:
-                method: GET
-                endpoint: /catalog/products
+          addProducts:
+              method: POST
+              endpoint: /products
+          updateProducts:
+              method: PATCH
+              endpoint: /products
+          getProducts:
+              method: GET
+              endpoint: /products
         order:
-            getOrders:
-                method: GET
-                endpoint: /order/orders
-            authorize:
-                method: POST
-                endpoint: /order/authorize
+          getOrders:
+              method: GET
+              endpoint: /orders
+          authorize:
+              method: POST
+              endpoint: /authorize

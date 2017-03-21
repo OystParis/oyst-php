@@ -34,11 +34,9 @@ class OystConfigurationLoader
             throw new Exception('Configuration file missing: '.$this->configurationFile);
         }
 
-        if (isset($this->parameters)) {
-            return $this;
+        if (!isset($this->parameters)) {
+            $this->parameters = $this->yamlParser->parse(file_get_contents($this->configurationFile));
         }
-
-        $this->parameters = $this->yamlParser->parse(file_get_contents($this->configurationFile));
 
         return $this;
     }

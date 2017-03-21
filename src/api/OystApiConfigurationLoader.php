@@ -2,12 +2,25 @@
 
 abstract class OystApiConfigurationLoader extends OystConfigurationLoader
 {
-    const ENV_PROD = 'prod';
+    const DEFAULT_ENV = 'prod';
 
-    const ENV_DEV = 'dev';
+    /** @var  int */
+    private $version;
 
     /** @var  string */
-    private $environment = self::ENV_PROD;
+    private $environment;
+
+    /** @var  array */
+    private $allowedVersions;
+
+    /** @var  array */
+    private $allowedEnvironments;
+
+    /** @var  string */
+    private $entity;
+
+    /** @var  array */
+    private $allowedEntities;
 
     /**
      * @return array
@@ -22,7 +35,7 @@ abstract class OystApiConfigurationLoader extends OystConfigurationLoader
      */
     final public function getEndpoints()
     {
-        return $this->getParameters()['endpoints'];
+        return $this->getParameters()['endpoints']['v'.$this->version];
     }
 
     /**
@@ -55,7 +68,7 @@ abstract class OystApiConfigurationLoader extends OystConfigurationLoader
      */
     public function setEnvironment($environment)
     {
-        if (in_array($environment, [self::ENV_PROD, self::ENV_DEV])) {
+        if (in_array($environment, $this->allowedEnvironments)) {
             $this->environment = $environment;
         }
         return $this;
@@ -66,6 +79,82 @@ abstract class OystApiConfigurationLoader extends OystConfigurationLoader
      */
     public function getApiUrl()
     {
-        return $this->getParameters()[$this->environment]['url'];
+        return $this->getParameters()['url'][$this->environment][$this->entity];
+    }
+
+    /**
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * @param int $version
+     * @return $this
+     */
+    public function setVersion($version)
+    {
+        if (in_array($version, $this->allowedVersions)) {
+            $this->version = $version;
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getEntity()
+    {
+        return $this->entity;
+    }
+
+    /**
+     * @param string $entity
+     * @return $this
+     */
+    public function setEntity($entity)
+    {
+        if (in_array($entity, $this->allowedEntities)) {
+            $this->entity = $entity;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSettings()
+    {
+        return $this->getParameters()['settings'];
+    }
+
+    /**
+     * @return array
+     */
+    public function getDefault()
+    {
+        return $this->getParameters()['default'];
+    }
+
+    /**
+     * @return $this
+     */
+    public function load()
+    {
+        parent::load();
+
+        $this->allowedVersions = $this->getSettings()['allowed_versions'];
+        $this->allowedEnvironments = $this->getSettings()['allowed_environments'];
+        $this->allowedEntities = $this->getSettings()['allowed_entities'];
+
+        $this->setEnvironment($this->getDefault()['environment']);
+        $this->setVersion($this->getDefault()['version']);
+
+        return $this;
     }
 }
