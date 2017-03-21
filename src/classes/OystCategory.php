@@ -38,11 +38,11 @@ class OystCategory implements OystArrayInterface
      * @param string $title
      * @param bool   $isMain
      */
-    public function __construct($ref, $title, $isMain = false)
+    public function __construct($ref, $title, $main = false)
     {
-        $this->ref    = $ref;
-        $this->title  = $title;
-        $this->main = $isMain;
+        $this->ref   = $ref;
+        $this->title = $title;
+        $this->main  = $main;
     }
 
     /**

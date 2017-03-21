@@ -10,7 +10,7 @@
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
-class OystOrder
+class OystOrder implements Guzzle\Service\Command\ResponseClassInterface
 {
     /**
      * @var string
@@ -113,6 +113,19 @@ class OystOrder
         $this->createdAt        = OystObjectHelper::getDate($data['created_at']);
         $this->updatedAt        = OystObjectHelper::getDate($data['updated_at']);
         $this->quantity         = OystObjectHelper::getValue($data['quantity']);
+    }
+
+    /**
+     * @param \Guzzle\Service\Command\OperationCommand $command
+     *
+     * @return OystOrder
+     */
+    public static function fromCommand(\Guzzle\Service\Command\OperationCommand $command)
+    {
+        $result = $command->getResponse()->json();
+        $order  = new self($result);
+
+        return $order;
     }
 
     /**

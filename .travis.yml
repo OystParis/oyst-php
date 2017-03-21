@@ -11,5 +11,8 @@ before_install:
 install:
   - composer install --no-interaction --prefer-source
 
+before_script:
+  - echo 'date.timezone = "Europe/Paris"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+
 script:
   - vendor/bin/phpunit tests/

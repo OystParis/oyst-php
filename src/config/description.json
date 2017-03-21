@@ -1,0 +1,26 @@
+{
+    "name": "API",
+    "apiVersion": "1.0",
+    "description": "Oyst API",
+    "operations": {
+        "PostProducts": {
+            "httpMethod": "POST",
+            "uri": "products",
+            "summary": "Send a SMS",
+            "parameters": {
+                "products": {
+                    "location": "body",
+                    "type": "array",
+                    "description": "Products to send",
+                    "required": "true"
+                }
+            }
+        },
+        "GetOrder": {
+            "uri": "users/{user_id}",
+            "summary": "Show user details",
+            "responseType": "class",
+            "responseClass": "\\Model\\Order"
+        }
+    }
+}

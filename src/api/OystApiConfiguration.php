@@ -1,85 +1,51 @@
 <?php
 
-abstract class OystApiConfigurationLoader extends OystConfigurationLoader
+/**
+ * Class OystApiConfiguration
+ *
+ * @category Oyst
+ * @author   Oyst <dev@oyst.com>
+ * @license  Copyright 2017, Oyst
+ * @link     http://www.oyst.com
+ */
+class OystApiConfiguration
 {
-    const DEFAULT_ENV = 'prod';
+    /** @var array */
+    private $parameters;
 
-    /** @var  int */
+    /** @var int */
     private $version;
 
-    /** @var  string */
+    /** @var string */
     private $environment;
 
-    /** @var  array */
+    /** @var array */
     private $allowedVersions;
 
-    /** @var  array */
+    /** @var array */
     private $allowedEnvironments;
 
-    /** @var  string */
+    /** @var string */
     private $entity;
 
-    /** @var  array */
+    /** @var array */
     private $allowedEntities;
+
+    /**
+     * @param \Symfony\Component\Yaml\Parser $yamlParser
+     */
+    public function __construct(\Symfony\Component\Yaml\Parser $yamlParser, $descriptionFile)
+    {
+        $this->parametersFile = $descriptionFile;
+        $this->yamlParser     = $yamlParser;
+    }
 
     /**
      * @return array
      */
     final public function getParameters()
     {
-        return parent::getParameters()['api'];
-    }
-
-    /**
-     * @return array
-     */
-    final public function getEndpoints()
-    {
-        return $this->getParameters()['endpoints']['v'.$this->version];
-    }
-
-    /**
-     * @return array
-     */
-    final public function getCatalogEndpoints()
-    {
-        return $this->getEndpoints()['catalog'];
-    }
-
-    /**
-     * @return array
-     */
-    final public function getOrderEndpoints()
-    {
-        return $this->getEndpoints()['order'];
-    }
-
-    /**
-     * @return string
-     */
-    public function getEnvironment()
-    {
-        return $this->environment;
-    }
-
-    /**
-     * @param $environment
-     * @return $this
-     */
-    public function setEnvironment($environment)
-    {
-        if (in_array($environment, $this->allowedEnvironments)) {
-            $this->environment = $environment;
-        }
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getApiUrl()
-    {
-        return $this->getParameters()['url'][$this->environment][$this->entity];
+        return $this->parameters['api'];
     }
 
     /**
@@ -92,6 +58,7 @@ abstract class OystApiConfigurationLoader extends OystConfigurationLoader
 
     /**
      * @param int $version
+     *
      * @return $this
      */
     public function setVersion($version)
@@ -103,6 +70,27 @@ abstract class OystApiConfigurationLoader extends OystConfigurationLoader
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getEnvironment()
+    {
+        return $this->environment;
+    }
+
+    /**
+     * @param $environment
+     *
+     * @return $this
+     */
+    public function setEnvironment($environment)
+    {
+        if (in_array($environment, $this->allowedEnvironments)) {
+            $this->environment = $environment;
+        }
+
+        return $this;
+    }
 
     /**
      * @return string
@@ -114,6 +102,7 @@ abstract class OystApiConfigurationLoader extends OystConfigurationLoader
 
     /**
      * @param string $entity
+     *
      * @return $this
      */
     public function setEntity($entity)
@@ -123,6 +112,14 @@ abstract class OystApiConfigurationLoader extends OystConfigurationLoader
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApiUrl()
+    {
+        return $this->getParameters()['url'][$this->environment][$this->entity];
     }
 
     /**
@@ -146,8 +143,15 @@ abstract class OystApiConfigurationLoader extends OystConfigurationLoader
      */
     public function load()
     {
-        parent::load();
+        if (!file_exists($this->parametersFile)) {
+            throw new Exception('Configuration file missing: '.$this->parametersFile);
+        }
 
+        if (isset($this->parameters)) {
+            return $this;
+        }
+
+        $this->parameters = $this->yamlParser->parse(file_get_contents($this->parametersFile));
         $this->allowedVersions = $this->getSettings()['allowed_versions'];
         $this->allowedEnvironments = $this->getSettings()['allowed_environments'];
         $this->allowedEntities = $this->getSettings()['allowed_entities'];

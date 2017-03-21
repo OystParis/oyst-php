@@ -3,34 +3,16 @@
 /**
  * Class OystCatalogAPI
  *
- * PHP version 5.2
- *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
-class OystCatalogAPI extends OystAPIHelper
+class OystCatalogAPI extends OystApiClient
 {
     /**
-     * @var OystProductApiConfigurationLoader
-     */
-    protected $apiConfigurationLoader;
-
-    /**
-     * OystCatalogAPI constructor.
-     * @param OystProductApiConfigurationLoader $oystProductApiConfigurationLoader
-     * @param string $apiKey
-     * @param string $userAgent
-     */
-    public function __construct(OystProductApiConfigurationLoader $oystProductApiConfigurationLoader, $apiKey, $userAgent)
-    {
-        $oystProductApiConfigurationLoader->setEntity('catalog');
-        parent::__construct($oystProductApiConfigurationLoader, $apiKey, $userAgent);
-    }
-
-    /**
-     * @param $oystProducts
+     * @param OystProduct[] $oystProducts
+     *
      * @return mixed
      */
     public function postProducts($oystProducts)
@@ -38,54 +20,24 @@ class OystCatalogAPI extends OystAPIHelper
         $formattedData = [];
         /** @var OystArrayInterface $product */
         foreach ($oystProducts as $oystProduct) {
-            $productData = $oystProduct->toArray();
-            OystCollectionHelper::cleanData($productData);
-            $formattedData[] = $productData;
+            $formattedData[] = $oystProduct->toArray();
         }
 
-        $data = array('products' => $formattedData);
-        $endpointInfo = $this->apiConfigurationLoader->getMethodAddProducts();
+        $data     = array('products' => $oystProducts);
+        $response = $this->executeCommand('PostProducts', $data);
 
-        return $this->send($endpointInfo['method'], $endpointInfo['endpoint'], $data);
+        return $response;
     }
 
     /**
-     * PUT /products/{id}
+     * @param $orderId
      *
-     * @param OystProduct $product
-     *
-     * @return array
+     * @return string
      */
-    public function putProduct(OystProduct $product)
+    public function notifyImport()
     {
-        $endpointInfo = $this->apiConfigurationLoader->getMethodUpdateProducts();
-        $url  = $endpointInfo['endpoint'].$product->getId();
-        $data = $product->toArray();
+        $response = $this->executeCommand('NotifyImport');
 
-        return $this->send($endpointInfo['method'], $url, $data);
-    }
-
-    /**
-     * DELETE /products/{id}
-     *
-     * @param OystProduct $oystProduct
-     * @return array
-     *
-     */
-    public function deleteProduct(OystProduct $oystProduct)
-    {
-        $endpointInfo = $this->apiConfigurationLoader->getMethodDeleteProducts();
-        $url  = $endpointInfo['endpoint'].$oystProduct->getId();
-
-        return $this->send($endpointInfo['method'], $url);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function requestNewExport()
-    {
-        $endpointInfo = $this->apiConfigurationLoader->getMethodNotifyNewExport();
-        return $this->send($endpointInfo['method'], $endpointInfo['endpoint']);
+        return $response;
     }
 }
