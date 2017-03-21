@@ -227,7 +227,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setActive($active)
     {
-        $this->active = $active;
+        $this->active = (bool) $active;
 
         return $this;
     }
@@ -545,7 +545,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setWeight($weight)
     {
-        $this->weight = $weight;
+        $this->weight = (int) $weight;
 
         return $this;
     }

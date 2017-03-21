@@ -42,7 +42,7 @@ class OystCategory implements OystArrayInterface
     {
         $this->ref    = $ref;
         $this->title  = $title;
-        $this->isMain = $isMain;
+        $this->main = $isMain;
     }
 
     /**

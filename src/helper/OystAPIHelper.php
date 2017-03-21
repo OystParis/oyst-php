@@ -31,8 +31,11 @@ abstract class OystAPIHelper
     /** @var  bool */
     protected $hadError;
 
-    /** @var   */
+    /** @var  string */
     private $lastError;
+
+    /** @var  string */
+    private $lastHttpCode;
 
     /**
      * @param OystApiConfigurationLoader $apiConfigurationLoader
@@ -90,7 +93,7 @@ abstract class OystAPIHelper
             $this->hadError = true;
             $this->lastError =  curl_errno($ch);
         }
-
+        $this->lastHttpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
         return $response;
@@ -110,5 +113,13 @@ abstract class OystAPIHelper
     public function getLastError()
     {
         return $this->lastError;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastHttpCode()
+    {
+        return $this->lastHttpCode;
     }
 }
