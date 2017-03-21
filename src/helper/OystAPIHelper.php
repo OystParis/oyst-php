@@ -69,31 +69,33 @@ abstract class OystAPIHelper
             $endpoint
         ;
 
-        $dataJson = json_encode($data);
+        $headers = [
+            'User-Agent: '.$this->userAgent,
+            'Authorization: Bearer '.$this->apiKey
+        ];
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, trim($url));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 2000);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json; charset=utf-8',
-            'Content-Length: '.strlen($dataJson),
-            'User-Agent: '.$this->userAgent,
-            'Authorization: Bearer '.$this->apiKey
-        ));
 
         if ($data && in_array($method, array('POST', 'PUT'))) {
+            $dataJson = json_encode($data);
+            $headers = array_merge($headers, [
+                'Content-Type: application/json; charset=utf-8',
+                'Content-Length: '.strlen($dataJson),
+            ]);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $dataJson);
         }
 
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         $response = curl_exec($ch);
         if (!$response) {
             $this->hadError = true;
             $this->lastError =  curl_errno($ch);
         }
-        $this->lastHttpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$this->lastHttpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
         return $response;

@@ -39,6 +39,6 @@ class OystProductApiConfigurationLoader extends OystApiConfigurationLoader
      */
     final public function getMethodNotifyNewExport()
     {
-        return $this->getCatalogEndpoints()['notifyExport'];
+        return $this->getCatalogEndpoints()['notifyNewExport'];
     }
 }
