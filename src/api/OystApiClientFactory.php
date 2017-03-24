@@ -18,7 +18,7 @@ class OystApiClientFactory
      */
     public static function createCatalogApiClient($apiKey, $userAgent)
     {
-        $client     = self::createClient('catalog', $apiKey, $userAgent);
+        $client     = self::createClient('catalog');
         $catalogApi = new OystCatalogAPI($client, $apiKey, $userAgent);
 
         return $catalogApi;
@@ -32,7 +32,7 @@ class OystApiClientFactory
      */
     public static function createOrderApiClient($apiKey, $userAgent)
     {
-        $client   = self::createClient('order', $apiKey, $userAgent);
+        $client   = self::createClient('order');
         $orderApi = new OystOrderAPI($client, $apiKey, $userAgent);
 
         return $orderApi;
@@ -46,7 +46,7 @@ class OystApiClientFactory
      */
     public static function createPaymentApiClient($apiKey, $userAgent)
     {
-        $client     = self::createClient('payment', $apiKey, $userAgent);
+        $client     = self::createClient('payment');
         $paymentApi = new OystPaymentAPI($client, $apiKey, $userAgent);
 
         return $paymentApi;
@@ -56,19 +56,32 @@ class OystApiClientFactory
      * @param string $apiKey
      * @param string $userAgent
      *
+     * @return OystOrderAPI
+     */
+    public static function createOneClickApiClient($apiKey, $userAgent)
+    {
+        $client   = self::createClient('oneclick');
+        $orderApi = new OystOrderAPI($client, $apiKey, $userAgent);
+
+        return $orderApi;
+    }
+
+    /**
+     * @param string $apiKey
+     * @param string $userAgent
+     *
      * @return \Guzzle\Service\Client
      */
-    private static function createClient($entity, $apiKey, $userAgent)
+    private static function createClient($entity)
     {
         $configurationLoader = self::getApiConfiguration($entity);
         $description = self::getApiDescription();
 
-        $client = new \Guzzle\Service\Client($configurationLoader->getApiUrl());
+        $baseUrl = $configurationLoader->getApiUrl();
+        //$baseUrl = trim($configurationLoader->getApiUrl(), '/').'/'.$description->getApiVersion();
+
+        $client = new \Guzzle\Service\Client($baseUrl);
         $client->setDescription($description);
-        $client->setDefaultOption('headers', array(
-            'Authorization' => 'Bearer '.$apiKey,
-            'User-Agent'    => $userAgent
-        ));
 
         return $client;
     }

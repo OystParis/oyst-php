@@ -24,7 +24,6 @@ class OystPaymentAPI extends OystApiClient
      */
     public function payment($amount, $currency, $cartId, $urls, $is3d, $user)
     {
-        $url  = 'payments';
         $data = array(
             'user'     => $user,
             'order_id' => (string) $cartId,
@@ -41,6 +40,8 @@ class OystPaymentAPI extends OystApiClient
             ),
         );
 
-        return $this->send('POST', $url, $data);
+        $response = $this->executeCommand('SendPayment', $data);
+
+        return $response;
     }
 }

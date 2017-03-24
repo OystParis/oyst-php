@@ -1,47 +1,19 @@
 api:
+    environment: preprod
+
     url:
-        preprod:
-            catalog: https://api.staging.oyst.eu/catalog
-            order: https://api.staging.oyst.eu/order
-            payment: https://api.staging.oyst.eu/payment
-        prod:
-            catalog: https://api.oyst.com/catalog
-            order: https://api.oyst.com/order
-            payment: https://api.oyst.com/payment
         integration:
             catalog: https://catalog-api-integration.herokuapp.com
             order: https://order-api-integration.herokuapp.com
             payment: https://payment-api-integration.herokuapp.com
-
-    default:
-        version: 1
-        environment: integration
-
-    settings:
-        allowed_versions: [1]
-        allowed_environments: [preprod, prod, integration]
-        allowed_entities: [catalog, order, payment]
-
-    endpoints:
-        v1:
-            catalog:
-                addProducts:
-                    method: POST
-                    endpoint: /products
-                updateProducts:
-                    method: PATCH
-                    endpoint: /products
-                getProducts:
-                    method: GET
-                    endpoint: /products
-            order:
-                getOrders:
-                    method: GET
-                    endpoint: /orders
-                authorize:
-                    method: POST
-                    endpoint: /authorize
-            payment:
-                sendPayment:
-                    method: POST
-                    endpoint: /
+            oneclick: https://oneclick-api-integration.herokuapp.com
+        preprod:
+            catalog: https://catalog-api-integration.herokuapp.com
+            order: https://api.staging.oyst.eu/orders
+            payment: https://api.staging.oyst.eu/payment
+            oneclick: https://api.staging.oyst.eu/oneclick
+        prod:
+            catalog: https://api.oyst.com/catalog
+            order: https://api.oyst.com/oneclick/order
+            payment: https://api.oyst.com/payment
+            oneclick: https://api.oyst.com/oneclick

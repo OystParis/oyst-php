@@ -29,14 +29,15 @@ class OystOrderAPI extends OystApiClient
      */
     public function getOrders($page = 1, $perPage = 100, $statuses = array())
     {
-        $params = http_build_query(array(
+        $data = array(
             'page'     => $page,
             'per_page' => $perPage,
             'status'   => empty($statuses) ? array(self::STATUS_ACCEPTED, self::STATUS_PENDING) : $statuses
-        ));
-        $url = 'orders?'.$params;
+        );
 
-        return $this->send('GET', $url);
+        $response = $this->executeCommand('GetOrderList', $data);
+
+        return $response;
     }
 
     /**
@@ -44,29 +45,17 @@ class OystOrderAPI extends OystApiClient
      *
      * @param $orderId
      *
-     * @return array
+     * @return string
      */
     public function getOrder($orderId)
     {
-        $url = 'orders/'.$orderId;
-
-        return $this->send('GET', $url);
-    }
-
-    /**
-     * PATCH /orders/{id}
-     *
-     * @param int    $id
-     * @param string $status One of the available status (see constants)
-     */
-    public function patchOrder($orderId, $status)
-    {
-        $url  = 'orders/'.$orderId;
         $data = array(
-            'status' => $status
+            'id' => $orderId,
         );
 
-        return $this->send('PATCH', $url, $data);
+        $response = $this->executeCommand('GetOrder', $data);
+
+        return $response;
     }
 
     /**
@@ -77,11 +66,10 @@ class OystOrderAPI extends OystApiClient
      * @param int           $quantity
      * @param OystUser|null $user
      *
-     * @return array
+     * @return string
      */
-    public function authorizeOrder($productRef, $skuRef, $quantity, User $user = null)
+    public function authorizeOrder($productRef, $skuRef, $quantity, OystUser $user = null)
     {
-        $url  = 'orders/authorize';
         $data = array(
             'product_reference' => $productRef,
             'sku_reference'     => $skuRef,
@@ -92,6 +80,8 @@ class OystOrderAPI extends OystApiClient
             $data['user'] = $user->toArray();
         }
 
-        return $this->send('POST', $url, $data);
+        $response = $this->executeCommand('AuthorizeOrder', $data);
+
+        return $response;
     }
 }
