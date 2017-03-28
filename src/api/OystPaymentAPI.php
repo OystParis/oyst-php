@@ -11,8 +11,6 @@
 class OystPaymentAPI extends OystApiClient
 {
     /**
-     * POST /payments
-     *
      * @param float  $amount
      * @param string $currency
      * @param string $cartId
@@ -20,7 +18,7 @@ class OystPaymentAPI extends OystApiClient
      * @param bool   $is3d
      * @param array  $user
      *
-     * @return mixed The result on success, false on failure
+     * @return mixed
      */
     public function payment($amount, $currency, $cartId, $urls, $is3d, $user)
     {

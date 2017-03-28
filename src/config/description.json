@@ -14,7 +14,7 @@
             "summary": "Send products",
             "parameters": {
                 "products": {
-                    "location": "postField",
+                    "location": "json",
                     "type": "array",
                     "description": "Products to send",
                     "required": true

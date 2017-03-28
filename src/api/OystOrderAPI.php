@@ -19,8 +19,6 @@ class OystOrderAPI extends OystApiClient
     const STATUS_FINALIZED = 'finalized';
 
     /**
-     * GET /orders
-     *
      * @param int    $page    1 by default
      * @param int    $perPage 100 by default
      * @param string $status  Array of available status (see constants)
@@ -41,8 +39,6 @@ class OystOrderAPI extends OystApiClient
     }
 
     /**
-     * GET /orders/{id}
-     *
      * @param $orderId
      *
      * @return string
@@ -59,8 +55,6 @@ class OystOrderAPI extends OystApiClient
     }
 
     /**
-     * POST /orders/authorize
-     *
      * @param string        $productRef
      * @param string        $skuRef
      * @param int           $quantity
