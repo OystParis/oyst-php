@@ -20,10 +20,14 @@ class OystCatalogAPI extends OystApiClient
         $formattedData = [];
         /** @var OystArrayInterface $product */
         foreach ($oystProducts as $oystProduct) {
-            $formattedData[] = $oystProduct->toArray();
+            $oystProductArray = $oystProduct->toArray();
+
+            OystCollectionHelper::cleanData($oystProductArray);
+
+            $formattedData[] = $oystProductArray;
         }
 
-        $data     = array('products' => $oystProducts);
+        $data     = array('products' => $formattedData);
         $response = $this->executeCommand('PostProducts', $data);
 
         return $response;
