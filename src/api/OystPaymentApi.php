@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Class OystPaymentAPI
+ * Class OystPaymentApi
  *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
-class OystPaymentAPI extends OystApiClient
+class OystPaymentApi extends AbstractOystApiClient
 {
     /**
      * @param float  $amount

@@ -34,9 +34,9 @@ class OystSize implements OystArrayInterface
      */
     public function __construct($height, $width, $depth)
     {
-        $this->height = $height;
-        $this->width  = $width;
-        $this->depth  = $depth;
+        $this->setHeight($height);
+        $this->setWidth($width);
+        $this->setDepth($depth);
     }
 
     /**
@@ -49,10 +49,14 @@ class OystSize implements OystArrayInterface
 
     /**
      * @param int $height
+     *
+     * @return OystSize
      */
     public function setHeight($height)
     {
-        $this->height = $height;
+        $this->height = (int) $height;
+
+        return $this;
     }
 
     /**
@@ -65,10 +69,14 @@ class OystSize implements OystArrayInterface
 
     /**
      * @param int $width
+     *
+     * @return OystSize
      */
     public function setWidth($width)
     {
-        $this->width = $width;
+        $this->width = (int) $width;
+
+        return $this;
     }
 
     /**
@@ -81,10 +89,14 @@ class OystSize implements OystArrayInterface
 
     /**
      * @param int $depth
+     *
+     * @return OystSize
      */
     public function setDepth($depth)
     {
-        $this->depth = $depth;
+        $this->depth = (int) $depth;
+
+        return $this;
     }
 
     /**

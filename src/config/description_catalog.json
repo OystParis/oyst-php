@@ -1,0 +1,57 @@
+{
+    "name": "API Catalog",
+    "apiVersion": "v1",
+    "description": "Oyst API Catalog",
+    "operations": {
+        "NotifyImport": {
+            "httpMethod": "POST",
+            "uri": "import",
+            "summary": "Notify worker to start import catalog"
+        },
+        "PostProducts": {
+            "httpMethod": "POST",
+            "uri": "products",
+            "summary": "Send products",
+            "parameters": {
+                "products": {
+                    "location": "json",
+                    "type": "array",
+                    "description": "Products to send",
+                    "required": true
+                }
+            }
+        },
+        "PutProduct": {
+            "httpMethod": "PUT",
+            "uri": "products/{id}",
+            "summary": "Update a product",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "type": "string",
+                    "description": "Product reference",
+                    "required": true
+                },
+                "product": {
+                    "location": "json",
+                    "type": "object",
+                    "description": "Product data",
+                    "required": true
+                }
+            }
+        },
+        "DeleteProduct": {
+            "httpMethod": "DELETE",
+            "uri": "products/{id}",
+            "summary": "Delete a product",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "type": "string",
+                    "description": "Product reference",
+                    "required": true
+                }
+            }
+        }
+    }
+}

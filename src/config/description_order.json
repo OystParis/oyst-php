@@ -1,0 +1,246 @@
+{
+    "name": "API Order",
+    "apiVersion": "v1",
+    "description": "Oyst API Order",
+    "operations": {
+        "GetOrderList": {
+            "httpMethod": "GET",
+            "uri": "",
+            "summary": "Get order list (paginated)",
+            "responseClass": "orders",
+            "parameters": {
+                "page": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The page number to view the list",
+                    "required": false
+                },
+                "perPage": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The total of orders by page",
+                    "required": false
+                },
+                "status": {
+                    "location": "query",
+                    "type": "array",
+                    "description": "The statuses on which to filter",
+                    "required": false
+                }
+            }
+        },
+        "GetOrder": {
+            "httpMethod": "GET",
+            "uri": "orders/{id}",
+            "summary": "Get an order",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "type": "string",
+                    "description": "The order id",
+                    "required": true
+                }
+            }
+        }
+    },
+    "models": {
+        "amount": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "value": {
+                    "type": "int",
+                    "sentAs": "value"
+                },
+                "currency": {
+                    "type": "string",
+                    "sentAs": "currency"
+                }
+            }
+        },
+        "order": {
+            "type": "object",
+            "additionalProperties": false,
+            "location": "json",
+            "properties": {
+                "id": {
+                    "type": "int",
+                    "sentAs": "id"
+                },
+                "productReference": {
+                    "type": "string",
+                    "sentAs": "product_reference"
+                },
+                "variationReference": {
+                    "type": "string",
+                    "sentAs": "variation_reference"
+                },
+                "productAmount": {
+                    "$ref": "amount",
+                    "sentAs": "product_amount"
+                },
+                "orderAmount": {
+                    "$ref": "amount",
+                    "sentAs": "order_amount"
+                },
+                "currentStatus": {
+                    "type": "string",
+                    "sentAs": "current_status"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "sentAs": "created_at"
+                },
+                "merchantId": {
+                    "type": "string",
+                    "sentAs": "merchant_id"
+                },
+                "quantity": {
+                    "type": "int",
+                    "sentAs": "quantity"
+                },
+                "shipment": {
+                    "type": "object",
+                    "sentAs": "shipment",
+                    "additionalProperties": false,
+                    "properties": {
+                        "amount": {
+                            "$ref": "amount",
+                            "sentAs": "amount"
+                        },
+                        "carrier": {
+                            "type": "string",
+                            "sentAs": "carrier"
+                        },
+                        "tracking": {
+                            "type": "string",
+                            "sentAs": "tracking"
+                        },
+                        "url": {
+                            "type": "string",
+                            "sentAs": "url"
+                        }
+                    }
+                },
+                "historicStatus": {
+                    "type": "array",
+                    "sentAs": "status",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "date": {
+                                "type": "string",
+                                "sentAs": "date"
+                            },
+                            "status": {
+                                "type": "string",
+                                "sentAs": "status"
+                            }
+                        }
+                    }
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "sentAs": "updated_at"
+                },
+                "user": {
+                    "type": "object",
+                    "sentAs": "user",
+                    "additionalProperties": false,
+                    "properties": {
+                        "phone": {
+                            "type": "string",
+                            "sentAs": "phone_number"
+                        },
+                        "email": {
+                            "type": "string",
+                            "sentAs": "email"
+                        },
+                        "address": {
+                            "type": "object",
+                            "sentAs": "address",
+                            "additionalProperties": false,
+                            "properties": {
+                                "firstName": {
+                                    "type": "string",
+                                    "sentAs": "firstname"
+                                },
+                                "lastName": {
+                                    "type": "string",
+                                    "sentAs": "name"
+                                },
+                                "company": {
+                                    "type": "string",
+                                    "sentAs": "society"
+                                },
+                                "street": {
+                                    "type": "string",
+                                    "sentAs": "street"
+                                },
+                                "postalCode": {
+                                    "type": "string",
+                                    "sentAs": "postalcode"
+                                },
+                                "city": {
+                                    "type": "string",
+                                    "sentAs": "city"
+                                },
+                                "country": {
+                                    "type": "string",
+                                    "sentAs": "country"
+                                },
+                                "additional": {
+                                    "type": "string",
+                                    "sentAs": "additionnal"
+                                }
+                            }
+                        }
+                    }
+                },
+                "fees": {
+                    "type": "object",
+                    "sentAs": "fees",
+                    "additionalProperties": false,
+                    "properties": {
+                        "cpa": {
+                            "type": "int",
+                            "sentAs": "cpa"
+                        }
+                    }
+                },
+                "commissionAmount": {
+                    "$ref": "amount",
+                    "sentAs": "amount"
+                }
+            }
+        },
+        "orders": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "totalItems": {
+                    "type": "string",
+                    "sentAs": "total_items",
+                    "location": "json"
+                },
+                "totalPages": {
+                    "type": "string",
+                    "sentAs": "total_pages",
+                    "location": "json"
+                },
+                "items": {
+                    "type": "array",
+                    "sentAs": "orders",
+                    "location": "json",
+                    "additionalProperties": false,
+                    "items": {
+                        "$ref": "order",
+                        "type": "object",
+                        "location": "json"
+                    }
+                }
+            }
+        }
+    }
+}

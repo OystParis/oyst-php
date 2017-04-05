@@ -162,7 +162,7 @@ class OystProduct implements OystArrayInterface
     /**
      * Optional
      *
-     * @var stdClass
+     * @var array
      */
     private $information;
 
@@ -190,6 +190,7 @@ class OystProduct implements OystArrayInterface
         $this->images          = array();
         $this->relatedProducts = array();
         $this->variations      = array();
+        $this->information     = array();
     }
 
     /**
@@ -545,7 +546,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setWeight($weight)
     {
-        $this->weight = (int) $weight;
+        $this->weight = $weight;
 
         return $this;
     }
@@ -665,7 +666,7 @@ class OystProduct implements OystArrayInterface
     }
 
     /**
-     * @return stdClass
+     * @return array
      */
     public function getInformation()
     {
@@ -673,9 +674,9 @@ class OystProduct implements OystArrayInterface
     }
 
     /**
-     * Custom object
+     * Custom array
      *
-     * @param stdClass $information
+     * @param array $information
      *
      * @return OystProduct
      */

@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Class OystOrderAPI
+ * Class OystOrderApi
  *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
-class OystOrderAPI extends OystApiClient
+class OystOrderApi extends AbstractOystApiClient
 {
     const STATUS_ACCEPTED  = 'accepted';
     const STATUS_DENIED    = 'denied';
@@ -19,9 +19,9 @@ class OystOrderAPI extends OystApiClient
     const STATUS_FINALIZED = 'finalized';
 
     /**
-     * @param int    $page    1 by default
-     * @param int    $perPage 100 by default
-     * @param string $status  Array of available status (see constants)
+     * @param int      $page    1 by default
+     * @param int      $perPage 100 by default
+     * @param string[] statuses Array of available statuses (see constants)
      *
      * @return mixed
      */
@@ -50,31 +50,6 @@ class OystOrderAPI extends OystApiClient
         );
 
         $response = $this->executeCommand('GetOrder', $data);
-
-        return $response;
-    }
-
-    /**
-     * @param string        $productRef
-     * @param string        $skuRef
-     * @param int           $quantity
-     * @param OystUser|null $user
-     *
-     * @return string
-     */
-    public function authorizeOrder($productRef, $skuRef, $quantity, OystUser $user = null)
-    {
-        $data = array(
-            'product_reference' => $productRef,
-            'sku_reference'     => $skuRef,
-            'quantity'          => $quantity,
-        );
-
-        if (!is_null($user)) {
-            $data['user'] = $user->toArray();
-        }
-
-        $response = $this->executeCommand('AuthorizeOrder', $data);
 
         return $response;
     }

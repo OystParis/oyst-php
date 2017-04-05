@@ -5,14 +5,16 @@ php:
 
 sudo: false
 
-before_install:
-  - composer self-update
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
 
 install:
-  - composer install --no-interaction --prefer-source
+  - composer install --no-interaction
 
 before_script:
   - echo 'date.timezone = "Europe/Paris"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 script:
-  - vendor/bin/phpunit tests/
+  - vendor/bin/phpunit --exclude-group ignore tests/ApiWrapperTest.php

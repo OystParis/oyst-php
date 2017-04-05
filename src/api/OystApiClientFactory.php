@@ -10,72 +10,60 @@
  */
 class OystApiClientFactory
 {
+    const ENTITY_CATALOG  = 'catalog';
+    const ENTITY_ORDER    = 'order';
+    const ENTITY_PAYMENT  = 'payment';
+    const ENTITY_ONECLICK = 'oneclick';
+
+    const ENV_PROD    = 'prod';
+    const ENV_PREPROD = 'preprod';
+    const ENV_INT     = 'integration';
+    const ENV_TEST    = 'test';
+
     /**
      * @param string $apiKey
      * @param string $userAgent
+     * @param string $environment
      *
-     * @return OystCatalogAPI
+     * @return AbstractOystApiClient
+     *
+     * @throws Exception
      */
-    public static function createCatalogApiClient($apiKey, $userAgent)
+    public static function getClient($entityName, $apiKey, $userAgent, $environment = self::ENV_PROD)
     {
-        $client     = self::createClient('catalog');
-        $catalogApi = new OystCatalogAPI($client, $apiKey, $userAgent);
+        $client = static::createClient($entityName, $environment);
 
-        return $catalogApi;
+        switch ($entityName) {
+            case self::ENTITY_CATALOG:
+                $oystClientAPI = new OystCatalogApi($client, $apiKey, $userAgent);
+                break;
+            case self::ENTITY_ORDER:
+                $oystClientAPI = new OystOrderApi($client, $apiKey, $userAgent);
+                break;
+            case self::ENTITY_PAYMENT:
+                $oystClientAPI = new OystPaymentApi($client, $apiKey, $userAgent);
+                break;
+            case self::ENTITY_ONECLICK:
+                $oystClientAPI = new OystOneClickApi($client, $apiKey, $userAgent);
+                break;
+            default:
+                throw new Exception('Entity not managed or do not exist: '.$entityName);
+                break;
+        }
+
+        return $oystClientAPI;
     }
 
     /**
-     * @param string $apiKey
-     * @param string $userAgent
-     *
-     * @return OystOrderAPI
-     */
-    public static function createOrderApiClient($apiKey, $userAgent)
-    {
-        $client   = self::createClient('order');
-        $orderApi = new OystOrderAPI($client, $apiKey, $userAgent);
-
-        return $orderApi;
-    }
-
-    /**
-     * @param string $apiKey
-     * @param string $userAgent
-     *
-     * @return OystPaymentAPI
-     */
-    public static function createPaymentApiClient($apiKey, $userAgent)
-    {
-        $client     = self::createClient('payment');
-        $paymentApi = new OystPaymentAPI($client, $apiKey, $userAgent);
-
-        return $paymentApi;
-    }
-
-    /**
-     * @param string $apiKey
-     * @param string $userAgent
-     *
-     * @return OystOrderAPI
-     */
-    public static function createOneClickApiClient($apiKey, $userAgent)
-    {
-        $client   = self::createClient('oneclick');
-        $orderApi = new OystOrderAPI($client, $apiKey, $userAgent);
-
-        return $orderApi;
-    }
-
-    /**
-     * @param string $apiKey
-     * @param string $userAgent
+     * @param string $entityName
+     * @param string $environment
      *
      * @return \Guzzle\Service\Client
      */
-    private static function createClient($entity)
+    private static function createClient($entityName, $environment = self::ENV_PROD)
     {
-        $configurationLoader = self::getApiConfiguration($entity);
-        $description = self::getApiDescription();
+        $configurationLoader = static::getApiConfiguration($entityName, $environment);
+        $description = static::getApiDescription($entityName);
 
         $baseUrl = $configurationLoader->getApiUrl();
         //$baseUrl = trim($configurationLoader->getApiUrl(), '/').'/'.$description->getApiVersion();
@@ -89,12 +77,13 @@ class OystApiClientFactory
     /**
      * @return OystApiConfiguration
      */
-    private static function getApiConfiguration($entity)
+    private static function getApiConfiguration($entity, $environment)
     {
         $parametersFile = __DIR__.'/../config/parameters.yml';
         $parserYml      = new \Symfony\Component\Yaml\Parser();
         $configuration  = new OystApiConfiguration($parserYml, $parametersFile);
         $configuration->load();
+        $configuration->setEnvironment($environment);
         $configuration->setEntity($entity);
 
         return $configuration;
@@ -103,9 +92,9 @@ class OystApiClientFactory
     /**
      * @return \Guzzle\Service\Description\ServiceDescription
      */
-    private static function getApiDescription()
+    private static function getApiDescription($entityName)
     {
-        $configurationFile = __DIR__.'/../config/description.json';
+        $configurationFile = __DIR__.'/../config/description_'.$entityName.'.json';
         $description       = \Guzzle\Service\Description\ServiceDescription::factory($configurationFile);
 
         return $description;

@@ -2,11 +2,11 @@
 
 function oystAutoload($className)
 {
-    $folders = [
+    $folders = array(
         'api',
         'classes',
         'helper',
-    ];
+    );
 
     // Simple autoload without sub directories for now
     foreach ($folders as $folder) {

@@ -1,6 +1,4 @@
 api:
-    environment: preprod
-
     url:
         integration:
             catalog: https://catalog-api-integration.herokuapp.com
@@ -8,7 +6,7 @@ api:
             payment: https://payment-api-integration.herokuapp.com
             oneclick: https://oneclick-api-integration.herokuapp.com
         preprod:
-            catalog: https://catalog-api-integration.herokuapp.com
+            catalog: https://api.staging.oyst.eu/catalog
             order: https://api.staging.oyst.eu/orders
             payment: https://api.staging.oyst.eu/payment
             oneclick: https://api.staging.oyst.eu/oneclick
@@ -17,3 +15,8 @@ api:
             order: https://api.oyst.com/oneclick/order
             payment: https://api.oyst.com/payment
             oneclick: https://api.oyst.com/oneclick
+        test:
+            catalog: https://localhost/catalog
+            order: https://localhost/order
+            payment: https://localhost/payment
+            oneclick: https://localhost/oneclick

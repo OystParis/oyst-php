@@ -10,23 +10,20 @@
  */
 class OystApiConfiguration
 {
+    /** @var string */
+    private $parametersFile;
+
+    /** @var \Symfony\Component\Yaml\Parser */
+    private $yamlParser;
+
     /** @var array */
     private $parameters;
-
-    /** @var int */
-    private $version;
 
     /** @var string */
     private $environment;
 
-    /** @var array */
-    private $allowedEnvironments;
-
     /** @var string */
     private $entity;
-
-    /** @var array */
-    private $allowedEntities;
 
     /**
      * @param \Symfony\Component\Yaml\Parser $yamlParser
@@ -36,14 +33,7 @@ class OystApiConfiguration
     {
         $this->parametersFile = $descriptionFile;
         $this->yamlParser     = $yamlParser;
-    }
-
-    /**
-     * @return array
-     */
-    final public function getParameters()
-    {
-        return $this->parameters['api'];
+        $this->environment    = OystApiClientFactory::ENV_PROD;
     }
 
     /**
@@ -75,7 +65,7 @@ class OystApiConfiguration
      */
     private function isValidEnvironment($environment)
     {
-        return isset($this->getParameters()['url'][$environment]);
+        return isset($this->parameters['api']['url'][$environment]);
     }
 
     /**
@@ -107,7 +97,7 @@ class OystApiConfiguration
      */
     private function isValidEntity($entity)
     {
-        return isset($this->getParameters()['url'][$this->environment][$entity]);
+        return isset($this->parameters['api']['url'][$this->environment][$entity]);
     }
 
     /**
@@ -115,26 +105,16 @@ class OystApiConfiguration
      */
     public function getApiUrl()
     {
-        return $this->getParameters()['url'][$this->environment][$this->entity];
+        if (isset($this->parameters['api']['url'][$this->environment][$this->entity])) {
+            return $this->parameters['api']['url'][$this->environment][$this->entity];
+        }
+
+        return null;
     }
 
     /**
-     * @return array
-     */
-    public function getSettings()
-    {
-        return $this->getParameters()['settings'];
-    }
-
-    /**
-     * @return array
-     */
-    public function getDefaultEnvironment()
-    {
-        return $this->getParameters()['environment'];
-    }
-
-    /**
+     * @throws Exception
+     *
      * @return $this
      */
     public function load()
@@ -143,15 +123,9 @@ class OystApiConfiguration
             throw new Exception('Configuration file missing: '.$this->parametersFile);
         }
 
-        if (isset($this->parameters)) {
-            return $this;
+        if (!isset($this->parameters)) {
+            $this->parameters = $this->yamlParser->parse(file_get_contents($this->parametersFile));
         }
-
-        $this->parameters = $this->yamlParser->parse(file_get_contents($this->parametersFile));
-        $this->allowedEnvironments = $this->getSettings()['allowed_environments'];
-        $this->allowedEntities = $this->getSettings()['allowed_entities'];
-
-        $this->setEnvironment($this->getDefaultEnvironment());
 
         return $this;
     }

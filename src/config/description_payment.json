@@ -1,0 +1,67 @@
+{
+    "name": "API Payment",
+    "apiVersion": "v1",
+    "description": "Oyst API Payment",
+    "operations": {
+        "SendPayment": {
+            "httpMethod": "POST",
+            "uri": "payments",
+            "summary": "Send payment",
+            "parameters": {
+                "user": {
+                    "location": "json",
+                    "type": "object",
+                    "description": "The user who's paying",
+                    "required": true
+                },
+                "order_id": {
+                    "location": "json",
+                    "type": "string",
+                    "description": "The id of the order to process payment",
+                    "required": true
+                },
+                "is_3d": {
+                    "location": "json",
+                    "type": "boolean",
+                    "description": "3D Secure payment",
+                    "required": true
+                },
+                "amount": {
+                    "location": "json",
+                    "type": "array",
+                    "description": "Total amount of the order",
+                    "required": true
+                },
+                "notification_url": {
+                    "location": "json",
+                    "type": "string",
+                    "description": "Url to call to change order status asynchronously",
+                    "required": true
+                },
+                "redirects": {
+                    "location": "json",
+                    "type": "object",
+                    "description": "Urls of redirection",
+                    "required": true,
+                    "properties": {
+                        "cancel_url": {
+                            "type": "string",
+                            "description": "URL cancel",
+                            "required": true
+                        },
+                        "error_url": {
+                            "type": "string",
+                            "description": "URL error",
+                            "required": true
+                        },
+                        "return_url": {
+                            "type": "string",
+                            "description": "URL return",
+                            "required": true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
