@@ -18,7 +18,7 @@
                     "location": "json",
                     "type": "string",
                     "description": "The sku reference of the ordered product",
-                    "required": true
+                    "required": false
                 },
                 "quantity": {
                     "location": "json",
