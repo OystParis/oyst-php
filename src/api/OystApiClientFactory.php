@@ -66,7 +66,9 @@ class OystApiClientFactory
         $description = static::getApiDescription($entityName);
 
         $baseUrl = $configurationLoader->getApiUrl();
-        //$baseUrl = trim($configurationLoader->getApiUrl(), '/').'/'.$description->getApiVersion();
+        if (!in_array($environment, [static::ENV_INT])) {
+            $baseUrl = $configurationLoader->getApiUrl().'/'.$description->getApiVersion();
+        }
 
         $client = new \Guzzle\Service\Client($baseUrl);
         $client->setDescription($description);
