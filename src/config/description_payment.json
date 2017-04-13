@@ -62,6 +62,19 @@
                     }
                 }
             }
+        },
+        "CancelOrRefund": {
+            "httpMethod": "POST",
+            "uri": "payments/{id}/cancel_or_refund",
+            "summary": "Cancel or refund a payment",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "type": "string",
+                    "description": "The payment id",
+                    "required": true
+                }
+            }
         }
     }
 }

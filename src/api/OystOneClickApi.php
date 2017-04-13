@@ -18,7 +18,7 @@ class OystOneClickApi extends AbstractOystApiClient
      *
      * @return mixed
      */
-    public function authorizeOrder($productRef, $quantity, $variationRef = null, OystUser $user = null)
+    public function authorizeOrder($productRef, $quantity = 1, $variationRef = null, OystUser $user = null)
     {
         $data = array(
             'product_reference'   => $productRef,

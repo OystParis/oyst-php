@@ -42,4 +42,20 @@ class OystPaymentApi extends AbstractOystApiClient
 
         return $response;
     }
+
+    /**
+     * @param $paymentId
+     *
+     * @return mixed
+     */
+    public function cancelOrRefund($paymentId)
+    {
+        $data = array(
+            'id' => $paymentId,
+        );
+
+        $response = $this->executeCommand('CancelOrRefund', $data);
+
+        return $response;
+    }
 }
