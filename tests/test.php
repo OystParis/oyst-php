@@ -27,7 +27,7 @@ function testAuthorizeOrder($apiKey, $userAgent, $env)
 {
     /** @var OystOneClickAPI $oneClickApi */
     $oneClickApi = OystApiClientFactory::getClient(OystApiClientFactory::ENTITY_ONECLICK, $apiKey, $userAgent, $env);
-    $result = $oneClickApi->authorizeOrder('test', 'test', 666);
+    $result = $oneClickApi->authorizeOrder('test', 666, 'test');
 
     printTestResult($oneClickApi, $result);
 }

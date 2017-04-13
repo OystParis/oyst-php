@@ -183,7 +183,7 @@ class ApiWrapperTest extends PHPUnit_Framework_TestCase
 
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = new OystOneClickApi($client, $apiKey, $userAgent);
-        $result = $oneClickApi->authorizeOrder('test', 'test', 666);
+        $result = $oneClickApi->authorizeOrder('test', 666, 'test');
 
         $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
         $this->assertEquals($result['url'], 'http://localhost/success');
@@ -305,7 +305,8 @@ class ApiWrapperTest extends PHPUnit_Framework_TestCase
      */
     public function testOkGetOrders($apiKey, $userAgent)
     {
-        $fakeResponse = new Guzzle\Http\Message\Response(200, array('Content-Type' => 'application/json'), '{"total_items": "400", "total_pages": "40", "orders": [{"id": 1, "product_reference": "ma_ref"}, {"id": 2, "product_amount": {"value": 5000, "currency": "EUR", "param_supp": "test"}}, {"id": 3, "param_supp": "test"}]}');
+        $json = '{"total_items": "400", "total_pages": "40", "orders": [{"id": 1, "product_reference": "ma_ref"}, {"id": 2, "product_amount": {"value": 5000, "currency": "EUR", "param_supp": "test"}}, {"id": 3, "param_supp": "test"}]}';
+        $fakeResponse = new Guzzle\Http\Message\Response(200, array('Content-Type' => 'application/json'), $json);
         $client = static::initClientTest(OystApiClientFactory::ENTITY_ORDER, $fakeResponse);
 
         $orderApi = new OystOrderApi($client, $apiKey, $userAgent);
