@@ -71,7 +71,7 @@ abstract class AbstractOystApiClient
         } catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
             $responseBody = $e->getResponse()->getBody(true);
             $responseBody = json_decode($responseBody, true);
-            $errorMessage = is_array($responseBody['error']) ? $responseBody['error']['message'] : $responseBody['error'];
+            $errorMessage = isset($responseBody['error']['message']) ? $responseBody['error']['message'] : (isset($responseBody['message']) ? $responseBody['message'] : $responseBody['error']);
 
             $this->lastError    = $errorMessage ?: $responseBody;
             $this->lastHttpCode = $e->getResponse()->getStatusCode();
