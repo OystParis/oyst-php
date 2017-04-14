@@ -5,7 +5,7 @@
     "operations": {
         "GetOrderList": {
             "httpMethod": "GET",
-            "uri": "",
+            "uri": "orders",
             "summary": "Get order list (paginated)",
             "responseClass": "orders",
             "parameters": {
@@ -23,7 +23,7 @@
                 },
                 "status": {
                     "location": "query",
-                    "type": "array",
+                    "type": "string",
                     "description": "The statuses on which to filter",
                     "required": false
                 }

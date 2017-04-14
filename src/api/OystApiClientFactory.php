@@ -67,7 +67,7 @@ class OystApiClientFactory
 
         $baseUrl = $configurationLoader->getApiUrl();
 
-        if (!in_array($environment, array(static::ENV_INT)) && !in_array($entityName, array(static::ENTITY_ONECLICK))) {
+        if (!in_array($environment, array(static::ENV_INT))) {
             $baseUrl = $configurationLoader->getApiUrl().'/'.$description->getApiVersion();
         }
 

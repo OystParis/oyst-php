@@ -25,12 +25,12 @@ class OystOrderApi extends AbstractOystApiClient
      *
      * @return mixed
      */
-    public function getOrders($page = 1, $perPage = 100, $statuses = array())
+    public function getOrders($page = 1, $perPage = 100, $status = self::STATUS_ACCEPTED)
     {
         $data = array(
             'page'     => $page,
             'per_page' => $perPage,
-            'status'   => empty($statuses) ? array(self::STATUS_ACCEPTED, self::STATUS_PENDING) : $statuses
+            'status'   => $status
         );
 
         $response = $this->executeCommand('GetOrderList', $data);

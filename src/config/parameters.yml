@@ -7,7 +7,7 @@ api:
             oneclick: https://oneclick-api-integration.herokuapp.com
         preprod:
             catalog: https://api.staging.oyst.eu/catalog
-            order: https://api.staging.oyst.eu/orders
+            order: https://api.staging.oyst.eu/order
             payment: https://api.staging.oyst.eu/payment
             oneclick: https://api.staging.oyst.eu/oneclick
         prod:
