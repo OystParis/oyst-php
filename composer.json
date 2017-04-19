@@ -1,7 +1,21 @@
 {
+    "name": "oyst/oyst-php",
+    "type": "library",
+    "description": "Oyst PHP API Wrapper",
+    "homepage": "https://github.com/OystParis/oyst-php",
+    "keywords": ["github", "oyst", "api", "php", "payment", "1-click", "catalog", "order"],
+    "authors": [
+        {
+            "name": "Oyst Team",
+            "email": "dev@oyst.com",
+            "homepage": "http://www.oyst.com"
+        }
+    ],
     "require": {
         "php": ">=5.3",
-        "guzzlehttp/guzzle": "3.8.1",
+        "guzzlehttp/guzzle": "3.8.1"
+    },
+    "require-dev": {
         "phpunit/phpunit": "4.8.35"
     }
 }
