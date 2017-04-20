@@ -52,7 +52,7 @@ class OystCatalogApi extends AbstractOystApiClient
     {
         $data = array(
             'id'      => $oystProduct->getRef(),
-            'product' => $oystProduct
+            'product' => $oystProduct->toArray()
         );
         $response = $this->executeCommand('PutProduct', $data);
 

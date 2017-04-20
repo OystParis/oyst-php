@@ -674,7 +674,7 @@ class OystProduct implements OystArrayInterface
     }
 
     /**
-     * Custom array
+     * Custom array (with named keys)
      *
      * @param array $information
      *
@@ -780,7 +780,7 @@ class OystProduct implements OystArrayInterface
             'upc'                    => $this->upc,
             'isbn'                   => $this->isbn,
             'images'                 => $this->images,
-            'informations'           => $this->information,
+            'informations'           => $this->information ?: new stdClass(),
             'related_products'       => $this->relatedProducts,
             'variations'             => OystCollectionHelper::collectionToArray($this->variations),
         );

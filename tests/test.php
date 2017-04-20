@@ -4,12 +4,13 @@ require_once(__DIR__.'/../autoload.php');
 
 function executeTest()
 {
-    $userAgent = "Oyst PHP";
+    $userAgent = 'Oyst PHP';
     $apiKey = 'api_key_preprod';
     $env = OystApiClientFactory::ENV_PREPROD;
     testAuthorizeOrder($apiKey, $userAgent, $env);
     testPayment($apiKey, $userAgent, $env);
     testPostProducts($apiKey, $userAgent, $env);
+    testPutProduct($apiKey, $userAgent, $env);
     $apiKey = 'api_key_int';
     $env = OystApiClientFactory::ENV_INT;
     testDeleteProduct($apiKey, $userAgent, $env);
@@ -106,6 +107,46 @@ function testPostProducts($apiKey, $userAgent, $env)
     $products[] = $product;
 
     $result = $catalogApi->postProducts($products);
+
+    printTestResult($catalogApi, $result);
+}
+
+/**
+ * @param string $apiKey
+ * @param string $userAgent
+ * @param string $env
+ */
+function testPutProduct($apiKey, $userAgent, $env)
+{
+    /** @var OystCatalogAPI $catalogApi */
+    $catalogApi = OystApiClientFactory::getClient(OystApiClientFactory::ENTITY_CATALOG, $apiKey, $userAgent, $env);
+    $product = new OystProduct();
+    $product->setRef('ma_ref');
+    $product->setTitle('my title');
+    $product->setAmountIncludingTax(new OystPrice(25, 'EUR'));
+    $product->setCategories([new OystCategory('cat_ref', 'cat title', true)]);
+    $product->setImages(['http://localhost']);
+
+    $info = [
+        'meta'     => 'info en vrac',
+        'subtitle' => 'test'
+    ];
+    $product->setAvailableQuantity(5);
+    $product->setDescription('qdgsdfg');
+    $product->setEan('my_ean');
+    $product->setIsbn('my_isbn');
+    $product->setActive(true);
+    $product->setMaterialized(true);
+    $product->setInformation($info);
+    $product->setManufacturer('my manufacturer');
+    $product->addRelatedProduct('ref_related');
+    $product->setShortDescription('short description');
+    $product->setSize(new OystSize(42, 42, 42));
+    $product->addTag('test');
+    $product->setUpc('my_upc');
+    $product->setUrl('http://localhost');
+
+    $result = $catalogApi->putProduct($product);
 
     printTestResult($catalogApi, $result);
 }
