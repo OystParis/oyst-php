@@ -73,6 +73,21 @@
                     "type": "string",
                     "description": "The payment id",
                     "required": true
+                },
+                "amount": {
+                    "type": "object",
+                    "location": "json",
+                    "additionalProperties": false,
+                    "properties": {
+                        "value": {
+                            "type": "integer",
+                            "sentAs": "value"
+                        },
+                        "currency": {
+                            "type": "string",
+                            "sentAs": "currency"
+                        }
+                    }
                 }
             }
         }

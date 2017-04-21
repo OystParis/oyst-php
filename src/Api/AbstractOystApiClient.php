@@ -77,9 +77,9 @@ abstract class AbstractOystApiClient
     {
         $this->response = null;
 
-        $command = $this->client->getCommand($commandName, $params);
-
         try {
+            $command = $this->client->getCommand($commandName, $params);
+
             $request = $command->prepare();
             $headers = array(
                 'Authorization'  => 'Bearer '.$this->apiKey,

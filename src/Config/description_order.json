@@ -43,7 +43,7 @@
             "additionalProperties": false,
             "properties": {
                 "value": {
-                    "type": "int",
+                    "type": "integer",
                     "sentAs": "value"
                 },
                 "currency": {
@@ -58,7 +58,7 @@
             "location": "json",
             "properties": {
                 "id": {
-                    "type": "int",
+                    "type": "integer",
                     "sentAs": "id"
                 },
                 "productReference": {
@@ -90,7 +90,7 @@
                     "sentAs": "merchant_id"
                 },
                 "quantity": {
-                    "type": "int",
+                    "type": "integer",
                     "sentAs": "quantity"
                 },
                 "shipment": {
@@ -198,7 +198,7 @@
                     "additionalProperties": false,
                     "properties": {
                         "cpa": {
-                            "type": "int",
+                            "type": "integer",
                             "sentAs": "cpa"
                         }
                     }

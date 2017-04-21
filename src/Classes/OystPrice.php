@@ -81,11 +81,11 @@ class OystPrice implements OystArrayInterface
      */
     public function toArray()
     {
-        $tax = array(
+        $price = array(
             'value'    => $this->value,
             'currency' => $this->currency,
         );
 
-        return $tax;
+        return $price;
     }
 }

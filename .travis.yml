@@ -18,9 +18,9 @@ before_script:
 
 script:
   - mkdir -p build/logs
-  - ./bin/phpcs --config-set ignore_warnings_on_exit 1
-  - ./bin/phpcs --standard=PSR2 --ignore=vendor .
-  - ./bin/phpunit -c phpunit.xml.dist
+  - vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
+  - vendor/bin/phpcs --standard=PSR2 --ignore=vendor .
+  - vendor/bin/phpunit -c phpunit.xml.dist
 
 after_script:
   - php vendor/bin/coveralls

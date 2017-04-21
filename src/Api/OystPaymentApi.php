@@ -2,6 +2,8 @@
 
 namespace Oyst\Api;
 
+use Oyst\Classes\OystPrice;
+
 /**
  * Class OystPaymentApi
  *
@@ -50,15 +52,20 @@ class OystPaymentApi extends AbstractOystApiClient
     /**
      * Cancel a payment if the capture was not done yet, or refund it otherwise
      *
-     * @param $paymentId
+     * @param string         $paymentId
+     * @param OystPrice|null $price     If $price is null then the refund is total
      *
      * @return mixed
      */
-    public function cancelOrRefund($paymentId)
+    public function cancelOrRefund($paymentId, OystPrice $price = null)
     {
         $data = array(
             'id' => $paymentId,
         );
+
+        if (!is_null($price)) {
+            $data['amount'] = $price->toArray();
+        }
 
         $response = $this->executeCommand('CancelOrRefund', $data);
 

@@ -97,7 +97,7 @@ class OystApiClientFactory
      */
     private static function getApiConfiguration($entity, $environment)
     {
-        $parametersFile = __DIR__.'/../config/parameters.yml';
+        $parametersFile = __DIR__.'/../Config/parameters.yml';
         $parserYml      = new Parser();
         $configuration  = new OystApiConfiguration($parserYml, $parametersFile);
         $configuration->load();
@@ -116,7 +116,7 @@ class OystApiClientFactory
      */
     private static function getApiDescription($entityName)
     {
-        $configurationFile = __DIR__.'/../config/description_'.$entityName.'.json';
+        $configurationFile = __DIR__.'/../Config/description_'.$entityName.'.json';
         $description       = ServiceDescription::factory($configurationFile);
 
         return $description;
