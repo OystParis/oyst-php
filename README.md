@@ -1,6 +1,10 @@
 API Wrapper
 ===========
 
+Build Status
+------------
+* Latest Release: [![Master Branch](https://travis-ci.org/OystParis/oyst-php.svg?branch=master)](https://travis-ci.org/OystParis/oyst-php)
+
 The class `OystApiClientFactory` is used to get the right client to communicate with the api.
 As we build one class => several methods request call, for now the abstract method is not used to process automatically.
 

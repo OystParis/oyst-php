@@ -8,6 +8,10 @@
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
+namespace Oyst\Api;
+
+use Guzzle;
+
 class OystApiClientFactory
 {
     const ENTITY_CATALOG  = 'catalog';

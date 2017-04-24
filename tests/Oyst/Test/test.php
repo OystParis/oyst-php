@@ -1,6 +1,10 @@
 <?php
 
-require_once(__DIR__.'/../autoload.php');
+namespace Oyst\Test;
+
+use Oyst\Api\OystApiClientFactory;
+use Oyst\Classes\OystPrice;
+use Oyst\Classes\OystProduct;
 
 function executeTest()
 {

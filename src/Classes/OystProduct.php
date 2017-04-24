@@ -10,6 +10,10 @@
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
+namespace Oyst\Classes;
+
+use Oyst\Helper\OystCollectionHelper;
+
 class OystProduct implements OystArrayInterface
 {
     /**
@@ -780,7 +784,7 @@ class OystProduct implements OystArrayInterface
             'upc'                    => $this->upc,
             'isbn'                   => $this->isbn,
             'images'                 => $this->images,
-            'informations'           => $this->information ?: new stdClass(),
+            'informations'           => $this->information ?: new \stdClass(),
             'related_products'       => $this->relatedProducts,
             'variations'             => OystCollectionHelper::collectionToArray($this->variations),
         );

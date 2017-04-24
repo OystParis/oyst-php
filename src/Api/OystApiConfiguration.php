@@ -8,6 +8,10 @@
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
+namespace Oyst\Api;
+
+use Symfony\Component\Yaml\Parser;
+
 class OystApiConfiguration
 {
     /** @var string */
@@ -120,7 +124,7 @@ class OystApiConfiguration
     public function load()
     {
         if (!file_exists($this->parametersFile)) {
-            throw new Exception('Configuration file missing: '.$this->parametersFile);
+            throw new \Exception('Configuration file missing: '.$this->parametersFile);
         }
 
         if (!isset($this->parameters)) {

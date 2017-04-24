@@ -10,6 +10,8 @@
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
+namespace Oyst\Classes;
+
 class OystShipment implements OystArrayInterface
 {
     /**

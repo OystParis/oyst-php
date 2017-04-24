@@ -1,8 +1,21 @@
 <?php
 
-require_once(__DIR__.'/../autoload.php');
+namespace Oyst\Test;
 
-class ApiWrapperTest extends PHPUnit_Framework_TestCase
+use Guzzle;
+use Oyst\Api\OystApiClientFactory;
+use Oyst\Api\OystApiConfiguration;
+use Oyst\Api\OystCatalogApi;
+use Oyst\Api\OystOneClickApi;
+use Oyst\Api\OystOrderApi;
+use Oyst\Api\OystPaymentApi;
+use Oyst\Classes\OystCategory;
+use Oyst\Classes\OystPrice;
+use Oyst\Classes\OystProduct;
+use Oyst\Classes\OystSize;
+use ReflectionMethod;
+
+class ApiWrapperTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * DataProvider
@@ -12,14 +25,14 @@ class ApiWrapperTest extends PHPUnit_Framework_TestCase
     public function clientDataOk()
     {
         return array(
-            array('OystCatalogApi', 'catalog', 'api_key', 'user_agent', 'preprod'),
-            array('OystPaymentApi', 'payment', 'api_key', 'user_agent', 'preprod'),
-            array('OystOrderApi', 'order', 'api_key', 'user_agent', 'preprod'),
-            array('OystOneClickApi', 'oneclick', 'api_key', 'user_agent', 'preprod'),
-            array('OystCatalogApi', 'catalog', 'api_key', 'user_agent', 'unknow_env'),
-            array('OystPaymentApi', 'payment', 'api_key', 'user_agent', 'unknow_env'),
-            array('OystOrderApi', 'order', 'api_key', 'user_agent', 'unknow_env'),
-            array('OystOneClickApi', 'oneclick', 'api_key', 'user_agent', 'unknow_env')
+            array('Oyst\Api\OystCatalogApi', 'catalog', 'api_key', 'user_agent', 'preprod'),
+            array('Oyst\Api\OystPaymentApi', 'payment', 'api_key', 'user_agent', 'preprod'),
+            array('Oyst\Api\OystOrderApi', 'order', 'api_key', 'user_agent', 'preprod'),
+            array('Oyst\Api\OystOneClickApi', 'oneclick', 'api_key', 'user_agent', 'preprod'),
+            array('Oyst\Api\OystCatalogApi', 'catalog', 'api_key', 'user_agent', 'unknow_env'),
+            array('Oyst\Api\OystPaymentApi', 'payment', 'api_key', 'user_agent', 'unknow_env'),
+            array('Oyst\Api\OystOrderApi', 'order', 'api_key', 'user_agent', 'unknow_env'),
+            array('Oyst\Api\OystOneClickApi', 'oneclick', 'api_key', 'user_agent', 'unknow_env')
         );
     }
 
@@ -116,7 +129,7 @@ class ApiWrapperTest extends PHPUnit_Framework_TestCase
      */
     public function testApiConfiguration($entityName, $env, $expectedEntity, $expectedEnv, $expectedApiUrl)
     {
-        $reflectionMethod = new ReflectionMethod('OystApiClientFactory', 'getApiConfiguration');
+        $reflectionMethod = new ReflectionMethod('Oyst\Api\OystApiClientFactory', 'getApiConfiguration');
         $reflectionMethod->setAccessible(true);
         /** @var OystApiConfiguration $configuration */
         $configuration = $reflectionMethod->invoke(null, $entityName, $env);
@@ -131,7 +144,7 @@ class ApiWrapperTest extends PHPUnit_Framework_TestCase
      */
     public function testApiDescription($entityName)
     {
-        $reflectionMethod = new ReflectionMethod('OystApiClientFactory', 'getApiDescription');
+        $reflectionMethod = new ReflectionMethod('Oyst\Api\OystApiClientFactory', 'getApiDescription');
         $reflectionMethod->setAccessible(true);
         $description = $reflectionMethod->invoke(null, $entityName);
 
@@ -144,7 +157,7 @@ class ApiWrapperTest extends PHPUnit_Framework_TestCase
      */
     public function testExceptionApiDescription($entityName)
     {
-        $reflectionMethod = new ReflectionMethod('OystApiClientFactory', 'getApiDescription');
+        $reflectionMethod = new ReflectionMethod('Oyst\Api\OystApiClientFactory', 'getApiDescription');
         $reflectionMethod->setAccessible(true);
         $reflectionMethod->invoke(null, $entityName);
     }
@@ -154,11 +167,11 @@ class ApiWrapperTest extends PHPUnit_Framework_TestCase
      */
     static public function initClientTest($entityName, $fakeResponse)
     {
-        $reflectionMethod = new ReflectionMethod('OystApiClientFactory', 'getApiConfiguration');
+        $reflectionMethod = new ReflectionMethod('Oyst\Api\OystApiClientFactory', 'getApiConfiguration');
         $reflectionMethod->setAccessible(true);
         $configuration = $reflectionMethod->invoke(null, $entityName, OystApiClientFactory::ENV_TEST);
 
-        $reflectionMethod = new ReflectionMethod('OystApiClientFactory', 'getApiDescription');
+        $reflectionMethod = new ReflectionMethod('Oyst\Api\OystApiClientFactory', 'getApiDescription');
         $reflectionMethod->setAccessible(true);
         $description = $reflectionMethod->invoke(null, $entityName);
 

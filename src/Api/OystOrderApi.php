@@ -8,6 +8,8 @@
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
+namespace Oyst\Api;
+
 class OystOrderApi extends AbstractOystApiClient
 {
     const STATUS_ACCEPTED  = 'accepted';

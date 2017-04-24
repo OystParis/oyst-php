@@ -8,6 +8,11 @@
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
+namespace Oyst\Api;
+
+use Oyst\Classes\OystProduct;
+use Oyst\Helper\OystCollectionHelper;
+
 class OystCatalogApi extends AbstractOystApiClient
 {
     /**
