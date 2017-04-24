@@ -10,12 +10,13 @@
  */
 namespace Oyst\Api;
 
-use Guzzle;
+use Guzzle\Http\Exception\ClientErrorResponseException;
+use Guzzle\Service\Client;
 
 abstract class AbstractOystApiClient
 {
     /**
-     * @var \Guzzle\Service\Client
+     * @var Client
      */
     private $client;
 
@@ -40,11 +41,11 @@ abstract class AbstractOystApiClient
     private $lastHttpCode;
 
     /**
-     * @param \Guzzle\Service\Client $client
-     * @param string                 $apiKey
-     * @param string                 $userAgent
+     * @param Client    $client
+     * @param string    $apiKey
+     * @param string    $userAgent
      */
-    public function __construct(\Guzzle\Service\Client $client, $apiKey, $userAgent)
+    public function __construct(Client $client, $apiKey, $userAgent)
     {
         $this->client    = $client;
         $this->apiKey    = $apiKey;
@@ -72,10 +73,17 @@ abstract class AbstractOystApiClient
 
             $this->lastError    = false;
             $this->lastHttpCode = $command->getResponse() ? $command->getResponse()->getStatusCode() : 200;
-        } catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+        } catch (ClientErrorResponseException $e) {
             $responseBody = $e->getResponse()->getBody(true);
             $responseBody = json_decode($responseBody, true);
-            $errorMessage = is_array($responseBody['error']) && isset($responseBody['error']['message']) ? $responseBody['error']['message'] : (isset($responseBody['message']) ? $responseBody['message'] : $responseBody['error']);
+
+            if (is_array($responseBody['error']) && isset($responseBody['error']['message'])) {
+                $errorMessage = $responseBody['error']['message'];
+            } elseif (isset($responseBody['message'])) {
+                $errorMessage = $responseBody['message'];
+            } else {
+                $errorMessage = $responseBody['error'];
+            }
 
             $this->lastError    = $errorMessage ?: $responseBody;
             $this->lastHttpCode = $e->getResponse()->getStatusCode();

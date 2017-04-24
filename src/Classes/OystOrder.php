@@ -12,6 +12,7 @@
  */
 namespace Oyst\Classes;
 
+use Guzzle\Service\Command\OperationCommand;
 use Oyst\Helper\OystObjectHelper;
 
 class OystOrder implements Guzzle\Service\Command\ResponseClassInterface
@@ -102,11 +103,11 @@ class OystOrder implements Guzzle\Service\Command\ResponseClassInterface
     private $updatedAt;
 
     /**
-     * @param \Guzzle\Service\Command\OperationCommand $command
+     * @param OperationCommand $command
      *
      * @return OystOrder
      */
-    public static function fromCommand(\Guzzle\Service\Command\OperationCommand $command)
+    public static function fromCommand(OperationCommand $command)
     {
         $data  = $command->getResponse()->json();
         $order = new self();

@@ -12,6 +12,8 @@
  */
 namespace Oyst\Classes;
 
+use Oyst\Helper\OystCollectionHelper;
+
 class OystUser implements OystArrayInterface
 {
     /**

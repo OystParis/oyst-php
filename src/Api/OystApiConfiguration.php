@@ -17,7 +17,7 @@ class OystApiConfiguration
     /** @var string */
     private $parametersFile;
 
-    /** @var \Symfony\Component\Yaml\Parser */
+    /** @var Parser */
     private $yamlParser;
 
     /** @var array */
@@ -30,10 +30,10 @@ class OystApiConfiguration
     private $entity;
 
     /**
-     * @param \Symfony\Component\Yaml\Parser $yamlParser
-     * @param string                         $descriptionFile
+     * @param Parser    $yamlParser
+     * @param string    $descriptionFile
      */
-    public function __construct(\Symfony\Component\Yaml\Parser $yamlParser, $descriptionFile)
+    public function __construct(Parser $yamlParser, $descriptionFile)
     {
         $this->parametersFile = $descriptionFile;
         $this->yamlParser     = $yamlParser;
@@ -117,7 +117,7 @@ class OystApiConfiguration
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      *
      * @return $this
      */
