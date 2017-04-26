@@ -40,6 +40,12 @@ abstract class AbstractOystApiClient
      */
     private $lastHttpCode;
 
+    /** @var  mixed */
+    private $response;
+
+    /** @var  string */
+    private $body;
+
     /**
      * @param Client    $client
      * @param string    $apiKey
@@ -60,7 +66,7 @@ abstract class AbstractOystApiClient
      */
     protected function executeCommand($commandName, $params = array())
     {
-        $response = null;
+        $this->response = null;
         $command  = $this->client->getCommand($commandName, $params);
 
         try {
@@ -69,13 +75,15 @@ abstract class AbstractOystApiClient
                 'Authorization'  => 'Bearer '.$this->apiKey,
                 'User-Agent'     => $this->userAgent,
             ));
-            $response = $command->execute();
+            $this->response = $command->execute();
 
             $this->lastError    = false;
             $this->lastHttpCode = $command->getResponse() ? $command->getResponse()->getStatusCode() : 200;
+            $this->body = $command->getResponse()->getBody();
+
         } catch (ClientErrorResponseException $e) {
-            $responseBody = $e->getResponse()->getBody(true);
-            $responseBody = json_decode($responseBody, true);
+            $this->body = $e->getResponse()->getBody(true);
+            $responseBody = json_decode($this->body, true);
 
             if (is_array($responseBody['error']) && isset($responseBody['error']['message'])) {
                 $errorMessage = $responseBody['error']['message'];
@@ -92,7 +100,7 @@ abstract class AbstractOystApiClient
             $this->lastHttpCode = $e->getCode();
         }
 
-        return $response;
+        return $this->response;
     }
 
     /**
@@ -109,5 +117,21 @@ abstract class AbstractOystApiClient
     public function getLastHttpCode()
     {
         return $this->lastHttpCode;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
     }
 }
