@@ -1,5 +1,11 @@
 <?php
 
+namespace Oyst\Api;
+
+use Guzzle\Service\Client;
+use Guzzle\Service\Description\ServiceDescription;
+use Symfony\Component\Yaml\Parser;
+
 /**
  * Class OystApiClientFactory
  *
@@ -8,12 +14,6 @@
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
-namespace Oyst\Api;
-
-use Guzzle\Service\Client;
-use Guzzle\Service\Description\ServiceDescription;
-use Symfony\Component\Yaml\Parser;
-
 class OystApiClientFactory
 {
     const ENTITY_CATALOG  = 'catalog';
@@ -23,7 +23,6 @@ class OystApiClientFactory
 
     const ENV_PROD    = 'prod';
     const ENV_PREPROD = 'preprod';
-    const ENV_INT     = 'integration';
     const ENV_TEST    = 'test';
 
     /**
@@ -72,11 +71,7 @@ class OystApiClientFactory
         $configurationLoader = static::getApiConfiguration($entityName, $environment);
         $description = static::getApiDescription($entityName);
 
-        $baseUrl = $configurationLoader->getApiUrl();
-
-        if (!in_array($environment, array(static::ENV_INT))) {
-            $baseUrl = $configurationLoader->getApiUrl().'/'.$description->getApiVersion();
-        }
+        $baseUrl = $configurationLoader->getApiUrl().'/'.$description->getApiVersion();
 
         $client = new Client($baseUrl);
         $client->setDescription($description);

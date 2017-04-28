@@ -1,5 +1,7 @@
 <?php
 
+namespace Oyst\Api;
+
 /**
  * Class OystPaymentApi
  *
@@ -8,8 +10,6 @@
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
-namespace Oyst\Api;
-
 class OystPaymentApi extends AbstractOystApiClient
 {
     /**

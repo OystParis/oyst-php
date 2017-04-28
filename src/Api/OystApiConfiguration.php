@@ -1,5 +1,9 @@
 <?php
 
+namespace Oyst\Api;
+
+use Symfony\Component\Yaml\Parser;
+
 /**
  * Class OystApiConfiguration
  *
@@ -8,10 +12,6 @@
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
-namespace Oyst\Api;
-
-use Symfony\Component\Yaml\Parser;
-
 class OystApiConfiguration
 {
     /** @var string */

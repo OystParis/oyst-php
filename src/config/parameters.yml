@@ -1,10 +1,5 @@
 api:
     url:
-        integration:
-            catalog: https://catalog-api-integration.herokuapp.com
-            order: https://order-api-integration.herokuapp.com
-            payment: https://payment-api-integration.herokuapp.com
-            oneclick: https://oneclick-api-integration.herokuapp.com
         preprod:
             catalog: https://api.staging.oyst.eu/catalog
             order: https://api.staging.oyst.eu/order

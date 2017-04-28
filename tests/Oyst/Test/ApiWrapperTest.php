@@ -15,6 +15,14 @@ use Oyst\Classes\OystProduct;
 use Oyst\Classes\OystSize;
 use ReflectionMethod;
 
+/**
+ * Class ApiWrapperTest
+ *
+ * @category Oyst
+ * @author   Oyst <dev@oyst.com>
+ * @license  Copyright 2017, Oyst
+ * @link     http://www.oyst.com
+ */
 class ApiWrapperTest extends \PHPUnit_Framework_TestCase
 {
     /**

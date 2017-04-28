@@ -1,5 +1,9 @@
 <?php
 
+namespace Oyst\Api;
+
+use Oyst\Classes\OystUser;
+
 /**
  * Class OystOneClickApi
  *
@@ -8,8 +12,6 @@
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
-namespace Oyst\Api;
-
 class OystOneClickApi extends AbstractOystApiClient
 {
     /**

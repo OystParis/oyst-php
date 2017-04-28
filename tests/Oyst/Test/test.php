@@ -2,7 +2,12 @@
 
 namespace Oyst\Test;
 
+use Oyst\Api\AbstractOystApiClient;
 use Oyst\Api\OystApiClientFactory;
+use Oyst\Api\OystCatalogApi;
+use Oyst\Api\OystOneClickApi;
+use Oyst\Api\OystOrderApi;
+use Oyst\Api\OystPaymentApi;
 use Oyst\Classes\OystCategory;
 use Oyst\Classes\OystPrice;
 use Oyst\Classes\OystProduct;
@@ -21,8 +26,6 @@ function executeTest()
     testPayment($apiKey, $userAgent, $env);
     testPostProducts($apiKey, $userAgent, $env);
     testPutProduct($apiKey, $userAgent, $env);
-    $apiKey = 'api_key_int';
-    $env = OystApiClientFactory::ENV_INT;
     testDeleteProduct($apiKey, $userAgent, $env);
     // does not work two times in a row
 //    testNotifyImport($apiKey, $userAgent, $env);
@@ -36,7 +39,7 @@ function executeTest()
  */
 function testAuthorizeOrder($apiKey, $userAgent, $env)
 {
-    /** @var OystOneClickAPI $oneClickApi */
+    /** @var OystOneClickApi $oneClickApi */
     $oneClickApi = OystApiClientFactory::getClient(OystApiClientFactory::ENTITY_ONECLICK, $apiKey, $userAgent, $env);
     $result = $oneClickApi->authorizeOrder('test', 666, 'test');
 
@@ -50,7 +53,7 @@ function testAuthorizeOrder($apiKey, $userAgent, $env)
  */
 function testPayment($apiKey, $userAgent, $env)
 {
-    /** @var OystPaymentAPI $paymentApi */
+    /** @var OystPaymentApi $paymentApi */
     $paymentApi = OystApiClientFactory::getClient(OystApiClientFactory::ENTITY_PAYMENT, $apiKey, $userAgent, $env);
     $result = $paymentApi->payment(123, 'EUR', 3, array(
         'notification' => 'http://localhost.test',
@@ -77,7 +80,7 @@ function testPayment($apiKey, $userAgent, $env)
  */
 function testPostProducts($apiKey, $userAgent, $env)
 {
-    /** @var OystCatalogAPI $catalogApi */
+    /** @var OystCatalogApi $catalogApi */
     $catalogApi = OystApiClientFactory::getClient(OystApiClientFactory::ENTITY_CATALOG, $apiKey, $userAgent, $env);
     $products = array();
     $product = new OystProduct();
@@ -128,7 +131,7 @@ function testPostProducts($apiKey, $userAgent, $env)
  */
 function testPutProduct($apiKey, $userAgent, $env)
 {
-    /** @var OystCatalogAPI $catalogApi */
+    /** @var OystCatalogApi $catalogApi */
     $catalogApi = OystApiClientFactory::getClient(OystApiClientFactory::ENTITY_CATALOG, $apiKey, $userAgent, $env);
     $product = new OystProduct();
     $product->setRef('ma_ref');
@@ -168,7 +171,7 @@ function testPutProduct($apiKey, $userAgent, $env)
  */
 function testDeleteProduct($apiKey, $userAgent, $env)
 {
-    /** @var OystCatalogAPI $catalogApi */
+    /** @var OystCatalogApi $catalogApi */
     $catalogApi = OystApiClientFactory::getClient(OystApiClientFactory::ENTITY_CATALOG, $apiKey, $userAgent, $env);
     $result = $catalogApi->deleteProduct('ma_ref');
 
@@ -182,7 +185,7 @@ function testDeleteProduct($apiKey, $userAgent, $env)
  */
 function testNotifyImport($apiKey, $userAgent, $env)
 {
-    /** @var OystCatalogAPI $catalogApi */
+    /** @var OystCatalogApi $catalogApi */
     $catalogApi = OystApiClientFactory::getClient(OystApiClientFactory::ENTITY_CATALOG, $apiKey, $userAgent, $env);
     $result = $catalogApi->notifyImport();
 
@@ -196,7 +199,7 @@ function testNotifyImport($apiKey, $userAgent, $env)
  */
 function testGetOrders($apiKey, $userAgent, $env)
 {
-    /** @var OystOrderAPI $orderApi */
+    /** @var OystOrderApi $orderApi */
     $orderApi = OystApiClientFactory::getClient(OystApiClientFactory::ENTITY_ORDER, $apiKey, $userAgent, $env);
     $result = $orderApi->getOrders();
 
