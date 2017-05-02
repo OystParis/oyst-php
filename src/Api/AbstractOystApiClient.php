@@ -80,7 +80,6 @@ abstract class AbstractOystApiClient
             $this->lastError    = false;
             $this->lastHttpCode = $command->getResponse() ? $command->getResponse()->getStatusCode() : 200;
             $this->body = $command->getResponse()->getBody();
-
         } catch (ClientErrorResponseException $e) {
             $this->body = $e->getResponse()->getBody(true);
             $responseBody = json_decode($this->body, true);

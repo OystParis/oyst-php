@@ -27,6 +27,7 @@ class OystApiClientFactory
     const ENV_TEST    = 'test';
 
     /**
+     * @param string $entityName
      * @param string $apiKey
      * @param string $userAgent
      * @param string $environment

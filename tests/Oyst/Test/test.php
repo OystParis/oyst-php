@@ -3,11 +3,17 @@
 namespace Oyst\Test;
 
 use Oyst\Api\OystApiClientFactory;
+use Oyst\Classes\OystCategory;
 use Oyst\Classes\OystPrice;
 use Oyst\Classes\OystProduct;
+use Oyst\Classes\OystSize;
 
 function executeTest()
 {
+    if (!$loader = @include __DIR__ . '/../../../vendor/autoload.php') {
+        die('Project dependencies missing');
+    }
+
     $userAgent = 'Oyst PHP';
     $apiKey = 'api_key_preprod';
     $env = OystApiClientFactory::ENV_PREPROD;
@@ -73,18 +79,18 @@ function testPostProducts($apiKey, $userAgent, $env)
 {
     /** @var OystCatalogAPI $catalogApi */
     $catalogApi = OystApiClientFactory::getClient(OystApiClientFactory::ENTITY_CATALOG, $apiKey, $userAgent, $env);
-    $products = [];
+    $products = array();
     $product = new OystProduct();
     $product->setRef('ma_ref');
     $product->setTitle('my title');
     $product->setAmountIncludingTax(new OystPrice(25, 'EUR'));
-    $product->setCategories([new OystCategory('cat_ref', 'cat title', true)]);
-    $product->setImages(['http://localhost']);
+    $product->setCategories(array(new OystCategory('cat_ref', 'cat title', true)));
+    $product->setImages(array('http://localhost'));
 
-    $info = [
-        'meta'     => 'info en vrac',
-        'subtitle' => 'test'
-    ];
+    $info = array(
+        'meta' => 'info en vrac',
+        'subtitle' => 'test',
+    );
     $product->setAvailableQuantity(5);
     $product->setDescription('qdgsdfg');
     $product->setEan('my_ean');
@@ -105,8 +111,8 @@ function testPostProducts($apiKey, $userAgent, $env)
     $product->setRef('ma_ref');
     $product->setTitle('my title');
     $product->setAmountIncludingTax(new OystPrice(25, 'EUR'));
-    $product->setCategories([new OystCategory('cat_ref', 'cat title', true)]);
-    $product->setImages(['http://localhost']);
+    $product->setCategories(array(new OystCategory('cat_ref', 'cat title', true)));
+    $product->setImages(array('http://localhost'));
 
     $products[] = $product;
 
@@ -128,13 +134,13 @@ function testPutProduct($apiKey, $userAgent, $env)
     $product->setRef('ma_ref');
     $product->setTitle('my title');
     $product->setAmountIncludingTax(new OystPrice(25, 'EUR'));
-    $product->setCategories([new OystCategory('cat_ref', 'cat title', true)]);
-    $product->setImages(['http://localhost']);
+    $product->setCategories(array(new OystCategory('cat_ref', 'cat title', true)));
+    $product->setImages(array('http://localhost'));
 
-    $info = [
-        'meta'     => 'info en vrac',
-        'subtitle' => 'test'
-    ];
+    $info = array(
+        'meta' => 'info en vrac',
+        'subtitle' => 'test',
+    );
     $product->setAvailableQuantity(5);
     $product->setDescription('qdgsdfg');
     $product->setEan('my_ean');
@@ -199,14 +205,16 @@ function testGetOrders($apiKey, $userAgent, $env)
 
 /**
  * @param AbstractOystApiClient $clientApi
- * @param mixed                 $result
+ * @param mixed $result
  */
 function printTestResult($clientApi, $result)
 {
+    $debug = debug_backtrace();
+
     echo "<pre>";
-    echo "================="."\n";
-    echo (debug_backtrace()[1]['function'] ?: "Test")."\n";
-    echo "================="."\n";
+    echo "=================" . PHP_EOL;
+    echo ($debug[1]['function'] ?: "Test") . PHP_EOL;
+    echo "=================" . PHP_EOL;
     var_dump($clientApi->getLastHttpCode(), $clientApi->getLastError(), $result);
 }
 
