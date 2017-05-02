@@ -13,6 +13,8 @@ namespace Oyst\Classes;
 interface OystArrayInterface
 {
     /**
+     * Transform object to array to send it to the API
+     *
      * @return array
      */
     public function toArray();

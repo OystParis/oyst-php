@@ -30,8 +30,8 @@ class OystApiConfiguration
     private $entity;
 
     /**
-     * @param Parser    $yamlParser
-     * @param string    $descriptionFile
+     * @param Parser $yamlParser
+     * @param string $descriptionFile
      */
     public function __construct(Parser $yamlParser, $descriptionFile)
     {
@@ -117,6 +117,8 @@ class OystApiConfiguration
     }
 
     /**
+     * Load the parameters
+     *
      * @throws \Exception
      *
      * @return $this

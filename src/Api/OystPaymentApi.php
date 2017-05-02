@@ -13,6 +13,8 @@ namespace Oyst\Api;
 class OystPaymentApi extends AbstractOystApiClient
 {
     /**
+     * Send payment
+     *
      * @param float  $amount
      * @param string $currency
      * @param string $cartId
@@ -46,6 +48,8 @@ class OystPaymentApi extends AbstractOystApiClient
     }
 
     /**
+     * Cancel a payment if the capture was not done yet, or refund it otherwise
+     *
      * @param $paymentId
      *
      * @return mixed

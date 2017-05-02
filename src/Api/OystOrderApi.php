@@ -21,9 +21,11 @@ class OystOrderApi extends AbstractOystApiClient
     const STATUS_FINALIZED = 'finalized';
 
     /**
-     * @param int      $page    1 by default
-     * @param int      $perPage 100 by default
-     * @param string[] statuses Array of available statuses (see constants)
+     * Get oneclick orders (paginated)
+     *
+     * @param int    $page    1 by default
+     * @param int    $perPage 100 by default
+     * @param string $status  the order status (see constants)
      *
      * @return mixed
      */
@@ -41,6 +43,8 @@ class OystOrderApi extends AbstractOystApiClient
     }
 
     /**
+     * Get oneclick order
+     *
      * @param $orderId
      *
      * @return string[]|false

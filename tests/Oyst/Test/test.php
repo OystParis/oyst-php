@@ -208,7 +208,7 @@ function testGetOrders($apiKey, $userAgent, $env)
 
 /**
  * @param AbstractOystApiClient $clientApi
- * @param mixed $result
+ * @param mixed                 $result
  */
 function printTestResult($clientApi, $result)
 {

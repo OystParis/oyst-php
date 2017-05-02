@@ -15,6 +15,9 @@ use Oyst\Classes\OystUser;
 class OystOneClickApi extends AbstractOystApiClient
 {
     /**
+     * Check if an order can be processed for the selected product / quantity
+     * If it's the case, an order is created (can be retrieved via getOrder(s) method)
+     *
      * @param string        $productRef
      * @param string        $variationRef
      * @param int           $quantity

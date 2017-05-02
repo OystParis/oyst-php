@@ -15,29 +15,19 @@ use Guzzle\Service\Client;
  */
 abstract class AbstractOystApiClient
 {
-    /**
-     * @var Client
-     */
+    /** @var Client */
     private $client;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $apiKey;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $userAgent;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $lastError;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $lastHttpCode;
 
     /** @var  mixed */
@@ -47,9 +37,9 @@ abstract class AbstractOystApiClient
     private $body;
 
     /**
-     * @param Client    $client
-     * @param string    $apiKey
-     * @param string    $userAgent
+     * @param Client $client
+     * @param string $apiKey
+     * @param string $userAgent
      */
     public function __construct(Client $client, $apiKey, $userAgent)
     {
@@ -59,6 +49,8 @@ abstract class AbstractOystApiClient
     }
 
     /**
+     * Execute the command described in the description_[entityName].json file
+     *
      * @param string $commandName
      * @param array  $params
      *
@@ -104,6 +96,8 @@ abstract class AbstractOystApiClient
     }
 
     /**
+     * Get the error of the last command executed
+     *
      * @return string
      */
     public function getLastError()
@@ -112,6 +106,8 @@ abstract class AbstractOystApiClient
     }
 
     /**
+     * Get the HTTP Status Code of the last command executed
+     *
      * @return int
      */
     public function getLastHttpCode()
@@ -120,6 +116,8 @@ abstract class AbstractOystApiClient
     }
 
     /**
+     * Get the response of the last command executed
+     *
      * @return mixed
      */
     public function getResponse()
@@ -128,6 +126,8 @@ abstract class AbstractOystApiClient
     }
 
     /**
+     * Get the body of the last command executed
+     *
      * @return string
      */
     public function getBody()

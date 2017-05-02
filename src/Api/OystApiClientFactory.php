@@ -26,6 +26,8 @@ class OystApiClientFactory
     const ENV_TEST    = 'test';
 
     /**
+     * Returns the right API for the entityName passed in the parameters
+     *
      * @param string $entityName
      * @param string $apiKey
      * @param string $userAgent
@@ -61,6 +63,8 @@ class OystApiClientFactory
     }
 
     /**
+     * Create a Guzzle Client
+     *
      * @param string $entityName
      * @param string $environment
      *
@@ -80,6 +84,8 @@ class OystApiClientFactory
     }
 
     /**
+     * Create the API Configuration by loading parameters according to the environment passed in parameters
+     *
      * @return OystApiConfiguration
      */
     private static function getApiConfiguration($entity, $environment)
@@ -95,6 +101,8 @@ class OystApiClientFactory
     }
 
     /**
+     * Returns a Service Description by loading the right json file according to the entityName passed in parameters
+     *
      * @return ServiceDescription
      */
     private static function getApiDescription($entityName)
