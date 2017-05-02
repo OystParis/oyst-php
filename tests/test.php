@@ -15,21 +15,21 @@ use Oyst\Classes\OystSize;
 
 function executeTest()
 {
-    if (!$loader = @include __DIR__ . '/../../../vendor/autoload.php') {
+    if (!$loader = @include __DIR__ . '/../vendor/autoload.php') {
         die('Project dependencies missing');
     }
 
     $userAgent = 'Oyst PHP';
-    $apiKey = 'api_key_preprod';
+    $apiKey = 'd2e757ac5965f31de123a0732bbc2d796baed4730b51319a289b5341ba80f89c';
     $env = OystApiClientFactory::ENV_PREPROD;
-    testAuthorizeOrder($apiKey, $userAgent, $env);
+//    testAuthorizeOrder($apiKey, $userAgent, $env);
     testPayment($apiKey, $userAgent, $env);
-    testPostProducts($apiKey, $userAgent, $env);
-    testPutProduct($apiKey, $userAgent, $env);
-    testDeleteProduct($apiKey, $userAgent, $env);
+//    testPostProducts($apiKey, $userAgent, $env);
+//    testPutProduct($apiKey, $userAgent, $env);
+//    testDeleteProduct($apiKey, $userAgent, $env);
     // does not work two times in a row
 //    testNotifyImport($apiKey, $userAgent, $env);
-    testGetOrders($apiKey, $userAgent, $env);
+//    testGetOrders($apiKey, $userAgent, $env);
 }
 
 /**
@@ -214,7 +214,6 @@ function printTestResult($clientApi, $result)
 {
     $debug = debug_backtrace();
 
-    echo "<pre>";
     echo "=================" . PHP_EOL;
     echo ($debug[1]['function'] ?: "Test") . PHP_EOL;
     echo "=================" . PHP_EOL;

@@ -2,9 +2,6 @@
 
 namespace Oyst\Classes;
 
-use Guzzle\Service\Command\OperationCommand;
-use Oyst\Helper\OystObjectHelper;
-
 /**
  * Class OystOrder
  *

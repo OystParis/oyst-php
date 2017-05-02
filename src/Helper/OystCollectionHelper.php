@@ -2,6 +2,8 @@
 
 namespace Oyst\Helper;
 
+use Oyst\Classes\OystArrayInterface;
+
 /**
  * Class OystCollectionHelper
  *

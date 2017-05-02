@@ -75,7 +75,11 @@ class OystApiClientFactory
         $configurationLoader = static::getApiConfiguration($entityName, $environment);
         $description = static::getApiDescription($entityName);
 
-        $baseUrl = $configurationLoader->getApiUrl().'/'.$description->getApiVersion();
+        $baseUrl = $configurationLoader->getApiUrl();
+
+        if (!in_array($entityName, array(static::ENTITY_PAYMENT))) {
+            $baseUrl .= '/'.$description->getApiVersion();
+        }
 
         $client = new Client($baseUrl);
         $client->setDescription($description);
