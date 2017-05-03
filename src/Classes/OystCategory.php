@@ -36,7 +36,7 @@ class OystCategory implements OystArrayInterface
     /**
      * @param string $ref
      * @param string $title
-     * @param bool   $isMain
+     * @param bool   $main
      */
     public function __construct($ref, $title, $main = false)
     {

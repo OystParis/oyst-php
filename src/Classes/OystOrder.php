@@ -398,7 +398,7 @@ class OystOrder
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -406,7 +406,7 @@ class OystOrder
     }
 
     /**
-     * @param DateTime $createdAt
+     * @param \DateTime $createdAt
      *
      * @return OystOrder
      */
@@ -418,7 +418,7 @@ class OystOrder
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -426,7 +426,7 @@ class OystOrder
     }
 
     /**
-     * @param DateTime $updatedAt
+     * @param \DateTime $updatedAt
      *
      * @return OystOrder
      */

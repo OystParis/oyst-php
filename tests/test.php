@@ -20,16 +20,16 @@ function executeTest()
     }
 
     $userAgent = 'Oyst PHP';
-    $apiKey = 'd2e757ac5965f31de123a0732bbc2d796baed4730b51319a289b5341ba80f89c';
+    $apiKey = 'api_key_preprod';
     $env = OystApiClientFactory::ENV_PREPROD;
-//    testAuthorizeOrder($apiKey, $userAgent, $env);
+    testAuthorizeOrder($apiKey, $userAgent, $env);
     testPayment($apiKey, $userAgent, $env);
-//    testPostProducts($apiKey, $userAgent, $env);
-//    testPutProduct($apiKey, $userAgent, $env);
-//    testDeleteProduct($apiKey, $userAgent, $env);
-    // does not work two times in a row
-//    testNotifyImport($apiKey, $userAgent, $env);
-//    testGetOrders($apiKey, $userAgent, $env);
+    testPostProducts($apiKey, $userAgent, $env);
+    testPutProduct($apiKey, $userAgent, $env);
+    testDeleteProduct($apiKey, $userAgent, $env);
+    // does not work two times in a row for now
+    testNotifyImport($apiKey, $userAgent, $env);
+    testGetOrders($apiKey, $userAgent, $env);
 }
 
 /**
@@ -84,14 +84,14 @@ function testPostProducts($apiKey, $userAgent, $env)
     $catalogApi = OystApiClientFactory::getClient(OystApiClientFactory::ENTITY_CATALOG, $apiKey, $userAgent, $env);
     $products = array();
     $product = new OystProduct();
-    $product->setRef('ma_ref');
-    $product->setTitle('my title');
+    $product->setRef('sku1');
+    $product->setTitle('my title1');
     $product->setAmountIncludingTax(new OystPrice(25, 'EUR'));
     $product->setCategories(array(new OystCategory('cat_ref', 'cat title', true)));
     $product->setImages(array('http://localhost'));
 
     $info = array(
-        'meta' => 'info en vrac',
+        'meta' => 'info misc.',
         'subtitle' => 'test',
     );
     $product->setAvailableQuantity(5);
@@ -111,8 +111,8 @@ function testPostProducts($apiKey, $userAgent, $env)
     $products[] = $product;
 
     $product = new OystProduct();
-    $product->setRef('ma_ref');
-    $product->setTitle('my title');
+    $product->setRef('sku2');
+    $product->setTitle('my title2');
     $product->setAmountIncludingTax(new OystPrice(25, 'EUR'));
     $product->setCategories(array(new OystCategory('cat_ref', 'cat title', true)));
     $product->setImages(array('http://localhost'));
@@ -134,14 +134,14 @@ function testPutProduct($apiKey, $userAgent, $env)
     /** @var OystCatalogApi $catalogApi */
     $catalogApi = OystApiClientFactory::getClient(OystApiClientFactory::ENTITY_CATALOG, $apiKey, $userAgent, $env);
     $product = new OystProduct();
-    $product->setRef('ma_ref');
-    $product->setTitle('my title');
+    $product->setRef('sku1');
+    $product->setTitle('my title1');
     $product->setAmountIncludingTax(new OystPrice(25, 'EUR'));
     $product->setCategories(array(new OystCategory('cat_ref', 'cat title', true)));
     $product->setImages(array('http://localhost'));
 
     $info = array(
-        'meta' => 'info en vrac',
+        'meta' => 'info misc.',
         'subtitle' => 'test',
     );
     $product->setAvailableQuantity(5);
@@ -173,7 +173,7 @@ function testDeleteProduct($apiKey, $userAgent, $env)
 {
     /** @var OystCatalogApi $catalogApi */
     $catalogApi = OystApiClientFactory::getClient(OystApiClientFactory::ENTITY_CATALOG, $apiKey, $userAgent, $env);
-    $result = $catalogApi->deleteProduct('ma_ref');
+    $result = $catalogApi->deleteProduct('sku1');
 
     printTestResult($catalogApi, $result);
 }

@@ -38,7 +38,7 @@ class OystOrderApiTest extends OystApiContext
      */
     public function testOkGetOrders($apiKey, $userAgent)
     {
-        $json = '{"total_items": "400", "total_pages": "40", "orders": [{"id": 1, "product_reference": "ma_ref"}, {"id": 2, "product_amount": {"value": 5000, "currency": "EUR", "param_supp": "test"}}, {"id": 3, "param_supp": "test"}]}';
+        $json = '{"total_items": "400", "total_pages": "40", "orders": [{"id": 1, "product_reference": "sku"}, {"id": 2, "product_amount": {"value": 5000, "currency": "EUR", "param_supp": "test"}}, {"id": 3, "param_supp": "test"}]}';
         $fakeResponse = new Response(200, array('Content-Type' => 'application/json'), $json);
         $orderApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
         /** @var Model $result */

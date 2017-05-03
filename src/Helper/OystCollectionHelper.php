@@ -40,7 +40,7 @@ class OystCollectionHelper
     {
         foreach ($data as $field => $value) {
             if (!is_array($value) && !is_integer($value)) {
-                if (empty($value) || !$value) {
+                if ((empty($value) || !$value) && $value != '0') {
                     unset($data[$field]);
                 }
             }

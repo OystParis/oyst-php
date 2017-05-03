@@ -105,7 +105,7 @@ class OystApiConfiguration
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getApiUrl()
     {

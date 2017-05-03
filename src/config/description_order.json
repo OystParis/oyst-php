@@ -9,16 +9,10 @@
             "summary": "Get order list (paginated)",
             "responseClass": "orders",
             "parameters": {
-                "page": {
+                "limit": {
                     "location": "query",
                     "type": "string",
-                    "description": "The page number to view the list",
-                    "required": false
-                },
-                "perPage": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "The total of orders by page",
+                    "description": "The limit number of results to return",
                     "required": false
                 },
                 "status": {

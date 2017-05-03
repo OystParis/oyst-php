@@ -90,6 +90,9 @@ class OystApiClientFactory
     /**
      * Create the API Configuration by loading parameters according to the environment passed in parameters
      *
+     * @param string $entity
+     * @param string $environment
+     *
      * @return OystApiConfiguration
      */
     private static function getApiConfiguration($entity, $environment)
@@ -106,6 +109,8 @@ class OystApiClientFactory
 
     /**
      * Returns a Service Description by loading the right json file according to the entityName passed in parameters
+     *
+     * @param string $entityName
      *
      * @return ServiceDescription
      */

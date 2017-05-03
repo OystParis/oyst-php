@@ -4,14 +4,17 @@ namespace Oyst\Test;
 
 use Guzzle\Http\Message\Response;
 use Guzzle\Plugin\Mock\MockPlugin;
+use Guzzle\Service\Client;
 use Oyst\Api\AbstractOystApiClient;
 use Oyst\Api\OystApiClientFactory;
 
 /**
- * Created by PhpStorm.
- * User: ndecraene
- * Date: 02/05/17
- * Time: 16:35
+ * Class OystApiContext
+ *
+ * @category Oyst
+ * @author   Oyst <dev@oyst.com>
+ * @license  Copyright 2017, Oyst
+ * @link     http://www.oyst.com
  */
 abstract class OystApiContext extends \PHPUnit_Framework_TestCase
 {
@@ -39,6 +42,8 @@ abstract class OystApiContext extends \PHPUnit_Framework_TestCase
     /**
      * @param string   $entityName
      * @param Response $fakeResponse
+     *
+     * @return Client
      */
     public function createClientTest($entityName, $fakeResponse)
     {
@@ -51,7 +56,7 @@ abstract class OystApiContext extends \PHPUnit_Framework_TestCase
         $description = $reflectionMethod->invoke(null, $entityName);
 
         $baseUrl = $configuration->getApiUrl();
-        $client = new \Guzzle\Service\Client($baseUrl);
+        $client = new Client($baseUrl);
         $client->setDescription($description);
 
         $plugin = new MockPlugin();

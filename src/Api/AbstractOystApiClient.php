@@ -15,25 +15,39 @@ use Guzzle\Service\Client;
  */
 abstract class AbstractOystApiClient
 {
-    /** @var Client */
+    /**
+     * @var Client
+     */
     private $client;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $apiKey;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $userAgent;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $lastError;
 
-    /** @var int */
+    /**
+     * @var int
+     */
     private $lastHttpCode;
 
-    /** @var  mixed */
+    /**
+     * @var mixed
+     */
     private $response;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $body;
 
     /**

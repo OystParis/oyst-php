@@ -46,7 +46,7 @@ class OystCatalogApiTest extends OystApiContext
 
         $products = array();
         $product = new OystProduct();
-        $product->setRef('ma_ref');
+        $product->setRef('sku1');
         $product->setTitle('my title');
         $product->setAmountIncludingTax(new OystPrice(25, 'EUR'));
         $product->setCategories(array(new OystCategory('cat_ref', 'cat title', true)));
@@ -73,7 +73,7 @@ class OystCatalogApiTest extends OystApiContext
         $products[] = $product;
 
         $product = new OystProduct();
-        $product->setRef('ma_ref');
+        $product->setRef('sku2');
         $product->setTitle('my title');
         $product->setAmountIncludingTax(new OystPrice(25, 'EUR'));
         $product->setCategories(array(new OystCategory('cat_ref', 'cat title', true)));

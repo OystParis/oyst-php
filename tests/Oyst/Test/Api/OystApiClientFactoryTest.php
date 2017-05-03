@@ -4,6 +4,7 @@ namespace Oyst\Test\Api;
 
 use Guzzle\Service\Client;
 use Oyst\Api\OystApiClientFactory;
+use Oyst\Api\OystApiConfiguration;
 use ReflectionMethod;
 
 /**

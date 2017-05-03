@@ -1,6 +1,9 @@
-API Wrapper
-===========
-[![Master Branch](https://travis-ci.org/OystParis/oyst-php.svg?branch=master)](https://travis-ci.org/OystParis/oyst-php)
+Oyst PHP API Wrapper
+====================
+
+Build Status
+------------
+Latest Release [![Master Branch](https://travis-ci.org/OystParis/oyst-php.svg?branch=master)](https://travis-ci.org/OystParis/oyst-php)
 
 User Guide
 ----------
@@ -12,7 +15,7 @@ which is called by a public method access such as exec() or start() for example.
   
 ```php
 /** @var AbstractOystApiClient $apiWrapper */
-$apiWrapper = OystApiClientFactory::getClient($entityName, $apiKey, $userAgent, env = 'prod');
+$apiWrapper = OystApiClientFactory::getClient($entityName, $apiKey, $userAgent, env = OystApiClientFactory::ENV_PROD);
 ```
   
 This method take several parameters as:
