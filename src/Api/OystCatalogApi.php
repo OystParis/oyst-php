@@ -17,6 +17,23 @@ use Oyst\Helper\OystCollectionHelper;
 class OystCatalogApi extends AbstractOystApiClient
 {
     /**
+     * Get product
+     *
+     * @param string $oystProductRef
+     *
+     * @return mixed
+     */
+    public function getProduct($oystProductRef)
+    {
+        $data = array(
+            'id' => $oystProductRef,
+        );
+        $response = $this->executeCommand('GetProduct', $data);
+
+        return $response;
+    }
+
+    /**
      * Synchronize the merchant catalog
      *
      * @param OystProduct[] $oystProducts

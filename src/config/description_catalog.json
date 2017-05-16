@@ -40,6 +40,19 @@
                 }
             }
         },
+        "GetProduct": {
+            "httpMethod": "GET",
+            "uri": "products/{id}",
+            "summary": "Get a product",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "type": "string",
+                    "description": "Product reference",
+                    "required": true
+                }
+            }
+        },
         "DeleteProduct": {
             "httpMethod": "DELETE",
             "uri": "products/{id}",
