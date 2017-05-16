@@ -50,6 +50,9 @@ abstract class AbstractOystApiClient
      */
     private $body;
 
+    /** @var  string */
+    private $notifyUrl;
+
     /**
      * @param Client $client
      * @param string $apiKey
@@ -78,10 +81,16 @@ abstract class AbstractOystApiClient
 
         try {
             $request = $command->prepare();
-            $request->setHeaders(array(
+            $headers = array(
                 'Authorization'  => 'Bearer '.$this->apiKey,
                 'User-Agent'     => $this->userAgent,
-            ));
+            );
+
+            if (isset($this->notifyUrl)) {
+                $headers['oyst-notification-url'] = $this->notifyUrl;
+            }
+
+            $request->setHeaders($headers);
 
             $this->response     = $command->execute();
             $this->lastError    = false;
@@ -147,5 +156,24 @@ abstract class AbstractOystApiClient
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * @param string $notifyUrl
+     * @return AbstractOystApiClient
+     */
+    public function setNotifyUrl($notifyUrl)
+    {
+        $this->notifyUrl = $notifyUrl;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNotifyUrl()
+    {
+        return $this->notifyUrl;
     }
 }
