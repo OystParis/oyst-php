@@ -210,7 +210,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setRef($ref)
     {
-        $this->ref = $ref;
+        $this->ref = (string) $ref;
 
         return $this;
     }

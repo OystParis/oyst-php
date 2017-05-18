@@ -1,1 +1,4 @@
 /vendor
+/bin
+tests/Oyst/settings.json
+src/config/parameters_api.yml

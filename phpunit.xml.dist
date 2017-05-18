@@ -2,8 +2,13 @@
 
 <phpunit bootstrap="./tests/bootstrap.php" colors="true">
     <testsuites>
-        <testsuite name="Oyst Test Suite">
-            <directory suffix="Test.php">./tests/Oyst/Test/</directory>
+        <testsuite name="unitary">
+            <directory suffix="Test.php">./tests/Oyst/Test/Api</directory>
+            <directory suffix="Test.php">./tests/Oyst/Test/Helper</directory>
+        </testsuite>
+
+        <testsuite name="functional">
+            <directory suffix="Test.php">./tests/Oyst/Test/Controller</directory>
         </testsuite>
     </testsuites>
 

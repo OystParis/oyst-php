@@ -406,18 +406,6 @@ class OystOrder
     }
 
     /**
-     * @param \DateTime $createdAt
-     *
-     * @return OystOrder
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
      * @return \DateTime
      */
     public function getUpdatedAt()
@@ -426,14 +414,27 @@ class OystOrder
     }
 
     /**
-     * @param \DateTime $updatedAt
-     *
-     * @return OystOrder
+     * @return array
      */
-    public function setUpdatedAt($updatedAt)
+    public function toArray()
     {
-        $this->updatedAt = $updatedAt;
+        $order = array(
+            'productReference' => $this->productReference,
+            'skuReference' => $this->skuReference,
+            'productAmount' => $this->productAmount,
+            'productCurrency' => $this->productCurrency,
+            'orderAmount' => $this->orderAmount,
+            'orderCurrency' => $this->orderCurrency,
+            'quantity' => $this->quantity,
+            'currentStatus' => $this->currentStatus,
+            'shipment' => $this->shipment instanceof OystShipment ? $this->shipment->toArray() : [],
+            'statusHistoric' => $this->statusHistoric,
+            'user' => $this->user instanceof OystUser ? $this->user->toArray() : [],
+            'cpa' => $this->cpa,
+            'commissionValue' => $this->commissionValue,
+            'commissionCurrency' => $this->commissionCurrency,
+        );
 
-        return $this;
+        return $order;
     }
 }

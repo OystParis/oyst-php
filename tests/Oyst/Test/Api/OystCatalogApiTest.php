@@ -97,6 +97,7 @@ class OystCatalogApiTest extends OystApiContext
         $result = $catalogApi->deleteProduct('1-1');
 
         $this->assertEquals($catalogApi->getLastHttpCode(), 404);
+
         $this->assertEquals($catalogApi->getLastError(), 'product-not-found');
         $this->assertTrue(is_null($result));
     }

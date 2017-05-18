@@ -2,7 +2,9 @@
 
 namespace Oyst\Api;
 
+use Guzzle\Http\Exception\BadResponseException;
 use Guzzle\Http\Exception\ClientErrorResponseException;
+use Guzzle\Http\Exception\RequestException;
 use Guzzle\Service\Client;
 
 /**
@@ -95,21 +97,27 @@ abstract class AbstractOystApiClient
             $this->response     = $command->execute();
             $this->lastError    = false;
             $this->lastHttpCode = $command->getResponse() ? $command->getResponse()->getStatusCode() : 200;
-            $this->body         = $command->getResponse()->getBody();
-        } catch (ClientErrorResponseException $e) {
+            $this->body         = $command->getResponse()->getBody(true);
+        } catch (BadResponseException $e) {
             $this->body = $e->getResponse()->getBody(true);
             $responseBody = json_decode($this->body, true);
 
-            if (is_array($responseBody['error']) && isset($responseBody['error']['message'])) {
-                $errorMessage = $responseBody['error']['message'];
-            } elseif (isset($responseBody['message'])) {
-                $errorMessage = $responseBody['message'];
-            } else {
-                $errorMessage = $responseBody['error'];
-            }
-
-            $this->lastError    = $errorMessage ?: $responseBody;
+            $this->lastError = false;
             $this->lastHttpCode = $e->getResponse()->getStatusCode();
+            if (isset($responseBody['error'])) {
+                if (is_array($responseBody['error']) && isset($responseBody['error']['message'])) {
+                    $this->lastError = $responseBody['error']['message'];
+                } else {
+                    $this->lastError = $responseBody['error'];
+                }
+            } elseif (isset($responseBody['message'])) {
+                $this->lastError = $responseBody['message'];
+            } else {
+                $this->lastError = $responseBody;
+            }
+        } catch (RequestException $e) {
+            $this->lastError    = $e->getMessage();
+            $this->lastHttpCode = $e->getCode();
         } catch (\Exception $e) {
             $this->lastError    = $e->getMessage();
             $this->lastHttpCode = $e->getCode();

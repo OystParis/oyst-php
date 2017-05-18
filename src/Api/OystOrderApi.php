@@ -2,6 +2,10 @@
 
 namespace Oyst\Api;
 
+use Oyst\Classes\Enum\AbstractOrderState;
+use Oyst\Classes\OystOrder;
+use Oyst\Helper\OystCollectionHelper;
+
 /**
  * Class OystOrderApi
  *
@@ -12,14 +16,6 @@ namespace Oyst\Api;
  */
 class OystOrderApi extends AbstractOystApiClient
 {
-    const STATUS_ACCEPTED  = 'accepted';
-    const STATUS_DENIED    = 'denied';
-    const STATUS_PENDING   = 'pending';
-    const STATUS_REFUNDED  = 'refunded';
-    const STATUS_CANCELLED = 'cancelled';
-    const STATUS_SHIPPED   = 'shipped';
-    const STATUS_FINALIZED = 'finalized';
-
     /**
      * Get oneclick orders (paginated)
      *
@@ -28,14 +24,14 @@ class OystOrderApi extends AbstractOystApiClient
      *
      * @return mixed
      */
-    public function getOrders($limit = 10, $status = self::STATUS_ACCEPTED)
+    public function getOrders($limit = 10, $status = AbstractOrderState::ACCEPTED)
     {
         $data = array(
             'limit'  => $limit,
             'status' => $status
         );
 
-        $response = $this->executeCommand('GetOrderList', $data);
+        $response = $this->executeCommand('GetOrders', $data);
 
         return $response;
     }
@@ -56,5 +52,57 @@ class OystOrderApi extends AbstractOystApiClient
         $response = $this->executeCommand('GetOrder', $data);
 
         return isset($response['order']) ? $response['order'] : false;
+    }
+
+    /**
+     * @param $orderId
+     * @param $status
+     * @return mixed
+     */
+    public function updateStatus($orderId, $status)
+    {
+        $data = array(
+            'id' => $orderId,
+            'status' => $status
+        );
+        $response = $this->executeCommand('updateStatus', $data);
+
+        return $response;
+    }
+
+    /**
+     * @param $orderId
+     * @return mixed
+     */
+    public function decline($orderId)
+    {
+        return $this->updateStatus($orderId, AbstractOrderState::DECLINED);
+    }
+
+    /**
+     * @param $orderId
+     * @return mixed
+     */
+    public function accept($orderId)
+    {
+        return $this->updateStatus($orderId, AbstractOrderState::ACCEPTED);
+    }
+
+    /**
+     * @param $orderId
+     * @return mixed
+     */
+    public function pending($orderId)
+    {
+        return $this->updateStatus($orderId, AbstractOrderState::PENDING);
+    }
+
+    /**
+     * @param $orderId
+     * @return mixed
+     */
+    public function shipped($orderId)
+    {
+        return $this->updateStatus($orderId, AbstractOrderState::SHIPPED);
     }
 }

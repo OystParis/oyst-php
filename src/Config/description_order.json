@@ -3,11 +3,10 @@
     "apiVersion": "v1",
     "description": "Oyst API Order",
     "operations": {
-        "GetOrderList": {
+        "GetOrders": {
             "httpMethod": "GET",
             "uri": "orders",
-            "summary": "Get order list (paginated)",
-            "responseClass": "orders",
+            "summary": "Get the orders list (paginated)",
             "parameters": {
                 "limit": {
                     "location": "query",
@@ -32,6 +31,25 @@
                     "location": "uri",
                     "type": "string",
                     "description": "The order id",
+                    "required": true
+                }
+            }
+        },
+        "updateStatus": {
+            "httpMethod": "PATCH",
+            "uri": "orders/{id}",
+            "summary": "Update specific order status",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "type": "string",
+                    "description": "The order id",
+                    "required": true
+                },
+                "status": {
+                    "location": "json",
+                    "type": "string",
+                    "description": "New order status",
                     "required": true
                 }
             }
@@ -206,33 +224,6 @@
                 "commissionAmount": {
                     "$ref": "amount",
                     "sentAs": "amount"
-                }
-            }
-        },
-        "orders": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "totalItems": {
-                    "type": "string",
-                    "sentAs": "total_items",
-                    "location": "json"
-                },
-                "totalPages": {
-                    "type": "string",
-                    "sentAs": "total_pages",
-                    "location": "json"
-                },
-                "items": {
-                    "type": "array",
-                    "sentAs": "orders",
-                    "location": "json",
-                    "additionalProperties": false,
-                    "items": {
-                        "$ref": "order",
-                        "type": "object",
-                        "location": "json"
-                    }
                 }
             }
         }
