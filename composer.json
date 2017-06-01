@@ -2,6 +2,7 @@
     "name": "oyst/oyst-php",
     "type": "library",
     "description": "Oyst PHP API Wrapper",
+    "license": "Apache-2.0",
     "homepage": "https://github.com/OystParis/oyst-php",
     "keywords": ["github", "oyst", "api", "php", "payment", "1-click", "catalog", "order"],
     "authors": [
@@ -13,16 +14,26 @@
     ],
     "require": {
         "php": ">=5.3",
-        "guzzlehttp/guzzle": "3.8.1",
-        "symfony/yaml": "2.*"
+        "guzzlehttp/guzzle": "^3.8",
+        "symfony/yaml": "^2.8"
     },
     "require-dev": {
         "phpunit/phpunit": "4.8.35",
-        "squizlabs/php_codesniffer": "2.*"
+        "squizlabs/php_codesniffer": "^2.9",
+        "sebastian/phpdcd": "^1.0",
+        "sebastian/phpcpd": "^2.0",
+        "phpmd/phpmd": "^2.6",
+        "phploc/phploc": "^2.1",
+        "wimg/php-compatibility": "^7.1",
+        "simplyadmire/composer-plugins": "^2.1"
     },
     "autoload": {
         "psr-4": {
             "Oyst\\": "src"
         }
+    },
+    "support": {
+        "issues": "https://github.com/OystParis/oyst-php/issues",
+        "source": "https://github.com/OystParis/oyst-php/"
     }
 }
