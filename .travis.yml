@@ -18,9 +18,26 @@ before_script:
 
 script:
   - mkdir -p build/logs
-  - vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
-  - vendor/bin/phpcs --standard=PSR2 --ignore=vendor .
+  ## PHP Unit
   - vendor/bin/phpunit -c phpunit.xml.dist --testsuite unitary
-
-after_script:
-  - php vendor/bin/coveralls
+  ## PHP CodeSniffer disable error on exit
+  - vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
+  ## PHP CodeSniffer with PSR2
+  - vendor/bin/phpcs --standard=PSR2 --ignore=vendor .
+  ## PHP Copy/Paste Detector
+  - vendor/bin/phpcpd $TRAVIS_BUILD_DIR --exclude vendor
+  ## PHP Mess Detector
+  - vendor/bin/phpmd $TRAVIS_BUILD_DIR text cleancode --exclude vendor --ignore-violations-on-exit
+  - vendor/bin/phpmd $TRAVIS_BUILD_DIR text codesize --exclude vendor --ignore-violations-on-exit
+  - vendor/bin/phpmd $TRAVIS_BUILD_DIR text controversial --exclude vendor --ignore-violations-on-exit
+  - vendor/bin/phpmd $TRAVIS_BUILD_DIR text design --exclude vendor --ignore-violations-on-exit
+  - vendor/bin/phpmd $TRAVIS_BUILD_DIR text naming --exclude vendor --ignore-violations-on-exit
+  - vendor/bin/phpmd $TRAVIS_BUILD_DIR text unusedcode --exclude vendor --ignore-violations-on-exit
+  ## PHPLOC
+  - vendor/bin/phploc $TRAVIS_BUILD_DIR --exclude vendor
+  ## LINT
+  - find $TRAVIS_BUILD_DIR/src $TRAVIS_BUILD_DIR/tests -type f -name \*.php -exec php -l {} \;
+  ## PHPCompatibility
+  - rm -Rf vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/PHPCompatibility &&
+    cp -a vendor/wimg/php-compatibility vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/PHPCompatibility &&
+    vendor/bin/phpcs --standard=PHPCompatibility --ignore=vendor $TRAVIS_BUILD_DIR
