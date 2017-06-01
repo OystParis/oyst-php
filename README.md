@@ -14,7 +14,7 @@ which is called by a public method access such as exec() or start() for example.
 
 ```php
 /** @var AbstractOystApiClient $apiWrapper */
-$apiWrapper = OystApiClientFactory::getClient($entityName, $apiKey, $userAgent, $url);
+$apiWrapper = OystApiClientFactory::getClient($entityName, $apiKey, $userAgent, $environment, $url);
 ```
 
 This method take several parameters as:
@@ -31,14 +31,12 @@ This method take several parameters as:
 * **userAgent**
     * To know the origin of the request (PrestaShop vX.X.X / Magento vX.X.X / Elsewhere)
 
-* **env** (constants available in `OystApiClientFactory`), takes 2 values as:
+* **environment** (constants available in `OystApiClientFactory`), takes two values:
     * prod
     * preprod
 
-* **url** (default values can be found in parameters.yml), the URL of the API for three environments:
-    * prod
-    * preprod
-    * test (for unit test)
+* **url**
+    * The custom URL with which the APIs are to be called (if you don't want to use the default one set for the environment)
 
 Tests
 -----
