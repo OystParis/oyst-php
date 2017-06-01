@@ -43,5 +43,8 @@ class OneClickControllerTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->oneClickApi->authorizeOrder($this->product->getRef(), 1);
         $this->assertTrue(isset($result['url']));
+
+        $queries = parse_url($result['url'], PHP_URL_QUERY);
+        $this->assertTrue($queries['v'] == 2);
     }
 }

@@ -31,6 +31,12 @@
                     "type": "object",
                     "description": "The user who ordered the product",
                     "required": false
+                },
+                "version": {
+                    "location": "json",
+                    "type" : "string",
+                    "description": "Set the desired version of the one click process",
+                    "required": false
                 }
             }
         }
