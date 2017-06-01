@@ -30,6 +30,7 @@ class OystOneClickApi extends AbstractOystApiClient
         $data = array(
             'product_reference'   => $productRef,
             'quantity'            => $quantity,
+            'version' => 2
         );
 
         if (!is_null($variationRef)) {
