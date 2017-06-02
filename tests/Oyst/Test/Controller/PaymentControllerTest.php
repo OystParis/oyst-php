@@ -18,7 +18,7 @@ class PaymentControllerTest extends \PHPUnit_Framework_TestCase
     /** @var  array */
     private $user;
 
-    private function loadRequirements()
+    protected function setUp()
     {
         $this->settings = new TestSettings();
         $this->settings->load();
@@ -32,13 +32,10 @@ class PaymentControllerTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->user = UserFixture::getOne();
-        return $this;
     }
 
     public function testPayment()
     {
-        $this->loadRequirements();
-
         $urls = array(
             'notification' => 'http://localhost.test',
             'cancel' => 'http://localhost.test',

@@ -65,6 +65,16 @@
                     "required": true
                 }
             }
+        },
+        "GetShipments": {
+            "httpMethod": "GET",
+            "uri": "shipments",
+            "summary": "Get the list of shipments"
+        },
+        "GetShipmentTypes": {
+            "httpMethod": "GET",
+            "uri": "shipments/types",
+            "summary": "Get the list of shipment types"
         }
     }
 }

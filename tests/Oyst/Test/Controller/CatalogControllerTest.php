@@ -11,18 +11,24 @@ use Oyst\Classes\OystSize;
 use Oyst\Test\Fixture\ProductFixture;
 use Oyst\Test\TestSettings;
 
-class ProductControllerTest extends \PHPUnit_Framework_TestCase
+class CatalogControllerTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var  TestSettings */
+    /**
+     * @var TestSettings
+     */
     private $settings;
 
-    /** @var  OystProduct[] */
+    /**
+     * @var OystProduct[]
+     *  */
     private $products;
 
-    /** @var  OystCatalogApi */
+    /**
+     * @var OystCatalogApi
+     */
     private $catalogApi;
 
-    private function loadRequirements()
+    protected function setUp()
     {
         $this->settings = new TestSettings();
         $this->settings->load();
@@ -36,21 +42,23 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->products = ProductFixture::getList();
+    }
 
-        return $this;
+    public function testNotifyImport()
+    {
+        $result = $this->catalogApi->notifyImport();
+
+        $this->assertTrue(isset($result['import_id']));
     }
 
     public function testPostProducts()
     {
-        $this->loadRequirements();
         $result = $this->catalogApi->postProducts($this->products);
         $this->assertTrue(isset($result['imported']) && $result['imported'] == 2);
     }
 
     public function testUpdateProduct()
     {
-        $this->loadRequirements();
-
         $product = $this->products[0];
 
         $product->setTitle('updated_1');
@@ -86,13 +94,24 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
     {
         // As the API has a little bug with delete / get, we need to wait a fix
         $this->assertTrue(true);
-        return ;
-        $this->loadRequirements();
+        return;
 
         $product = $this->products[1];
 
         $result = $this->catalogApi->deleteProduct($product);
 
         $this->assertTrue(isset($result['deleted']));
+    }
+
+    public function testGetShipments()
+    {
+        $result = $this->catalogApi->getShipments();
+    }
+
+    public function testGetShipmentTypes()
+    {
+        $result = $this->catalogApi->getShipmentTypes();
+
+        $this->assertTrue(isset($result['types']));
     }
 }

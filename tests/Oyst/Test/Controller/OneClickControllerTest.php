@@ -19,7 +19,7 @@ class OneClickControllerTest extends \PHPUnit_Framework_TestCase
     /** @var  OystProduct */
     private $product;
 
-    private function loadRequirements()
+    protected function setUp()
     {
         $this->settings = new TestSettings();
         $this->settings->load();
@@ -33,18 +33,15 @@ class OneClickControllerTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->product = ProductFixture::getOneClickOrder();
-
-        return $this;
     }
 
     public function testNotifyImport()
     {
-        $this->loadRequirements();
-
         $result = $this->oneClickApi->authorizeOrder($this->product->getRef(), 1);
         $this->assertTrue(isset($result['url']));
 
-        $queries = parse_url($result['url'], PHP_URL_QUERY);
-        $this->assertTrue($queries['v'] == 2);
+        parse_str(parse_url($result['url'], PHP_URL_QUERY), $queries);
+
+        $this->assertTrue(isset($queries['v']) && $queries['v'] == 2);
     }
 }

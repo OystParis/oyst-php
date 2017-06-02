@@ -116,4 +116,28 @@ class OystCatalogApi extends AbstractOystApiClient
 
         return $response;
     }
+
+    /**
+     * Get the list of shipments
+     *
+     * @return mixed
+     */
+    public function getShipments()
+    {
+        $response = $this->executeCommand('GetShipments');
+
+        return $response;
+    }
+
+    /**
+     * Get the list of shipment types
+     *
+     * @return mixed
+     */
+    public function getShipmentTypes()
+    {
+        $response = $this->executeCommand('GetShipmentTypes');
+
+        return $response;
+    }
 }
