@@ -10,10 +10,14 @@ use Oyst\Test\TestSettings;
 
 class OrderControllerTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var  TestSettings */
+    /**
+     * @var TestSettings
+     */
     private $settings;
 
-    /** @var  OystOrderApi */
+    /**
+     * @var OystOrderApi
+     */
     private $orderApi;
 
     private function loadRequirements()
@@ -28,10 +32,7 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
             $this->settings->getUserAgent(),
             $this->settings->getEnv()
         );
-
-        return $this;
     }
-
 
     public function testGetOrders()
     {

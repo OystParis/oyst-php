@@ -43,6 +43,7 @@ class OystCatalogApi extends AbstractOystApiClient
     public function postProducts($oystProducts)
     {
         $formattedData = array();
+
         /** @var OystArrayInterface $product */
         foreach ($oystProducts as $oystProduct) {
             $oystProductArray = $oystProduct->toArray();
@@ -113,6 +114,56 @@ class OystCatalogApi extends AbstractOystApiClient
     public function notifyImport()
     {
         $response = $this->executeCommand('NotifyImport');
+
+        return $response;
+    }
+
+    /**
+     * Get the list of shipments
+     *
+     * @return mixed
+     */
+    public function getShipments()
+    {
+        $response = $this->executeCommand('GetShipments');
+
+        return $response;
+    }
+
+    /**
+     * Get the list of shipment types
+     *
+     * @return mixed
+     */
+    public function getShipmentTypes()
+    {
+        $response = $this->executeCommand('GetShipmentTypes');
+
+        return $response;
+    }
+
+    /**
+     * Post a list of shipments (will erase past created shipments)
+     *
+     *@param MerchantShipment[] $shipments
+     *
+     * @return mixed
+     */
+    public function postShipments($shipments)
+    {
+        $formattedData = array();
+
+        /** @var OystArrayInterface $shipment */
+        foreach ($shipments as $shipment) {
+            $shipmentArray = $shipment->toArray();
+
+            OystCollectionHelper::cleanData($shipmentArray);
+
+            $formattedData[] = $shipmentArray;
+        }
+
+        $data     = array('shipments' => $formattedData);
+        $response = $this->executeCommand('PostShipments', $data);
 
         return $response;
     }

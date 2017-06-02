@@ -50,6 +50,7 @@ class ProductFixture
         $product->setImages(array('http://localhost/test-2'));
 
         $products[] = clone $product;
+
         return $products;
     }
 
