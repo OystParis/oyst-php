@@ -12,6 +12,9 @@ namespace Oyst\Classes;
  */
 class OneClickShipment implements OystArrayInterface
 {
+    const HOME_DELIVERY = 'home_delivery';
+    const PICKUP_DELIVERY = 'pickup';
+
     /**
      * @var int
      */
@@ -56,13 +59,15 @@ class OneClickShipment implements OystArrayInterface
     }
 
     /**
-     * @param type $delay
-     *
+     * @param int $freeShipping
      * @return OneClickShipment
+     *
      */
     public function setFreeShipping($freeShipping)
     {
         $this->freeShipping = $freeShipping;
+
+        return $this;
     }
 
     /**
@@ -74,13 +79,15 @@ class OneClickShipment implements OystArrayInterface
     }
 
     /**
-     * @param bool $delay
-     *
+     * @param bool $primary
      * @return OneClickShipment
+     *
      */
     public function setPrimary($primary)
     {
         $this->primary = $primary;
+
+        return $this;
     }
 
     /**
@@ -92,13 +99,15 @@ class OneClickShipment implements OystArrayInterface
     }
 
     /**
-     * @param ShipmentAmount $delay
-     *
+     * @param ShipmentAmount $amount
      * @return OneClickShipment
+     *
      */
     public function setAmount(ShipmentAmount $amount)
     {
         $this->amount = $amount;
+
+        return $this;
     }
 
     /**
@@ -110,13 +119,15 @@ class OneClickShipment implements OystArrayInterface
     }
 
     /**
-     * @param OystCarrier $delay
-     *
+     * @param OystCarrier $carrier
      * @return OneClickShipment
+     *
      */
     public function setCarrier(OystCarrier $carrier)
     {
         $this->carrier = $carrier;
+
+        return $this;
     }
 
     /**
@@ -135,6 +146,8 @@ class OneClickShipment implements OystArrayInterface
     public function setDelay($delay)
     {
         $this->delay = $delay;
+
+        return $this;
     }
 
     /**
@@ -153,6 +166,8 @@ class OneClickShipment implements OystArrayInterface
     public function setZones($zones)
     {
         $this->zones = $zones;
+
+        return $this;
     }
 
     /**
