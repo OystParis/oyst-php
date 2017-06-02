@@ -75,6 +75,19 @@
             "httpMethod": "GET",
             "uri": "shipments/types",
             "summary": "Get the list of shipment types"
+        },
+        "PostShipments": {
+            "httpMethod": "POST",
+            "uri": "shipments",
+            "summary": "Create a list of shipments",
+            "parameters": {
+                "shipments": {
+                    "location": "json",
+                    "type": "string",
+                    "description": "List of shipments",
+                    "required": true
+                }
+            }
         }
     }
 }
