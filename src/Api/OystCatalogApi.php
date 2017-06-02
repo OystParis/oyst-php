@@ -145,7 +145,7 @@ class OystCatalogApi extends AbstractOystApiClient
     /**
      * Post a list of shipments (will erase past created shipments)
      *
-     *@param MerchantShipment[] $shipments
+     *@param OneClickShipment[] $shipments
      *
      * @return mixed
      */

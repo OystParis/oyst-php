@@ -20,7 +20,7 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
      */
     private $orderApi;
 
-    private function loadRequirements()
+    protected function setUp()
     {
         $this->settings = new TestSettings();
         $this->settings->load();
@@ -36,9 +36,8 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOrders()
     {
-        $this->loadRequirements();
-
         $result = $this->orderApi->getOrders();
+
         $this->assertTrue(is_array($result['orders']) && isset($result['count']));
     }
 
@@ -47,7 +46,6 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
         // TODO: This order part should work better with a new created order
         // As we can't create order on the API for real functional test, We need to create
         // a new one from live plugin and then register the id inside the settings here.
-        $this->loadRequirements();
 
         // This part works, but we need to develop the post
         if (!$this->settings->getOrderId()) {

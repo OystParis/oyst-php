@@ -3,14 +3,14 @@
 namespace Oyst\Classes;
 
 /**
- * Class OystShipment
+ * Class OneClickShipment
  *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
-class OystShipment implements OystArrayInterface
+class OneClickShipment implements OystArrayInterface
 {
     /**
      * @var int
@@ -58,7 +58,7 @@ class OystShipment implements OystArrayInterface
     /**
      * @param type $delay
      *
-     * @return MerchantShipment
+     * @return OneClickShipment
      */
     public function setFreeShipping($freeShipping)
     {
@@ -76,7 +76,7 @@ class OystShipment implements OystArrayInterface
     /**
      * @param bool $delay
      *
-     * @return MerchantShipment
+     * @return OneClickShipment
      */
     public function setPrimary($primary)
     {
@@ -94,7 +94,7 @@ class OystShipment implements OystArrayInterface
     /**
      * @param ShipmentAmount $delay
      *
-     * @return MerchantShipment
+     * @return OneClickShipment
      */
     public function setAmount(ShipmentAmount $amount)
     {
@@ -112,7 +112,7 @@ class OystShipment implements OystArrayInterface
     /**
      * @param OystCarrier $delay
      *
-     * @return MerchantShipment
+     * @return OneClickShipment
      */
     public function setCarrier(OystCarrier $carrier)
     {
@@ -130,7 +130,7 @@ class OystShipment implements OystArrayInterface
     /**
      * @param int $delay
      *
-     * @return MerchantShipment
+     * @return OneClickShipment
      */
     public function setDelay($delay)
     {
@@ -148,7 +148,7 @@ class OystShipment implements OystArrayInterface
     /**
      * @param string[] $zones
      *
-     * @return MerchantShipment
+     * @return OneClickShipment
      */
     public function setZones($zones)
     {
