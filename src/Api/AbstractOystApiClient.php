@@ -102,7 +102,7 @@ abstract class AbstractOystApiClient
             $this->body = $e->getResponse()->getBody(true);
             $responseBody = json_decode($this->body, true);
 
-            $this->lastError = false;
+            $this->lastError = $responseBody;
             $this->lastHttpCode = $e->getResponse()->getStatusCode();
             if (isset($responseBody['error'])) {
                 if (is_array($responseBody['error']) && isset($responseBody['error']['message'])) {
@@ -112,8 +112,6 @@ abstract class AbstractOystApiClient
                 }
             } elseif (isset($responseBody['message'])) {
                 $this->lastError = $responseBody['message'];
-            } else {
-                $this->lastError = $responseBody;
             }
         } catch (RequestException $e) {
             $this->lastError    = $e->getMessage();

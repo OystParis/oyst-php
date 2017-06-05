@@ -60,6 +60,7 @@ class OneClickShipment implements OystArrayInterface
 
     /**
      * @param int $freeShipping
+     *
      * @return OneClickShipment
      *
      */
@@ -80,6 +81,7 @@ class OneClickShipment implements OystArrayInterface
 
     /**
      * @param bool $primary
+     *
      * @return OneClickShipment
      *
      */
@@ -100,6 +102,7 @@ class OneClickShipment implements OystArrayInterface
 
     /**
      * @param ShipmentAmount $amount
+     *
      * @return OneClickShipment
      *
      */
@@ -120,6 +123,7 @@ class OneClickShipment implements OystArrayInterface
 
     /**
      * @param OystCarrier $carrier
+     *
      * @return OneClickShipment
      *
      */
