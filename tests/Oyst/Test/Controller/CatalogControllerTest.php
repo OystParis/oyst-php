@@ -4,10 +4,14 @@ namespace Oyst\Test\Controller;
 
 use Oyst\Api\OystApiClientFactory;
 use Oyst\Api\OystCatalogApi;
+use Oyst\Classes\OneClickShipment;
+use Oyst\Classes\OystCarrier;
 use Oyst\Classes\OystCategory;
 use Oyst\Classes\OystPrice;
 use Oyst\Classes\OystProduct;
 use Oyst\Classes\OystSize;
+use Oyst\Classes\ShipmentAmount;
+use Oyst\Test\Fixture\OneClickShipmentFixture;
 use Oyst\Test\Fixture\ProductFixture;
 use Oyst\Test\TestSettings;
 
@@ -42,6 +46,7 @@ class CatalogControllerTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->products = ProductFixture::getList();
+        $this->shipments = OneClickShipmentFixture::getList();
     }
 
     public function testNotifyImport()
@@ -106,6 +111,9 @@ class CatalogControllerTest extends \PHPUnit_Framework_TestCase
     public function testGetShipments()
     {
         $result = $this->catalogApi->getShipments();
+
+        $this->assertTrue(isset($result['shipments']));
+        $this->assertTrue(count($result['shipments']) === 2);
     }
 
     public function testGetShipmentTypes()
@@ -113,5 +121,13 @@ class CatalogControllerTest extends \PHPUnit_Framework_TestCase
         $result = $this->catalogApi->getShipmentTypes();
 
         $this->assertTrue(isset($result['types']));
+    }
+
+    public function testPostShipments()
+    {
+        $result = $this->catalogApi->postShipments($this->shipments);
+
+        $this->assertTrue(isset($result['shipments']));
+        $this->assertTrue(count($result['shipments']) === 2);
     }
 }

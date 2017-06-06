@@ -3,15 +3,18 @@
 namespace Oyst\Classes;
 
 /**
- * Class OystShipment
+ * Class OneClickShipment
  *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
-class OystShipment implements OystArrayInterface
+class OneClickShipment implements OystArrayInterface
 {
+    const HOME_DELIVERY = 'home_delivery';
+    const PICKUP_DELIVERY = 'pickup';
+
     /**
      * @var int
      */
@@ -56,13 +59,16 @@ class OystShipment implements OystArrayInterface
     }
 
     /**
-     * @param type $delay
+     * @param int $freeShipping
      *
-     * @return MerchantShipment
+     * @return OneClickShipment
+     *
      */
     public function setFreeShipping($freeShipping)
     {
         $this->freeShipping = $freeShipping;
+
+        return $this;
     }
 
     /**
@@ -74,13 +80,16 @@ class OystShipment implements OystArrayInterface
     }
 
     /**
-     * @param bool $delay
+     * @param bool $primary
      *
-     * @return MerchantShipment
+     * @return OneClickShipment
+     *
      */
     public function setPrimary($primary)
     {
         $this->primary = $primary;
+
+        return $this;
     }
 
     /**
@@ -92,13 +101,16 @@ class OystShipment implements OystArrayInterface
     }
 
     /**
-     * @param ShipmentAmount $delay
+     * @param ShipmentAmount $amount
      *
-     * @return MerchantShipment
+     * @return OneClickShipment
+     *
      */
     public function setAmount(ShipmentAmount $amount)
     {
         $this->amount = $amount;
+
+        return $this;
     }
 
     /**
@@ -110,13 +122,16 @@ class OystShipment implements OystArrayInterface
     }
 
     /**
-     * @param OystCarrier $delay
+     * @param OystCarrier $carrier
      *
-     * @return MerchantShipment
+     * @return OneClickShipment
+     *
      */
     public function setCarrier(OystCarrier $carrier)
     {
         $this->carrier = $carrier;
+
+        return $this;
     }
 
     /**
@@ -130,11 +145,13 @@ class OystShipment implements OystArrayInterface
     /**
      * @param int $delay
      *
-     * @return MerchantShipment
+     * @return OneClickShipment
      */
     public function setDelay($delay)
     {
         $this->delay = $delay;
+
+        return $this;
     }
 
     /**
@@ -148,11 +165,13 @@ class OystShipment implements OystArrayInterface
     /**
      * @param string[] $zones
      *
-     * @return MerchantShipment
+     * @return OneClickShipment
      */
     public function setZones($zones)
     {
         $this->zones = $zones;
+
+        return $this;
     }
 
     /**

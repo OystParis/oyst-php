@@ -48,7 +48,6 @@ class ProductFixture
         $product->setAmountIncludingTax(new OystPrice(25, 'EUR'));
         $product->setCategories(array(new OystCategory('cat_ref', 'cat title', true)));
         $product->setImages(array('http://localhost/test-2'));
-
         $products[] = clone $product;
 
         return $products;

@@ -83,7 +83,7 @@
             "parameters": {
                 "shipments": {
                     "location": "json",
-                    "type": "string",
+                    "type": "array",
                     "description": "List of shipments",
                     "required": true
                 }

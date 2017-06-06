@@ -5,10 +5,14 @@ namespace Oyst\Test\Api;
 use Guzzle\Http\Message\Response;
 use Oyst\Api\OystApiClientFactory;
 use Oyst\Api\OystCatalogApi;
+use Oyst\Classes\OneClickShipment;
+use Oyst\Classes\OystCarrier;
 use Oyst\Classes\OystCategory;
 use Oyst\Classes\OystPrice;
 use Oyst\Classes\OystProduct;
 use Oyst\Classes\OystSize;
+use Oyst\Classes\ShipmentAmount;
+use Oyst\Test\Fixture\OneClickShipmentFixture;
 use Oyst\Test\OystApiContext;
 
 /**
@@ -113,5 +117,111 @@ class OystCatalogApiTest extends OystApiContext
 
         $this->assertEquals($catalogApi->getLastHttpCode(), 200);
         $this->assertTrue(!is_null($result['import_id']));
+    }
+
+    /**
+     * @dataProvider fakeData
+     */
+    public function testGetShipments($apiKey, $userAgent)
+    {
+        $fakeResponse = new Response(
+            200,
+            array('Content-Type' => 'application/json'),
+            '{
+                "error": {
+                  "code": "CAT-404",
+                  "message": "shipments-not-found"
+                },
+                "merchantId": "merchant_uuid"
+            }'
+        );
+        $catalogApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
+        $result = $catalogApi->getShipments();
+
+        $this->assertEquals($catalogApi->getLastHttpCode(), 200);
+    }
+
+    /**
+     * @dataProvider fakeData
+     */
+    public function testGetShipmentTypes($apiKey, $userAgent)
+    {
+        $fakeResponse = new Response(
+            200,
+            array('Content-Type' => 'application/json'),
+            '{
+                "types": {
+                  "home_delivery": "Home delivery",
+                  "pick_up": "Navette Pick-up",
+                  "mondial_relay": "Mondial Relay"
+                }
+            }'
+        );
+        $catalogApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
+        $result = $catalogApi->getShipmentTypes();
+
+        $this->assertEquals($catalogApi->getLastHttpCode(), 200);
+        $this->assertTrue(is_array($result['types']));
+        $this->assertTrue(count($result['types']) === 3);
+    }
+
+    /**
+     * @dataProvider fakeData
+     */
+    public function testPostShipments($apiKey, $userAgent)
+    {
+        $fakeResponse = new Response(
+            200,
+            array('Content-Type' => 'application/json'),
+            '{
+                "shipments": [
+                    {
+                        "id": "shipment_guid1",
+                        "free_shipping": 100000,
+                        "merchant_id": "merchant_uuid",
+                        "primary": true,
+                        "amount": {
+                            "currency": "EUR",
+                            "follower": 100,
+                            "leader": 490
+                        },
+                        "carrier": {
+                            "id": "test1",
+                            "name": "UPS",
+                            "type": "home_delivery"
+                        },
+                        "delay": 72,
+                        "zones": ["FR", "EN", "IE"]
+                    },
+                    {
+                        "id": "shipment_guid2",
+                        "free_shipping": 50000,
+                        "merchant_id": "merchant_uuid",
+                        "primary": false,
+                        "amount": {
+                            "currency": "EUR",
+                            "follower": 100,
+                            "leader": 490
+                        },
+                        "carrier": {
+                            "id": "test2",
+                            "name": "Navette Pick-up",
+                            "type": "pick_up"
+                        },
+                        "delay": 72,
+                        "zones": ["FR", "EN", "IE"]
+                    }
+                ]
+            }'
+        );
+        $catalogApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
+
+        $shipments = OneClickShipmentFixture::getList();
+
+        $result = $catalogApi->postShipments($shipments);
+
+        $this->assertEquals($catalogApi->getLastHttpCode(), 200);
+        $this->assertTrue(is_array($result['shipments']));
+        $this->assertTrue(count($result['shipments']) === 2);
     }
 }

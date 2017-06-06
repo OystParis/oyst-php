@@ -29,11 +29,12 @@ class TestSettings
     {
         if (isset($this->parametersFile)) {
             $parserYml = new Parser();
-            $params = $parserYml->parse(file_get_contents($this->parametersFile))['test'];
-            $this->apiKey = $params['apiKey'];
-            $this->env = $params['env'];
-            $this->userAgent = $params['userAgent'];
-            $this->userAgent = $params['orderId'];
+            $parameters = $parserYml->parse(file_get_contents($this->parametersFile));
+            $paramsTest = $parameters['test'];
+            $this->apiKey = $paramsTest['apiKey'];
+            $this->env = $paramsTest['env'];
+            $this->userAgent = $paramsTest['userAgent'];
+            $this->userAgent = $paramsTest['orderId'];
         }
 
         // Look for environment
