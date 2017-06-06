@@ -20,7 +20,7 @@ class OneClickShipmentFixture
         $shipment->setDelay(72);
         $shipment->setFreeShipping(100000);
         $shipment->setPrimary(true);
-        $shipment->setZones(array("FR", "EN", "IE"));
+        $shipment->setZones(array('FR', 'EN', 'IE'));
         $shipments[] = $shipment;
 
         $shipment = new OneClickShipment();
@@ -29,7 +29,7 @@ class OneClickShipmentFixture
         $shipment->setDelay(72);
         $shipment->setFreeShipping(50000);
         $shipment->setPrimary(false);
-        $shipment->setZones(array("FR", "EN", "IE"));
+        $shipment->setZones(array('FR', 'EN', 'IE'));
         $shipments[] = $shipment;
 
         return $shipments;

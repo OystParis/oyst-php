@@ -162,7 +162,7 @@ class OystCatalogApiTest extends OystApiContext
 
         $this->assertEquals($catalogApi->getLastHttpCode(), 200);
         $this->assertTrue(is_array($result['types']));
-        $this->assertTrue(count($result['types']) == 3);
+        $this->assertTrue(count($result['types']) === 3);
     }
 
     /**
@@ -222,6 +222,6 @@ class OystCatalogApiTest extends OystApiContext
 
         $this->assertEquals($catalogApi->getLastHttpCode(), 200);
         $this->assertTrue(is_array($result['shipments']));
-        $this->assertTrue(count($result['shipments']) == 2);
+        $this->assertTrue(count($result['shipments']) === 2);
     }
 }

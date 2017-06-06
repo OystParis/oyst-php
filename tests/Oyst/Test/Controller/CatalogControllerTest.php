@@ -113,7 +113,7 @@ class CatalogControllerTest extends \PHPUnit_Framework_TestCase
         $result = $this->catalogApi->getShipments();
 
         $this->assertTrue(isset($result['shipments']));
-        $this->assertTrue(count($result['shipments']) == 2);
+        $this->assertTrue(count($result['shipments']) === 2);
     }
 
     public function testGetShipmentTypes()
@@ -128,6 +128,6 @@ class CatalogControllerTest extends \PHPUnit_Framework_TestCase
         $result = $this->catalogApi->postShipments($this->shipments);
 
         $this->assertTrue(isset($result['shipments']));
-        $this->assertTrue(count($result['shipments']) == 2);
+        $this->assertTrue(count($result['shipments']) === 2);
     }
 }
