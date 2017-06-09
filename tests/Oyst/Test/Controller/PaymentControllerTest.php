@@ -52,6 +52,6 @@ class PaymentControllerTest extends \PHPUnit_Framework_TestCase
             $this->user
         );
 
-        $this->assertTrue(isset($result['url']));
+        $this->assertTrue(isset($result['url']), $this->paymentApi->getBody());
     }
 }

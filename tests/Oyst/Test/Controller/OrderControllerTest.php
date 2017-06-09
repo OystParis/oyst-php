@@ -38,7 +38,7 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
     {
         $result = $this->orderApi->getOrders();
 
-        $this->assertTrue(is_array($result['orders']) && isset($result['count']));
+        $this->assertTrue(is_array($result['orders']) && isset($result['count']), $this->orderApi->getBody());
     }
 
     public function testUpdateOrder()
@@ -54,7 +54,7 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
 
         $orderInfo = $this->orderApi->getOrder($this->settings->getOrderId());
 
-        $this->assertTrue(is_array($orderInfo));
+        $this->assertTrue(is_array($orderInfo), $this->orderApi->getBody());
 
         $currentState = $orderInfo['current_status'];
 
@@ -72,7 +72,7 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->orderApi->updateStatus($this->settings->getOrderId(), $nextStatus);
 
-        $this->assertEquals(200, $this->orderApi->getLastHttpCode());
-        $this->assertEquals($nextStatus, $result['order']['current_status']);
+        $this->assertEquals(200, $this->orderApi->getLastHttpCode(), $this->orderApi->getBody());
+        $this->assertEquals($nextStatus, $result['order']['current_status'], $this->orderApi->getBody());
     }
 }

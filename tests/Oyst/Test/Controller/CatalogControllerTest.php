@@ -53,13 +53,13 @@ class CatalogControllerTest extends \PHPUnit_Framework_TestCase
     {
         $result = $this->catalogApi->notifyImport();
 
-        $this->assertTrue(isset($result['import_id']));
+        $this->assertTrue(isset($result['import_id']), $this->catalogApi->getBody());
     }
 
     public function testPostProducts()
     {
         $result = $this->catalogApi->postProducts($this->products);
-        $this->assertTrue(isset($result['imported']) && $result['imported'] == 2);
+        $this->assertTrue(isset($result['imported']) && $result['imported'] == 2, $this->catalogApi->getBody());
     }
 
     public function testUpdateProduct()
@@ -94,7 +94,7 @@ class CatalogControllerTest extends \PHPUnit_Framework_TestCase
 
         // Temporary cause API is broken with catalog
         if ($result) {
-            $this->assertTrue($result['product']['title'] == 'updated_1');
+            $this->assertTrue($result['product']['title'] == 'updated_1', $this->catalogApi->getBody());
         }
     }
 
@@ -108,29 +108,29 @@ class CatalogControllerTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->catalogApi->deleteProduct($product);
 
-        $this->assertTrue(isset($result['deleted']));
+        $this->assertTrue(isset($result['deleted']), $this->catalogApi->getBody());
     }
 
     public function testGetShipments()
     {
         $result = $this->catalogApi->getShipments();
 
-        $this->assertTrue(isset($result['shipments']));
-        $this->assertTrue(count($result['shipments']) === 2);
+        $this->assertTrue(isset($result['shipments']), $this->catalogApi->getBody());
+        $this->assertTrue(count($result['shipments']) === 2, $this->catalogApi->getBody());
     }
 
     public function testGetShipmentTypes()
     {
         $result = $this->catalogApi->getShipmentTypes();
 
-        $this->assertTrue(isset($result['types']));
+        $this->assertTrue(isset($result['types']), $this->catalogApi->getBody());
     }
 
     public function testPostShipments()
     {
         $result = $this->catalogApi->postShipments($this->shipments);
 
-        $this->assertTrue(isset($result['shipments']));
-        $this->assertTrue(count($result['shipments']) === 2);
+        $this->assertTrue(isset($result['shipments']), $this->catalogApi->getBody());
+        $this->assertTrue(count($result['shipments']) === 2, $this->catalogApi->getBody());
     }
 }
