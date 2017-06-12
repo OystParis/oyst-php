@@ -1,6 +1,6 @@
 {
     "name": "API Order",
-    "apiVersion": "v1",
+    "apiVersion": "v2",
     "description": "Oyst API Order",
     "operations": {
         "GetOrders": {
