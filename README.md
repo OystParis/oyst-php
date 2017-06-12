@@ -3,7 +3,7 @@ Oyst PHP API Wrapper
 
 Build Status
 ------------
-Latest Release [![Master Branch](https://travis-ci.org/OystParis/oyst-php.svg?branch=master)](https://travis-ci.org/OystParis/oyst-php)
+Latest Release [![Master Branch](https://travis-ci.org/oystparis/oyst-php.svg?branch=master)](https://travis-ci.org/oystparis/oyst-php)
 
 User Guide
 ----------
