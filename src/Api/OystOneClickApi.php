@@ -18,19 +18,20 @@ class OystOneClickApi extends AbstractOystApiClient
      * Check if an order can be processed for the selected product / quantity
      * If it's the case, an order is created (can be retrieved via getOrder(s) method)
      *
-     * @param string        $productRef
-     * @param string        $variationRef
-     * @param int           $quantity
+     * @param string $productRef
+     * @param int $quantity
+     * @param string $variationRef
      * @param OystUser|null $user
+     * @param int $version
      *
      * @return mixed
      */
-    public function authorizeOrder($productRef, $quantity = 1, $variationRef = null, OystUser $user = null)
+    public function authorizeOrder($productRef, $quantity = 1, $variationRef = null, OystUser $user = null, $version = 1)
     {
         $data = array(
             'product_reference' => $productRef,
             'quantity'          => $quantity,
-            'version'           => 1
+            'version'           => $version
         );
 
         if (!is_null($variationRef)) {

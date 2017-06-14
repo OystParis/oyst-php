@@ -37,11 +37,17 @@ class OneClickControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testNotifyImport()
     {
-        $result = $this->oneClickApi->authorizeOrder($this->product->getRef(), 1);
+        $apiVersion = 1;
+        $result = $this->oneClickApi->authorizeOrder(
+            $this->product->getRef(),
+            1,
+            null,
+            null,
+            $apiVersion
+        );
+
         $this->assertTrue(isset($result['url']));
-
         parse_str(parse_url($result['url'], PHP_URL_QUERY), $queries);
-
-        $this->assertTrue(isset($queries['v']) && $queries['v'] == 2);
+        $this->assertTrue(isset($queries['v']) && $queries['v'] == $apiVersion);
     }
 }

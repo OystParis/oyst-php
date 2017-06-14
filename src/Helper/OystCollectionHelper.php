@@ -38,14 +38,18 @@ class OystCollectionHelper
      */
     public static function cleanData(&$data)
     {
-        foreach ($data as $field => $value) {
+        foreach ($data as $field => &$value) {
             if (!is_array($value) && !is_integer($value)) {
                 if ((empty($value) || !$value) && $value != '0') {
                     unset($data[$field]);
                 }
             }
-            if (is_array($value) && empty($value)) {
-                unset($data[$field]);
+            if (is_array($value)) {
+                if (empty($value)) {
+                    unset($data[$field]);
+                } else {
+                    self::cleanData($value);
+                }
             }
         }
     }

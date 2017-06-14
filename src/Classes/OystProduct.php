@@ -722,7 +722,7 @@ class OystProduct implements OystArrayInterface
     }
 
     /**
-     * @return array
+     * @return OystProduct[]
      */
     public function getVariations()
     {
