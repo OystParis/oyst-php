@@ -66,7 +66,7 @@ class OneClickShipment implements OystArrayInterface
      */
     public function setFreeShipping($freeShipping)
     {
-        $this->freeShipping = $freeShipping;
+        $this->freeShipping = $freeShipping * 100;
 
         return $this;
     }
