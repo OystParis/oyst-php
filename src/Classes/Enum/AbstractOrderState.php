@@ -5,7 +5,7 @@ namespace Oyst\Classes\Enum;
 class AbstractOrderState
 {
     const WAITING = 'waiting';
-    const DECLINED = 'declined';
+    const DENIED = 'denied';
     const ACCEPTED = 'accepted';
     const FINALIZED = 'finalized';
     const PENDING = 'pending';
