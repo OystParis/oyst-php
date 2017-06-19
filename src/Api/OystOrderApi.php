@@ -74,9 +74,9 @@ class OystOrderApi extends AbstractOystApiClient
      * @param $orderId
      * @return mixed
      */
-    public function decline($orderId)
+    public function deny($orderId)
     {
-        return $this->updateStatus($orderId, AbstractOrderState::DECLINED);
+        return $this->updateStatus($orderId, AbstractOrderState::DENIED);
     }
 
     /**
