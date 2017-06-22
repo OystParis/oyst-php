@@ -44,7 +44,7 @@ class ShipmentAmount implements OystArrayInterface
      */
     public function getAmountFollower()
     {
-        return $this->amountfollower;
+        return $this->amountFollower;
     }
 
     /**
