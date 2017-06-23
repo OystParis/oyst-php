@@ -43,6 +43,7 @@ Tests
 To run unit tests:
 ```php
 vendor/bin/phpunit -c phpunit.xml.dist --testsuite unitary
+vendor/bin/phpunit -c phpunit.xml.dist --testsuite functional
 ```
 
 Documentation
