@@ -31,15 +31,15 @@ class OystApiClientFactory
      * @param string $apiKey
      * @param string $userAgent
      * @param string $env
-     * @param string $url
+     * @param string $customUrl
      *
      * @return AbstractOystApiClient
      *
      * @throws \Exception
      */
-    public static function getClient($entityName, $apiKey, $userAgent, $env = self::ENV_PROD, $url = null)
+    public static function getClient($entityName, $apiKey, $userAgent, $env = self::ENV_PROD, $customUrl = null)
     {
-        $client = static::createClient($entityName, $env, $url);
+        $client = static::createClient($entityName, $env, $customUrl);
 
         switch ($entityName) {
             case self::ENTITY_CATALOG:
@@ -67,22 +67,22 @@ class OystApiClientFactory
      *
      * @param string $entityName
      * @param string $env
-     * @param string $url
+     * @param string $customUrl
      *
      * @return Client
      */
-    private static function createClient($entityName, $env, $url)
+    private static function createClient($entityName, $env, $customUrl)
     {
-        $configurationLoader = static::getApiConfiguration($entityName, $env, $url);
+        $configurationLoader = static::getApiConfiguration($entityName, $env, $customUrl);
         $description = static::getApiDescription($entityName);
 
-        $baseUrl = $configurationLoader->getApiUrl();
+        $url = $configurationLoader->getBaseUrl();
 
         if (!in_array($entityName, array(static::ENTITY_PAYMENT))) {
-            $baseUrl .= '/'.$description->getApiVersion();
+            $url .= '/'.$description->getApiVersion();
         }
 
-        $client = new Client($baseUrl);
+        $client = new Client($url);
         $client->setDescription($description);
 
         return $client;
@@ -93,19 +93,19 @@ class OystApiClientFactory
      *
      * @param string $entity
      * @param string $env
-     * @param string $url
+     * @param string $customUrl
      *
      * @return OystApiConfiguration
      */
-    private static function getApiConfiguration($entity, $env, $url)
+    private static function getApiConfiguration($entity, $env, $customUrl)
     {
         $parametersFile = __DIR__.'/../Config/parameters.yml';
         $parserYml      = new Parser();
         $configuration  = new OystApiConfiguration($parserYml, $parametersFile);
-        $configuration->load();
         $configuration->setEnvironment($env);
-        $configuration->setUrl($url);
+        $configuration->setCustomUrl($customUrl);
         $configuration->setEntity($entity);
+        $configuration->load();
 
         return $configuration;
     }

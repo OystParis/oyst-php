@@ -7,6 +7,7 @@ use Guzzle\Plugin\Mock\MockPlugin;
 use Guzzle\Service\Client;
 use Oyst\Api\AbstractOystApiClient;
 use Oyst\Api\OystApiClientFactory;
+use Oyst\Api\OystApiConfiguration;
 
 /**
  * Class OystApiContext
@@ -49,13 +50,15 @@ abstract class OystApiContext extends \PHPUnit_Framework_TestCase
     {
         $reflectionMethod = new \ReflectionMethod('Oyst\Api\OystApiClientFactory', 'getApiConfiguration');
         $reflectionMethod->setAccessible(true);
+
+        /** @var OystApiConfiguration $configuration */
         $configuration = $reflectionMethod->invoke(null, $entityName, null, 'https://localhost');
 
         $reflectionMethod = new \ReflectionMethod('Oyst\Api\OystApiClientFactory', 'getApiDescription');
         $reflectionMethod->setAccessible(true);
         $description = $reflectionMethod->invoke(null, $entityName);
 
-        $baseUrl = $configuration->getApiUrl();
+        $baseUrl = $configuration->getBaseUrl();
         $client = new Client($baseUrl);
         $client->setDescription($description);
 

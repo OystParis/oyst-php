@@ -179,7 +179,7 @@ class OystApiClientFactoryTest extends \PHPUnit_Framework_TestCase
         $configuration = $reflectionMethod->invoke(null, $entityName, $env, $url);
 
         $this->assertEquals($configuration->getEntity(), $expectedEntity);
-        $this->assertEquals($configuration->getApiUrl(), $expectedApiUrl);
+        $this->assertEquals($configuration->getBaseUrl(), $expectedApiUrl);
     }
 
     /**
