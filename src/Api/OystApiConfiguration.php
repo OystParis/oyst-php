@@ -32,7 +32,7 @@ class OystApiConfiguration
     /**
      * @var string
      */
-    private $url;
+    private $customUrl;
 
     /**
      * @var string
@@ -43,6 +43,9 @@ class OystApiConfiguration
      * @var string
      */
     private $entity;
+
+    /** @var  \string */
+    private $baseUrl;
 
     /**
      * @param Parser $yamlParser
@@ -57,19 +60,20 @@ class OystApiConfiguration
     /**
      * @return string
      */
-    public function getUrl()
+    public function getCustomUrl()
     {
-        return $this->url;
+        return $this->customUrl;
     }
 
     /**
-     * @param $environment
+     * @param $customUrl
      *
      * @return $this
+     *
      */
-    public function setUrl($url)
+    public function setCustomUrl($customUrl)
     {
-        $this->url = $url;
+        $this->customUrl = $customUrl;
 
         return $this;
     }
@@ -104,40 +108,14 @@ class OystApiConfiguration
 
     /**
      * @param string $entity
-     *
      * @return $this
+     * @throws \Exception
      */
     public function setEntity($entity)
     {
-        if (!isset($this->parameters['api']['path'][$entity])) {
-            throw new \Exception('The entity "'.$entity.'" does not exist.');
-        }
-
         $this->entity = $entity;
 
         return $this;
-    }
-
-    /**
-     * @return string|null
-     *
-     * @throws \Exception
-     */
-    public function getApiUrl()
-    {
-        $apiUrl = '';
-
-        if (!is_null($this->url)) {
-            $apiUrl = trim($this->url, '/');
-        } elseif (isset($this->parameters['api']['env'][$this->environment])) {
-            $apiUrl = $this->parameters['api']['env'][$this->environment];
-        } else {
-            throw new \Exception('The url was not set for the environment '.$this->environment.'.');
-        }
-
-        $apiUrl .= '/'.trim($this->parameters['api']['path'][$this->entity], '/');
-
-        return $apiUrl;
     }
 
     /**
@@ -157,6 +135,28 @@ class OystApiConfiguration
             $this->parameters = $this->yamlParser->parse(file_get_contents($this->parametersFile));
         }
 
+        if (!is_null($this->customUrl)) {
+            $baseUrl = trim($this->customUrl, '/');
+        } elseif (isset($this->parameters['api']['env'][$this->environment])) {
+            $baseUrl = $this->parameters['api']['env'][$this->environment];
+        } else {
+            throw new \Exception('Custom url or the environment is missing, did you forgot to set one of them ?');
+        }
+
+        if (!isset($this->parameters['api']['path'][$this->entity])) {
+            throw new \Exception('Entity doesn\'t exist, please set a valid one');
+        }
+
+        $this->baseUrl = $baseUrl.'/'.trim($this->parameters['api']['path'][$this->entity], '/');
+
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBaseUrl()
+    {
+        return $this->baseUrl;
     }
 }
