@@ -690,6 +690,19 @@ class OystProduct implements OystArrayInterface
     }
 
     /**
+     * @param $key
+     * @param $value
+     *
+     * @return $this
+     */
+    public function addInformation($key, $value)
+    {
+        $this->information[$key] = $value;
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getRelatedProducts()
