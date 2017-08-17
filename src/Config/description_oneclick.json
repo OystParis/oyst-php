@@ -37,6 +37,12 @@
                     "type" : "string",
                     "description": "Set the desired version of the one click process",
                     "required": false
+                },
+                "product": {
+                    "location": "json",
+                    "type" : "object",
+                    "description": "The product ordered for catalog less",
+                    "required": false
                 }
             }
         }
