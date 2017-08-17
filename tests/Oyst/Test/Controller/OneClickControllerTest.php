@@ -43,7 +43,8 @@ class OneClickControllerTest extends \PHPUnit_Framework_TestCase
             1,
             null,
             null,
-            $apiVersion
+            $apiVersion,
+            null
         );
 
         $this->assertTrue(isset($result['url']), $this->oneClickApi->getBody());

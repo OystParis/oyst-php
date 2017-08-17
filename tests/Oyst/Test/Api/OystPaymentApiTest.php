@@ -20,8 +20,8 @@ class OystPaymentApiTest extends OystApiContext
 {
     /**
      * @param Response $fakeResponse
-     * @param string   $apiKey
-     * @param string   $userAgent
+     * @param string $apiKey
+     * @param string $userAgent
      *
      * @return OystPaymentApi
      */
@@ -38,7 +38,11 @@ class OystPaymentApiTest extends OystApiContext
      */
     public function testPayment($apiKey, $userAgent)
     {
-        $fakeResponse = new Response(200, array('Content-Type' => 'application/json'), '{"url": "http://localhost/success"}');
+        $fakeResponse = new Response(
+            200,
+            array('Content-Type' => 'application/json'),
+            '{"url": "http://localhost/success"}'
+        );
         $paymentApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
         $result = $paymentApi->payment(123, 'EUR', 3, array(
             'notification' => 'http://localhost.test',
@@ -64,7 +68,11 @@ class OystPaymentApiTest extends OystApiContext
      */
     public function testCancel($apiKey, $userAgent)
     {
-        $fakeResponse = new Response(200, array('Content-Type' => 'application/json'), '{"payment_id": "9eef1d60-3ed1-11e7-8336-1b2205bd98b6", "response": "cancel-received"}');
+        $fakeResponse = new Response(
+            200,
+            array('Content-Type' => 'application/json'),
+            '{"payment_id": "9eef1d60-3ed1-11e7-8336-1b2205bd98b6", "response": "cancel-received"}'
+        );
         $paymentApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
         $result = $paymentApi->cancelOrRefund('9eef1d60-3ed1-11e7-8336-1b2205bd98b6');
 
@@ -78,7 +86,11 @@ class OystPaymentApiTest extends OystApiContext
      */
     public function testTotalRefund($apiKey, $userAgent)
     {
-        $fakeResponse = new Response(200, array('Content-Type' => 'application/json'), '{"refund": {"id": "9eef1d60-3ed1-11e7-8336-1b2205bd98b6", "success": true, "status": "refund-received"}}');
+        $fakeResponse = new Response(
+            200,
+            array('Content-Type' => 'application/json'),
+            '{"refund": {"id": "9eef1d60-3ed1-11e7-8336-1b2205bd98b6", "success": true, "status": "refund-received"}}'
+        );
         $paymentApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
         $result = $paymentApi->cancelOrRefund('9eef1d60-3ed1-11e7-8336-1b2205bd98b6');
 
@@ -92,7 +104,11 @@ class OystPaymentApiTest extends OystApiContext
      */
     public function testPartialRefund($apiKey, $userAgent)
     {
-        $fakeResponse = new Response(200, array('Content-Type' => 'application/json'), '{"refund": {"id": "9eef1d60-3ed1-11e7-8336-1b2205bd98b6", "success": true, "status": "refund-received"}}');
+        $fakeResponse = new Response(
+            200,
+            array('Content-Type' => 'application/json'),
+            '{"refund": {"id": "9eef1d60-3ed1-11e7-8336-1b2205bd98b6", "success": true, "status": "refund-received"}}'
+        );
         $paymentApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
         $price = new OystPrice(6.66, 'EUR');
         $result = $paymentApi->cancelOrRefund('9eef1d60-3ed1-11e7-8336-1b2205bd98b6', $price);

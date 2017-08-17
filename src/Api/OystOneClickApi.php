@@ -2,6 +2,7 @@
 
 namespace Oyst\Api;
 
+use Oyst\Classes\OystProduct;
 use Oyst\Classes\OystUser;
 
 /**
@@ -23,15 +24,23 @@ class OystOneClickApi extends AbstractOystApiClient
      * @param string $variationRef
      * @param OystUser|null $user
      * @param int $version
+     * @param OystProduct $product OystProduct for catalog less
      *
      * @return mixed
      */
-    public function authorizeOrder($productRef, $quantity = 1, $variationRef = null, OystUser $user = null, $version = 1)
-    {
+    public function authorizeOrder(
+        $productRef,
+        $quantity = 1,
+        $variationRef = null,
+        OystUser $user = null,
+        $version = 1,
+        OystProduct $product = null
+    ) {
         $data = array(
             'product_reference' => $productRef,
-            'quantity'          => $quantity,
-            'version'           => $version
+            'quantity' => $quantity,
+            'version' => $version,
+            'product' => $product,
         );
 
         if (!is_null($variationRef)) {

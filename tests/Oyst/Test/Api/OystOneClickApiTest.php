@@ -19,8 +19,8 @@ class OystOneClickApiTest extends OystApiContext
 {
     /**
      * @param Response $fakeResponse
-     * @param string   $apiKey
-     * @param string   $userAgent
+     * @param string $apiKey
+     * @param string $userAgent
      *
      * @return OystOneClickApi
      */
@@ -37,7 +37,11 @@ class OystOneClickApiTest extends OystApiContext
      */
     public function testAuthorizeOrder($apiKey, $userAgent)
     {
-        $fakeResponse = new Response(200, array('Content-Type' => 'application/json'), '{"url": "http://localhost/success"}');
+        $fakeResponse = new Response(
+            200,
+            array('Content-Type' => 'application/json'),
+            '{"url": "http://localhost/success"}'
+        );
 
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
