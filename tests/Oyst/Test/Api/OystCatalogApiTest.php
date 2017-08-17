@@ -27,8 +27,8 @@ class OystCatalogApiTest extends OystApiContext
 {
     /**
      * @param Response $fakeResponse
-     * @param string   $apiKey
-     * @param string   $userAgent
+     * @param string $apiKey
+     * @param string $userAgent
      *
      * @return OystCatalogApi
      */
@@ -45,7 +45,11 @@ class OystCatalogApiTest extends OystApiContext
      */
     public function testPostProducts($apiKey, $userAgent)
     {
-        $fakeResponse = new Response(200, array('Content-Type' => 'application/json'), '{"imported": 2}');
+        $fakeResponse = new Response(
+            200,
+            array('Content-Type' => 'application/json'),
+            '{"imported": 2}'
+        );
         $catalogApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
 
         $products = array();
@@ -57,7 +61,7 @@ class OystCatalogApiTest extends OystApiContext
         $product->setImages(array('http://localhost'));
 
         $info = array(
-            'meta'     => 'info en vrac',
+            'meta' => 'info en vrac',
             'subtitle' => 'test'
         );
         $product->setAvailableQuantity(5);
@@ -96,7 +100,11 @@ class OystCatalogApiTest extends OystApiContext
      */
     public function testDeleteProduct($apiKey, $userAgent)
     {
-        $fakeResponse = new Response(404, array('Content-Type' => 'application/json'), '{"error": {"code": "CAT-404", "message": "product-not-found"}}');
+        $fakeResponse = new Response(
+            404,
+            array('Content-Type' => 'application/json'),
+            '{"error": {"code": "CAT-404", "message": "product-not-found"}}'
+        );
         $catalogApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
         $result = $catalogApi->deleteProduct('1-1');
 
@@ -111,7 +119,11 @@ class OystCatalogApiTest extends OystApiContext
      */
     public function testNotifyImport($apiKey, $userAgent)
     {
-        $fakeResponse = new Response(200, array('Content-Type' => 'application/json'), '{"import_id": "fake_uuid"}');
+        $fakeResponse = new Response(
+            200,
+            array('Content-Type' => 'application/json'),
+            '{"import_id": "fake_uuid"}'
+        );
         $catalogApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
         $result = $catalogApi->notifyImport();
 

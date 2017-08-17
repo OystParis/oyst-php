@@ -20,8 +20,8 @@ class OystOrderApiTest extends OystApiContext
 {
     /**
      * @param Response $fakeResponse
-     * @param string   $apiKey
-     * @param string   $userAgent
+     * @param string $apiKey
+     * @param string $userAgent
      *
      * @return OystOrderApi
      */
@@ -54,7 +54,11 @@ class OystOrderApiTest extends OystApiContext
      */
     public function testKoGetOrders($apiKey, $userAgent)
     {
-        $fakeResponse = new Response(404, array('Content-Type' => 'application/json'), '{"statusCode": 404, "error": "Not Found"}');
+        $fakeResponse = new Response(
+            404,
+            array('Content-Type' => 'application/json'),
+            '{"statusCode": 404, "error": "Not Found"}'
+        );
         $orderApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
         $result = $orderApi->getOrders();
 
