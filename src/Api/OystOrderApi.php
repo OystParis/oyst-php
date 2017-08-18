@@ -19,15 +19,15 @@ class OystOrderApi extends AbstractOystApiClient
     /**
      * Get oneclick orders (paginated)
      *
-     * @param int    $limit   10 by default
+     * @param int    $perPage   10 by default
      * @param string $status  the order status (see constants)
      *
      * @return mixed
      */
-    public function getOrders($limit = 10, $status = AbstractOrderState::ACCEPTED)
+    public function getOrders($perPage = 10, $status = AbstractOrderState::ACCEPTED)
     {
         $data = array(
-            'limit'  => $limit,
+            'per_page'  => $perPage,
             'status' => $status
         );
 

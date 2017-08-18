@@ -27,14 +27,14 @@ class TestSettings
 
     public function load()
     {
-        if (isset($this->parametersFile)) {
+        if (isset($this->parametersFile) && file_exists($this->parametersFile)) {
             $parserYml = new Parser();
             $parameters = $parserYml->parse(file_get_contents($this->parametersFile));
             $paramsTest = $parameters['test'];
             $this->apiKey = $paramsTest['apiKey'];
             $this->env = $paramsTest['env'];
             $this->userAgent = $paramsTest['userAgent'];
-            $this->userAgent = $paramsTest['orderId'];
+            $this->orderId = $paramsTest['orderId'];
         }
 
         // Look for environment
