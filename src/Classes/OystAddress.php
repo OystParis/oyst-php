@@ -268,16 +268,16 @@ class OystAddress implements OystArrayInterface
     public function toArray()
     {
         $address = array(
-            'first_name'    => $this->firstName,
-            'last_name'     => $this->lastName,
-            'company_name'  => $this->companyName,
-            'label'         => $this->label,
-            'street'        => $this->street,
+            'first_name' => $this->firstName,
+            'last_name' => $this->lastName,
+            'company_name' => $this->companyName,
+            'label' => $this->label,
+            'street' => $this->street,
             'complementary' => $this->complementary,
-            'postcode'      => $this->postCode,
-            'city'          => $this->city,
-            'region'        => $this->region,
-            'country'       => $this->country,
+            'postcode' => $this->postCode,
+            'city' => $this->city,
+            'region' => $this->region,
+            'country' => $this->country,
         );
 
         return $address;

@@ -33,15 +33,15 @@ abstract class OystApiContext extends \PHPUnit_Framework_TestCase
 
     /**
      * @param Response $fakeResponse
-     * @param string   $apiKey
-     * @param string   $userAgent
+     * @param string $apiKey
+     * @param string $userAgent
      *
      * @return AbstractOystApiClient
      */
     abstract public function getApi($fakeResponse, $apiKey, $userAgent);
 
     /**
-     * @param string   $entityName
+     * @param string $entityName
      * @param Response $fakeResponse
      *
      * @return Client

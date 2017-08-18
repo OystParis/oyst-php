@@ -17,29 +17,29 @@ class OystPaymentApi extends AbstractOystApiClient
     /**
      * Send payment
      *
-     * @param float  $amount
+     * @param float $amount
      * @param string $currency
      * @param string $cartId
-     * @param array  $urls
-     * @param bool   $is3d
-     * @param array  $user
+     * @param array $urls
+     * @param bool $is3d
+     * @param array $user
      *
      * @return mixed
      */
     public function payment($amount, $currency, $cartId, $urls, $is3d, $user)
     {
         $data = array(
-            'user'     => $user,
-            'order_id' => (string) $cartId,
-            'is_3d'    => $is3d,
-            'amount'   => array(
-                'value'    => (float) $amount,
-                'currency' => (string) $currency,
+            'user' => $user,
+            'order_id' => (string)$cartId,
+            'is_3d' => $is3d,
+            'amount' => array(
+                'value' => (float)$amount,
+                'currency' => (string)$currency,
             ),
             'notification_url' => $urls['notification'],
-            'redirects'        => array(
+            'redirects' => array(
                 'cancel_url' => $urls['cancel'],
-                'error_url'  => $urls['error'],
+                'error_url' => $urls['error'],
                 'return_url' => $urls['return'],
             ),
         );
@@ -52,8 +52,8 @@ class OystPaymentApi extends AbstractOystApiClient
     /**
      * Cancel a payment if the capture was not done yet, or refund it otherwise
      *
-     * @param string         $paymentId
-     * @param OystPrice|null $price     If $price is null then the refund is total
+     * @param string $paymentId
+     * @param OystPrice|null $price If $price is null then the refund is total
      *
      * @return mixed
      */

@@ -6,18 +6,19 @@ use Symfony\Component\Yaml\Parser;
 
 class TestSettings
 {
-    /** @var  string */
+    /** @var string */
     private $apiKey;
 
-    /** @var  string */
+    /** @var string */
     private $env;
 
-    /** @var  string */
+    /** @var string */
     private $userAgent;
 
-    /** @var  string */
+    /** @var string */
     private $parametersFile;
 
+    /** @var int */
     private $orderId;
 
     public function __construct()
@@ -50,7 +51,7 @@ class TestSettings
      */
     public function setParameterFile($file)
     {
-        $this->parametersFile = __DIR__.'/../../../src/Config/'.$file;
+        $this->parametersFile = __DIR__ . '/../../../src/Config/' . $file;
 
         return $this;
     }

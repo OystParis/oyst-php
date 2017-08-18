@@ -27,7 +27,7 @@ class OystPrice implements OystArrayInterface
     private $currency;
 
     /**
-     * @param int    $value
+     * @param int $value
      * @param string $currency
      */
     public function __construct($value, $currency)
@@ -51,7 +51,7 @@ class OystPrice implements OystArrayInterface
      */
     public function setValue($value)
     {
-        $this->value = (int) round($value * 100);
+        $this->value = (int)round($value * 100);
 
         return $this;
     }
@@ -82,7 +82,7 @@ class OystPrice implements OystArrayInterface
     public function toArray()
     {
         $price = array(
-            'value'    => $this->value,
+            'value' => $this->value,
             'currency' => $this->currency,
         );
 

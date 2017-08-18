@@ -34,9 +34,9 @@ class OystCarrier implements OystArrayInterface
      */
     public function __construct($id, $name, $type)
     {
-        $this->id   = $id;
+        $this->id = $id;
         $this->name = $name;
-        $this->type  = $type;
+        $this->type = $type;
     }
 
     /**
@@ -105,7 +105,7 @@ class OystCarrier implements OystArrayInterface
     public function toArray()
     {
         $carrier = array(
-            'id'   => $this->id,
+            'id' => $this->id,
             'name' => $this->name,
             'type' => $this->type,
         );

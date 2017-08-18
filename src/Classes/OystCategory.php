@@ -36,13 +36,13 @@ class OystCategory implements OystArrayInterface
     /**
      * @param string $ref
      * @param string $title
-     * @param bool   $main
+     * @param bool $main
      */
     public function __construct($ref, $title, $main = false)
     {
-        $this->ref   = $ref;
+        $this->ref = $ref;
         $this->title = $title;
-        $this->main  = $main;
+        $this->main = $main;
     }
 
     /**
@@ -112,8 +112,8 @@ class OystCategory implements OystArrayInterface
     {
         $category = array(
             'reference' => $this->ref,
-            'is_main'   => $this->main,
-            'title'     => $this->title,
+            'is_main' => $this->main,
+            'title' => $this->title,
         );
 
         return $category;

@@ -53,7 +53,7 @@ class OystCatalogApi extends AbstractOystApiClient
             $formattedData[] = $oystProductArray;
         }
 
-        $data     = array('products' => $formattedData);
+        $data = array('products' => $formattedData);
         $response = $this->executeCommand('PostProducts', $data);
 
         return $response;
@@ -81,7 +81,7 @@ class OystCatalogApi extends AbstractOystApiClient
     public function putProduct(OystProduct $oystProduct)
     {
         $data = array(
-            'id'      => $oystProduct->getRef(),
+            'id' => $oystProduct->getRef(),
             'product' => $oystProduct->toArray()
         );
         $response = $this->executeCommand('PutProduct', $data);
@@ -145,7 +145,7 @@ class OystCatalogApi extends AbstractOystApiClient
     /**
      * Post a list of shipments (will erase past created shipments)
      *
-     *@param OneClickShipment[] $shipments
+     * @param OneClickShipment[] $shipments
      *
      * @return mixed
      */
@@ -162,7 +162,7 @@ class OystCatalogApi extends AbstractOystApiClient
             $formattedData[] = $shipmentArray;
         }
 
-        $data     = array('shipments' => $formattedData);
+        $data = array('shipments' => $formattedData);
         $response = $this->executeCommand('PostShipments', $data);
 
         return $response;
