@@ -54,7 +54,7 @@ class OystSize implements OystArrayInterface
      */
     public function setHeight($height)
     {
-        $this->height = (int) $height;
+        $this->height = (int)$height;
 
         return $this;
     }
@@ -74,7 +74,7 @@ class OystSize implements OystArrayInterface
      */
     public function setWidth($width)
     {
-        $this->width = (int) $width;
+        $this->width = (int)$width;
 
         return $this;
     }
@@ -94,7 +94,7 @@ class OystSize implements OystArrayInterface
      */
     public function setDepth($depth)
     {
-        $this->depth = (int) $depth;
+        $this->depth = (int)$depth;
 
         return $this;
     }
@@ -106,8 +106,8 @@ class OystSize implements OystArrayInterface
     {
         $size = array(
             'height' => $this->height,
-            'width'  => $this->width,
-            'depth'  => $this->depth
+            'width' => $this->width,
+            'depth' => $this->depth
         );
 
         return $size;

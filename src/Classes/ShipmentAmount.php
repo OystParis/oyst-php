@@ -28,8 +28,8 @@ class ShipmentAmount implements OystArrayInterface
     private $currency;
 
     /**
-     * @param int    $amountFollower
-     * @param int    $amountLeader
+     * @param int $amountFollower
+     * @param int $amountLeader
      * @param string $currency
      */
     public function __construct($amountFollower, $amountLeader, $currency)
@@ -54,7 +54,7 @@ class ShipmentAmount implements OystArrayInterface
      */
     public function setAmountFollower($amountFollower)
     {
-        $this->amountFollower = (int) round($amountFollower * 100);
+        $this->amountFollower = (int)round($amountFollower * 100);
 
         return $this;
     }
@@ -74,7 +74,7 @@ class ShipmentAmount implements OystArrayInterface
      */
     public function setAmountLeader($amountLeader)
     {
-        $this->amountLeader = (int) round($amountLeader * 100);
+        $this->amountLeader = (int)round($amountLeader * 100);
 
         return $this;
     }
@@ -106,7 +106,7 @@ class ShipmentAmount implements OystArrayInterface
     {
         $amount = array(
             'follower' => $this->amountFollower,
-            'leader'   => $this->amountLeader,
+            'leader' => $this->amountLeader,
             'currency' => $this->currency,
         );
 

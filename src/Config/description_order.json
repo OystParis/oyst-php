@@ -8,10 +8,10 @@
             "uri": "orders",
             "summary": "Get the orders list (paginated)",
             "parameters": {
-                "limit": {
+                "per_page": {
                     "location": "query",
                     "type": "string",
-                    "description": "The limit number of results to return",
+                    "description": "The limit number of results to return per page",
                     "required": false
                 },
                 "status": {

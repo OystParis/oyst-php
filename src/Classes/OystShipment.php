@@ -143,11 +143,11 @@ class OystShipment implements OystArrayInterface
     public function toArray()
     {
         $shipment = array(
-            'zone'    => $this->zone,
+            'zone' => $this->zone,
             'carrier' => $this->carrier,
-            'delay'   => $this->delay,
-            'amount'  => array(
-                'value'    => $this->value,
+            'delay' => $this->delay,
+            'amount' => array(
+                'value' => $this->value,
                 'currency' => $this->currency,
             ),
         );

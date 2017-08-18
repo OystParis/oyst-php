@@ -16,12 +16,12 @@ use Symfony\Component\Yaml\Parser;
  */
 class OystApiClientFactory
 {
-    const ENTITY_CATALOG  = 'catalog';
-    const ENTITY_ORDER    = 'order';
-    const ENTITY_PAYMENT  = 'payment';
+    const ENTITY_CATALOG = 'catalog';
+    const ENTITY_ORDER = 'order';
+    const ENTITY_PAYMENT = 'payment';
     const ENTITY_ONECLICK = 'oneclick';
 
-    const ENV_PROD    = 'prod';
+    const ENV_PROD = 'prod';
     const ENV_PREPROD = 'preprod';
 
     /**
@@ -55,7 +55,7 @@ class OystApiClientFactory
                 $oystClientAPI = new OystOneClickApi($client, $apiKey, $userAgent);
                 break;
             default:
-                throw new \Exception('Entity not managed or do not exist: '.$entityName);
+                throw new \Exception('Entity not managed or do not exist: ' . $entityName);
                 break;
         }
 
@@ -79,7 +79,7 @@ class OystApiClientFactory
         $url = $configurationLoader->getBaseUrl();
 
         if (!in_array($entityName, array(static::ENTITY_PAYMENT))) {
-            $url .= '/'.$description->getApiVersion();
+            $url .= '/' . $description->getApiVersion();
         }
 
         $client = new Client($url);
@@ -99,9 +99,9 @@ class OystApiClientFactory
      */
     private static function getApiConfiguration($entity, $env, $customUrl)
     {
-        $parametersFile = __DIR__.'/../Config/parameters.yml';
-        $parserYml      = new Parser();
-        $configuration  = new OystApiConfiguration($parserYml, $parametersFile);
+        $parametersFile = __DIR__ . '/../Config/parameters.yml';
+        $parserYml = new Parser();
+        $configuration = new OystApiConfiguration($parserYml, $parametersFile);
         $configuration->setEnvironment($env);
         $configuration->setCustomUrl($customUrl);
         $configuration->setEntity($entity);
@@ -119,8 +119,8 @@ class OystApiClientFactory
      */
     private static function getApiDescription($entityName)
     {
-        $configurationFile = __DIR__.'/../Config/description_'.$entityName.'.json';
-        $description       = ServiceDescription::factory($configurationFile);
+        $configurationFile = __DIR__ . '/../Config/description_' . $entityName . '.json';
+        $description = ServiceDescription::factory($configurationFile);
 
         return $description;
     }

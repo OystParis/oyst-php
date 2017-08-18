@@ -1,5 +1,5 @@
 test:
     apiKey : ""
     env: "preprod"
-    userAgent: "test"
+    userAgent: "TRAVIS"
     orderId:

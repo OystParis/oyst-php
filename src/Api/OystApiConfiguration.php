@@ -54,7 +54,7 @@ class OystApiConfiguration
     public function __construct(Parser $yamlParser, $descriptionFile)
     {
         $this->parametersFile = $descriptionFile;
-        $this->yamlParser     = $yamlParser;
+        $this->yamlParser = $yamlParser;
     }
 
     /**
@@ -128,7 +128,7 @@ class OystApiConfiguration
     public function load()
     {
         if (!file_exists($this->parametersFile)) {
-            throw new \Exception('Configuration file missing: '.$this->parametersFile);
+            throw new \Exception('Configuration file missing: ' . $this->parametersFile);
         }
 
         if (!isset($this->parameters)) {
@@ -147,7 +147,7 @@ class OystApiConfiguration
             throw new \Exception('Entity doesn\'t exist, please set a valid one');
         }
 
-        $this->baseUrl = $baseUrl.'/'.trim($this->parameters['api']['path'][$this->entity], '/');
+        $this->baseUrl = $baseUrl . '/' . trim($this->parameters['api']['path'][$this->entity], '/');
 
         return $this;
     }

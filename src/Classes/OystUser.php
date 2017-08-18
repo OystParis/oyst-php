@@ -56,7 +56,7 @@ class OystUser implements OystArrayInterface
 
     public function __construct()
     {
-        $this->addresses        = array();
+        $this->addresses = array();
         $this->billingAddresses = array();
     }
 
@@ -250,13 +250,13 @@ class OystUser implements OystArrayInterface
     public function toArray()
     {
         $user = array(
-            'first_name'        => $this->firstName,
-            'last_name'         => $this->lastName,
-            'language'          => $this->language,
-            'email'             => $this->email,
-            'phone'             => $this->phone,
-            'additional_data'   => $this->additionalData,
-            'addresses'         => OystCollectionHelper::collectionToArray($this->addresses),
+            'first_name' => $this->firstName,
+            'last_name' => $this->lastName,
+            'language' => $this->language,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'additional_data' => $this->additionalData,
+            'addresses' => OystCollectionHelper::collectionToArray($this->addresses),
             'billing_addresses' => OystCollectionHelper::collectionToArray($this->billingAddresses),
         );
 

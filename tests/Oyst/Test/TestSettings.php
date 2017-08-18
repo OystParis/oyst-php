@@ -6,18 +6,19 @@ use Symfony\Component\Yaml\Parser;
 
 class TestSettings
 {
-    /** @var  string */
+    /** @var string */
     private $apiKey;
 
-    /** @var  string */
+    /** @var string */
     private $env;
 
-    /** @var  string */
+    /** @var string */
     private $userAgent;
 
-    /** @var  string */
+    /** @var string */
     private $parametersFile;
 
+    /** @var int */
     private $orderId;
 
     public function __construct()
@@ -27,14 +28,14 @@ class TestSettings
 
     public function load()
     {
-        if (isset($this->parametersFile)) {
+        if (isset($this->parametersFile) && file_exists($this->parametersFile)) {
             $parserYml = new Parser();
             $parameters = $parserYml->parse(file_get_contents($this->parametersFile));
             $paramsTest = $parameters['test'];
             $this->apiKey = $paramsTest['apiKey'];
             $this->env = $paramsTest['env'];
             $this->userAgent = $paramsTest['userAgent'];
-            $this->userAgent = $paramsTest['orderId'];
+            $this->orderId = $paramsTest['orderId'];
         }
 
         // Look for environment
@@ -50,7 +51,7 @@ class TestSettings
      */
     public function setParameterFile($file)
     {
-        $this->parametersFile = __DIR__.'/../../../src/Config/'.$file;
+        $this->parametersFile = __DIR__ . '/../../../src/Config/' . $file;
 
         return $this;
     }

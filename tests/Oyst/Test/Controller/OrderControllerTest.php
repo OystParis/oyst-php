@@ -49,7 +49,7 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
 
         // This part works, but we need to develop the post
         if (!$this->settings->getOrderId()) {
-            return ;
+            return;
         }
 
         $orderInfo = $this->orderApi->getOrder($this->settings->getOrderId());
