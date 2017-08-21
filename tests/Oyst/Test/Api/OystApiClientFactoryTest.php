@@ -5,6 +5,7 @@ namespace Oyst\Test\Api;
 use Guzzle\Service\Client;
 use Oyst\Api\OystApiClientFactory;
 use Oyst\Api\OystApiConfiguration;
+use Oyst\Classes\OystUserAgent;
 use ReflectionMethod;
 
 /**
@@ -52,15 +53,17 @@ class OystApiClientFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function clientDataOk()
     {
+        $userAgent = new OystUserAgent('user_agent', '', '', 'php', phpversion());
+
         return array(
-            array('Oyst\Api\OystCatalogApi', 'catalog', 'api_key', 'user_agent', null, 'https://localhost'),
-            array('Oyst\Api\OystPaymentApi', 'payment', 'api_key', 'user_agent', null, 'https://localhost'),
-            array('Oyst\Api\OystOrderApi', 'order', 'api_key', 'user_agent', null, 'https://localhost'),
-            array('Oyst\Api\OystOneClickApi', 'oneclick', 'api_key', 'user_agent', null, 'https://localhost'),
-            array('Oyst\Api\OystCatalogApi', 'catalog', 'api_key', 'user_agent', null, 'https://localhost'),
-            array('Oyst\Api\OystPaymentApi', 'payment', 'api_key', 'user_agent', null, 'https://localhost'),
-            array('Oyst\Api\OystOrderApi', 'order', 'api_key', 'user_agent', null, 'https://localhost'),
-            array('Oyst\Api\OystOneClickApi', 'oneclick', 'api_key', 'user_agent', null, 'https://localhost')
+            array('Oyst\Api\OystCatalogApi', 'catalog', 'api_key', $userAgent, null, 'https://localhost'),
+            array('Oyst\Api\OystPaymentApi', 'payment', 'api_key', $userAgent, null, 'https://localhost'),
+            array('Oyst\Api\OystOrderApi', 'order', 'api_key', $userAgent, null, 'https://localhost'),
+            array('Oyst\Api\OystOneClickApi', 'oneclick', 'api_key', $userAgent, null, 'https://localhost'),
+            array('Oyst\Api\OystCatalogApi', 'catalog', 'api_key', $userAgent, null, 'https://localhost'),
+            array('Oyst\Api\OystPaymentApi', 'payment', 'api_key', $userAgent, null, 'https://localhost'),
+            array('Oyst\Api\OystOrderApi', 'order', 'api_key', $userAgent, null, 'https://localhost'),
+            array('Oyst\Api\OystOneClickApi', 'oneclick', 'api_key', $userAgent, null, 'https://localhost')
         );
     }
 
@@ -71,8 +74,10 @@ class OystApiClientFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function clientDataException()
     {
+        $userAgent = new OystUserAgent('user_agent', '', '', 'php', phpversion());
+
         return array(
-            array('unknown_entity', 'api_key', 'user_agent', null, 'https://localhost')
+            array('unknown_entity', 'api_key', $userAgent, null, 'https://localhost')
         );
     }
 

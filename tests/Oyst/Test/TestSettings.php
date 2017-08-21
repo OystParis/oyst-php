@@ -2,6 +2,7 @@
 
 namespace Oyst\Test;
 
+use Oyst\Classes\OystUserAgent;
 use Symfony\Component\Yaml\Parser;
 
 class TestSettings
@@ -12,7 +13,7 @@ class TestSettings
     /** @var string */
     private $env;
 
-    /** @var string */
+    /** @var OystUserAgent */
     private $userAgent;
 
     /** @var string */
@@ -28,20 +29,22 @@ class TestSettings
 
     public function load()
     {
+        $userAgent = 'Test';
         if (isset($this->parametersFile) && file_exists($this->parametersFile)) {
             $parserYml = new Parser();
             $parameters = $parserYml->parse(file_get_contents($this->parametersFile));
             $paramsTest = $parameters['test'];
             $this->apiKey = $paramsTest['apiKey'];
             $this->env = $paramsTest['env'];
-            $this->userAgent = $paramsTest['userAgent'];
+            $userAgent = $paramsTest['userAgent'];
             $this->orderId = $paramsTest['orderId'];
         }
 
         // Look for environment
         $this->apiKey = ($apiKey = getenv('API_KEY')) ? $apiKey : $this->apiKey;
         $this->env = ($env = getenv('API_ENV')) ? $env : $this->env;
-        $this->userAgent = ($userAgent = getenv('API_USER_AGENT')) ? $userAgent : $this->userAgent;
+        $userAgent = ($userAgentEnv = getenv('API_USER_AGENT')) ? $userAgentEnv : $userAgent;
+        $this->userAgent = new OystUserAgent($userAgent, '', '', 'php', phpversion());
         $this->orderId = ($orderId = getenv('API_ORDER_ID')) ? $orderId : $this->orderId;
     }
 

@@ -8,6 +8,7 @@ use Guzzle\Service\Client;
 use Oyst\Api\AbstractOystApiClient;
 use Oyst\Api\OystApiClientFactory;
 use Oyst\Api\OystApiConfiguration;
+use Oyst\Classes\OystUserAgent;
 
 /**
  * Class OystApiContext
@@ -26,8 +27,10 @@ abstract class OystApiContext extends \PHPUnit_Framework_TestCase
      */
     public function fakeData()
     {
+        $userAgent = new OystUserAgent('test', '', '', 'php', phpversion());
+
         return array(
-            array('api_key', 'user_agent')
+            array('api_key', $userAgent)
         );
     }
 
