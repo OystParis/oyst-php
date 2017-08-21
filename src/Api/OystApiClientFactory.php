@@ -16,6 +16,12 @@ use Symfony\Component\Yaml\Parser;
  */
 class OystApiClientFactory
 {
+    private static $version = array(
+        'major' => '1',
+        'minor' => '6',
+        'patch' => '0',
+    );
+
     const ENTITY_CATALOG = 'catalog';
     const ENTITY_ORDER = 'order';
     const ENTITY_PAYMENT = 'payment';
@@ -23,6 +29,18 @@ class OystApiClientFactory
 
     const ENV_PROD = 'prod';
     const ENV_PREPROD = 'preprod';
+
+    /**
+     * Gets the current version string
+     *
+     * @return string
+     */
+    public static function getVersion()
+    {
+        $ver = self::$version;
+
+        return trim("{$ver['major']}.{$ver['minor']}.{$ver['patch']}");
+    }
 
     /**
      * Returns the right API for the entityName passed in the parameters
