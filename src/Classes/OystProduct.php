@@ -250,7 +250,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setMaterialized($materialized)
     {
-        $this->materialized = $materialized;
+        $this->materialized = (bool)$materialized;
 
         return $this;
     }
@@ -270,7 +270,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = (string)$title;
 
         return $this;
     }
@@ -290,7 +290,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setCondition($condition)
     {
-        $this->condition = $condition;
+        $this->condition = (string)$condition;
 
         return $this;
     }
@@ -310,7 +310,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setShortDescription($shortDescription)
     {
-        $this->shortDescription = $shortDescription;
+        $this->shortDescription = (string)$shortDescription;
 
         return $this;
     }
@@ -330,7 +330,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $this->description = (string)$description;
 
         return $this;
     }
@@ -362,7 +362,7 @@ class OystProduct implements OystArrayInterface
      */
     public function addTag($tag)
     {
-        $this->tags[] = $tag;
+        $this->tags[] = (string)$tag;
 
         return $this;
     }
@@ -402,7 +402,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setUrl($url)
     {
-        $this->url = $url;
+        $this->url = (string)$url;
 
         return $this;
     }
@@ -454,7 +454,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setManufacturer($manufacturer)
     {
-        $this->manufacturer = $manufacturer;
+        $this->manufacturer = (string)$manufacturer;
 
         return $this;
     }
@@ -528,7 +528,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setAvailableQuantity($availableQuantity)
     {
-        $this->availableQuantity = $availableQuantity;
+        $this->availableQuantity = (int)$availableQuantity;
 
         return $this;
     }
@@ -548,7 +548,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setWeight($weight)
     {
-        $this->weight = $weight;
+        $this->weight = (string)$weight;
 
         return $this;
     }
@@ -568,7 +568,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setDiscounted($discounted)
     {
-        $this->discounted = $discounted;
+        $this->discounted = (bool)$discounted;
 
         return $this;
     }
@@ -588,7 +588,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setEan($ean)
     {
-        $this->ean = $ean;
+        $this->ean = (string)$ean;
 
         return $this;
     }
@@ -608,7 +608,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setUpc($upc)
     {
-        $this->upc = $upc;
+        $this->upc = (string)$upc;
 
         return $this;
     }
@@ -628,7 +628,7 @@ class OystProduct implements OystArrayInterface
      */
     public function setIsbn($isbn)
     {
-        $this->isbn = $isbn;
+        $this->isbn = (string)$isbn;
 
         return $this;
     }
@@ -662,7 +662,7 @@ class OystProduct implements OystArrayInterface
      */
     public function addImage($url)
     {
-        $this->images[] = $url;
+        $this->images[] = (string)$url;
 
         return $this;
     }
@@ -729,7 +729,7 @@ class OystProduct implements OystArrayInterface
      */
     public function addRelatedProduct($ref)
     {
-        $this->relatedProducts[] = $ref;
+        $this->relatedProducts[] = (string)$ref;
 
         return $this;
     }
