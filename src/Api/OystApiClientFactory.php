@@ -4,6 +4,7 @@ namespace Oyst\Api;
 
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
+use Oyst\Classes\OystUserAgent;
 use Symfony\Component\Yaml\Parser;
 
 /**
@@ -29,7 +30,7 @@ class OystApiClientFactory
      *
      * @param string $entityName
      * @param string $apiKey
-     * @param string $userAgent
+     * @param OystUserAgent $userAgent
      * @param string $env
      * @param string $customUrl
      *
@@ -37,7 +38,7 @@ class OystApiClientFactory
      *
      * @throws \Exception
      */
-    public static function getClient($entityName, $apiKey, $userAgent, $env = self::ENV_PROD, $customUrl = null)
+    public static function getClient($entityName, $apiKey, OystUserAgent $userAgent, $env = self::ENV_PROD, $customUrl = null)
     {
         $client = static::createClient($entityName, $env, $customUrl);
 

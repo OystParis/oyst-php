@@ -6,6 +6,7 @@ use Guzzle\Http\Exception\BadResponseException;
 use Guzzle\Http\Exception\ClientErrorResponseException;
 use Guzzle\Http\Exception\RequestException;
 use Guzzle\Service\Client;
+use Oyst\Classes\OystUserAgent;
 
 /**
  * Class AbstractOystApiClient
@@ -28,7 +29,7 @@ abstract class AbstractOystApiClient
     private $apiKey;
 
     /**
-     * @var string
+     * @var OystUserAgent
      */
     private $userAgent;
 
@@ -60,13 +61,13 @@ abstract class AbstractOystApiClient
     /**
      * @param Client $client
      * @param string $apiKey
-     * @param string $userAgent
+     * @param OystUserAgent $userAgent
      */
-    public function __construct(Client $client, $apiKey, $userAgent)
+    public function __construct(Client $client, $apiKey, OystUserAgent $userAgent)
     {
         $this->client = $client;
         $this->apiKey = $apiKey;
-        $this->userAgent = $userAgent;
+        $this->userAgent = $userAgent->toString();
     }
 
     /**
