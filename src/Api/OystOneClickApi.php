@@ -40,7 +40,6 @@ class OystOneClickApi extends AbstractOystApiClient
             'product_reference' => $productRef,
             'quantity' => $quantity,
             'version' => $version,
-            'product' => $product,
         );
 
         if (!is_null($variationRef)) {
@@ -49,6 +48,10 @@ class OystOneClickApi extends AbstractOystApiClient
 
         if (!is_null($user)) {
             $data['user'] = $user->toArray();
+        }
+
+        if (!is_null($product)) {
+            $data['product'] = $product->toArray();
         }
 
         $response = $this->executeCommand('AuthorizeOrder', $data);
