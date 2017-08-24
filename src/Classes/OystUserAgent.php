@@ -70,7 +70,6 @@ class OystUserAgent
         $data = array(
             "%PLATFORM_NAME%" => $this->platformName,
             "%PACKAGE_VERSION%" => $this->packageVersion,
-            "%PLATFORM_NAME%" => $this->platformName,
             "%CMS_VERSION%" => $this->platformVersion,
             "%LANGUAGE_NAME%" => $this->languageName,
             "%LANGUAGE_VERSION%" => $this->languageVersion,
