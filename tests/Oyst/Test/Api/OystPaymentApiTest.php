@@ -9,7 +9,7 @@ use Oyst\Classes\OystPrice;
 use Oyst\Test\OystApiContext;
 
 /**
- * Class OystPaymentApiTest
+ * Class OystPaymentApiTest for unitary tests
  *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>

@@ -9,7 +9,7 @@ use Oyst\Classes\OystUserAgent;
 use ReflectionMethod;
 
 /**
- * Class OystApiClientFactoryTest
+ * Class OystApiClientFactoryTest for unitary tests
  *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>

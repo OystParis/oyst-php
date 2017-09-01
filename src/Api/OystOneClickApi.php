@@ -40,13 +40,13 @@ class OystOneClickApi extends AbstractOystApiClient
         OneClickOrderParams $orderParams = null
     ) {
         $data = array(
-            'product_reference' => $productRef,
-            'quantity' => $quantity,
-            'version' => $version,
+            'product_reference' => (string)$productRef,
+            'quantity' => (int)$quantity,
+            'version' => (int)$version,
         );
 
         if (!is_null($variationRef)) {
-            $data['variation_reference'] = $variationRef;
+            $data['variation_reference'] = (string)$variationRef;
         }
 
         if (!is_null($user)) {

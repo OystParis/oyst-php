@@ -40,9 +40,9 @@ class OystCategory implements OystArrayInterface
      */
     public function __construct($ref, $title, $main = false)
     {
-        $this->ref = $ref;
-        $this->title = $title;
-        $this->main = $main;
+        $this->ref = (string)$ref;
+        $this->title = (string)$title;
+        $this->main = (bool)$main;
     }
 
     /**
@@ -60,7 +60,7 @@ class OystCategory implements OystArrayInterface
      */
     public function setRef($ref)
     {
-        $this->ref = $ref;
+        $this->ref = (string)$ref;
 
         return $this;
     }
@@ -80,7 +80,7 @@ class OystCategory implements OystArrayInterface
      */
     public function setMain($main)
     {
-        $this->main = $main;
+        $this->main = (bool)$main;
 
         return $this;
     }
@@ -100,7 +100,7 @@ class OystCategory implements OystArrayInterface
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = (string)$title;
 
         return $this;
     }
