@@ -27,6 +27,7 @@ class OystOneClickApi extends AbstractOystApiClient
      * @param int $version
      * @param OystProduct $product OystProduct for catalog less
      * @param OneClickOrderParams $orderParams
+     * @param array $context    Context is data about order which is received on order notification
      *
      * @return mixed
      */
@@ -37,7 +38,8 @@ class OystOneClickApi extends AbstractOystApiClient
         OystUser $user = null,
         $version = 1,
         OystProduct $product = null,
-        OneClickOrderParams $orderParams = null
+        OneClickOrderParams $orderParams = null,
+        $context = null
     ) {
         $data = array(
             'product_reference' => (string)$productRef,
@@ -59,6 +61,10 @@ class OystOneClickApi extends AbstractOystApiClient
 
         if (!is_null($orderParams)) {
             $data['order'] = $orderParams->toArray();
+        }
+
+        if (is_array($context)) {
+            $data['context'] = $context;
         }
 
         $response = $this->executeCommand('AuthorizeOrder', $data);

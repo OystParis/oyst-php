@@ -25,7 +25,9 @@ class OystCollectionHelper
 
         /** @var OystArrayInterface $element */
         foreach ($collection as $element) {
-            $data[] = $element->toArray();
+            if (!empty($element)) {
+                $data[] = $element->toArray();
+            }
         }
 
         return $data;
