@@ -43,6 +43,12 @@
                     "type" : "object",
                     "description": "The product ordered for catalog less",
                     "required": false
+                },
+                "order_params": {
+                    "location": "json",
+                    "type": "object",
+                    "description": "The order params",
+                    "required": false
                 }
             }
         }
