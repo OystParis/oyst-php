@@ -19,7 +19,7 @@ class OystApiClientFactory
 {
     private static $version = array(
         'major' => '1',
-        'minor' => '6',
+        'minor' => '7',
         'patch' => '0',
     );
 
