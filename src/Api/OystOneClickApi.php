@@ -3,6 +3,7 @@
 namespace Oyst\Api;
 
 use Oyst\Classes\OystProduct;
+use Oyst\Classes\OneClickOrderParams;
 use Oyst\Classes\OystUser;
 
 /**
@@ -25,6 +26,8 @@ class OystOneClickApi extends AbstractOystApiClient
      * @param OystUser|null $user
      * @param int $version
      * @param OystProduct $product OystProduct for catalog less
+     * @param OneClickOrderParams $orderParams
+     * @param array $context    Context is data about order which is received on order notification
      *
      * @return mixed
      */
@@ -34,16 +37,18 @@ class OystOneClickApi extends AbstractOystApiClient
         $variationRef = null,
         OystUser $user = null,
         $version = 1,
-        OystProduct $product = null
+        OystProduct $product = null,
+        OneClickOrderParams $orderParams = null,
+        $context = null
     ) {
         $data = array(
-            'product_reference' => $productRef,
-            'quantity' => $quantity,
-            'version' => $version,
+            'product_reference' => (string)$productRef,
+            'quantity' => (int)$quantity,
+            'version' => (int)$version,
         );
 
         if (!is_null($variationRef)) {
-            $data['variation_reference'] = $variationRef;
+            $data['variation_reference'] = (string)$variationRef;
         }
 
         if (!is_null($user)) {
@@ -52,6 +57,14 @@ class OystOneClickApi extends AbstractOystApiClient
 
         if (!is_null($product)) {
             $data['product'] = $product->toArray();
+        }
+
+        if (!is_null($orderParams)) {
+            $data['order'] = $orderParams->toArray();
+        }
+
+        if (is_array($context)) {
+            $data['context'] = $context;
         }
 
         $response = $this->executeCommand('AuthorizeOrder', $data);

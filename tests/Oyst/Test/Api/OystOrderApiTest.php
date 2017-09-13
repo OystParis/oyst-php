@@ -9,7 +9,7 @@ use Oyst\Api\OystOrderApi;
 use Oyst\Test\OystApiContext;
 
 /**
- * Class OystOrderApiTest
+ * Class OystOrderApiTest for unitary tests
  *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>

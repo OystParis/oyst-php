@@ -16,7 +16,7 @@ use Oyst\Test\Fixture\OneClickShipmentFixture;
 use Oyst\Test\OystApiContext;
 
 /**
- * Class OystCatalogApiTest
+ * Class  for unitary tests for unitary tests
  *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>

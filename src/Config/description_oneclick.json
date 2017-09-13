@@ -22,7 +22,7 @@
                 },
                 "quantity": {
                     "location": "json",
-                    "type": "string",
+                    "type": "number",
                     "description": "The quantity of the ordered product",
                     "required": true
                 },
@@ -34,14 +34,20 @@
                 },
                 "version": {
                     "location": "json",
-                    "type" : "string",
+                    "type": "number",
                     "description": "Set the desired version of the one click process",
                     "required": false
                 },
                 "product": {
                     "location": "json",
-                    "type" : "object",
+                    "type": "object",
                     "description": "The product ordered for catalog less",
+                    "required": false
+                },
+                "order_params": {
+                    "location": "json",
+                    "type": "object",
+                    "description": "The order params",
                     "required": false
                 }
             }

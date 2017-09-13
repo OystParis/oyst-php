@@ -6,8 +6,8 @@ use Guzzle\Http\Message\Response;
 use Guzzle\Plugin\Mock\MockPlugin;
 use Guzzle\Service\Client;
 use Oyst\Api\AbstractOystApiClient;
-use Oyst\Api\OystApiClientFactory;
 use Oyst\Api\OystApiConfiguration;
+use Oyst\Classes\OystProduct;
 use Oyst\Classes\OystUserAgent;
 
 /**
@@ -29,8 +29,10 @@ abstract class OystApiContext extends \PHPUnit_Framework_TestCase
     {
         $userAgent = new OystUserAgent('test', '', '', 'php', phpversion());
 
+        $product = new OystProduct();
+
         return array(
-            array('api_key', $userAgent)
+            array('api_key', $userAgent, $product)
         );
     }
 
