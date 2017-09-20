@@ -7,8 +7,11 @@ use Guzzle\Plugin\Mock\MockPlugin;
 use Guzzle\Service\Client;
 use Oyst\Api\AbstractOystApiClient;
 use Oyst\Api\OystApiConfiguration;
-use Oyst\Classes\OystProduct;
 use Oyst\Classes\OystUserAgent;
+use Oyst\Test\Fixture\OneClickNotificationFixture;
+use Oyst\Test\Fixture\OneClickOrderContextFixture;
+use Oyst\Test\Fixture\OneClickOrderParamsFixture;
+use Oyst\Test\Fixture\ProductFixture;
 
 /**
  * Class OystApiContext
@@ -29,10 +32,20 @@ abstract class OystApiContext extends \PHPUnit_Framework_TestCase
     {
         $userAgent = new OystUserAgent('test', '', '', 'php', phpversion());
 
-        $product = new OystProduct();
+        $productFixture = new ProductFixture();
+        $product = $productFixture->getOneClickOrder();
 
+        $oneClickOrderParamsFixture = new OneClickOrderParamsFixture();
+        $oneClickOrderParams = $oneClickOrderParamsFixture->getOrderParams();
+
+        $oneClickOrderContextFixture = new OneClickOrderContextFixture();
+        $oneClickOrderContext = $oneClickOrderContextFixture->getOrderContext();
+
+        $oneClickNotificationFixture = new OneClickNotificationFixture();
+        $oneClickNotification = $oneClickNotificationFixture->getNotification();
+//var_dump(get_class($oneClickNotification));die;
         return array(
-            array('api_key', $userAgent, $product)
+            array('api_key', $userAgent, $product, $oneClickOrderParams, $oneClickOrderContext, $oneClickNotification)
         );
     }
 
