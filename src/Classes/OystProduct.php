@@ -80,6 +80,13 @@ class OystProduct implements OystArrayInterface
     /**
      * Optional
      *
+     * @var OystPrice
+     */
+    private $amountExcludingTax;
+
+    /**
+     * Optional
+     *
      * @var string
      */
     private $url;
@@ -376,6 +383,14 @@ class OystProduct implements OystArrayInterface
     }
 
     /**
+     * @return OystPrice
+     */
+    public function getAmountExcludingTax()
+    {
+        return $this->amountExcludingTax;
+    }
+
+    /**
      * @param OystPrice $amountIncludingTax
      *
      * @return OystProduct
@@ -383,6 +398,18 @@ class OystProduct implements OystArrayInterface
     public function setAmountIncludingTax($amountIncludingTax)
     {
         $this->amountIncludingTax = $amountIncludingTax;
+
+        return $this;
+    }
+
+    /**
+     * @param OystPrice $amountExcludingTax
+     *
+     * @return OystProduct
+     */
+    public function setAmountExcludingTax($amountExcludingTax)
+    {
+        $this->amountExcludingTax = $amountExcludingTax;
 
         return $this;
     }
@@ -783,6 +810,7 @@ class OystProduct implements OystArrayInterface
             'description' => $this->description,
             'tags' => $this->tags,
             'amount_including_taxes' => $this->amountIncludingTax ? $this->amountIncludingTax->toArray() : array(),
+            'amount_excluding_taxes' => $this->amountExcludingTax ? $this->amountExcludingTax->toArray() : array(),
             'url' => $this->url,
             'categories' => OystCollectionHelper::collectionToArray($this->categories),
             'manufacturer' => $this->manufacturer,

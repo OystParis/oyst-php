@@ -114,6 +114,7 @@ class OystCollectionHelperTest extends \PHPUnit_Framework_TestCase
                         'description' => null,
                         'tags' => array(),
                         'amount_including_taxes' => array(),
+                        'amount_excluding_taxes' => array(),
                         'url' => null,
                         'categories' => array(),
                         'manufacturer' => null,
@@ -140,6 +141,7 @@ class OystCollectionHelperTest extends \PHPUnit_Framework_TestCase
                         'description' => 'description1',
                         'tags' => array(),
                         'amount_including_taxes' => array(),
+                        'amount_excluding_taxes' => array(),
                         'url' => null,
                         'categories' => array(
                             array(
