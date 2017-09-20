@@ -6,6 +6,14 @@ use Oyst\Classes\OneClickShipment;
 use Oyst\Classes\OystCarrier;
 use Oyst\Classes\ShipmentAmount;
 
+/**
+ * Class OneClickShipmentFixture
+ *
+ * @category Oyst
+ * @author   Oyst <dev@oyst.com>
+ * @license  Copyright 2017, Oyst
+ * @link     http://www.oyst.com
+ */
 class OneClickShipmentFixture
 {
     /**

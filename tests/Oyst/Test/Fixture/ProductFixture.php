@@ -7,6 +7,14 @@ use Oyst\Classes\OystPrice;
 use Oyst\Classes\OystProduct;
 use Oyst\Classes\OystSize;
 
+/**
+ * Class ProductFixture
+ *
+ * @category Oyst
+ * @author   Oyst <dev@oyst.com>
+ * @license  Copyright 2017, Oyst
+ * @link     http://www.oyst.com
+ */
 class ProductFixture
 {
     /**

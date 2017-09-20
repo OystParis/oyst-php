@@ -7,6 +7,14 @@ use Oyst\Api\OystPaymentApi;
 use Oyst\Test\Fixture\UserFixture;
 use Oyst\Test\TestSettings;
 
+/**
+ * Class PaymentControllerTest
+ *
+ * @category Oyst
+ * @author   Oyst <dev@oyst.com>
+ * @license  Copyright 2017, Oyst
+ * @link     http://www.oyst.com
+ */
 class PaymentControllerTest extends \PHPUnit_Framework_TestCase
 {
     /** @var  TestSettings */

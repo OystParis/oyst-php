@@ -15,6 +15,14 @@ use Oyst\Test\Fixture\OneClickShipmentFixture;
 use Oyst\Test\Fixture\ProductFixture;
 use Oyst\Test\TestSettings;
 
+/**
+ * Class CatalogControllerTest
+ *
+ * @category Oyst
+ * @author   Oyst <dev@oyst.com>
+ * @license  Copyright 2017, Oyst
+ * @link     http://www.oyst.com
+ */
 class CatalogControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**

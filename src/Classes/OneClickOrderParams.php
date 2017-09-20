@@ -3,7 +3,7 @@
 namespace Oyst\Classes;
 
 /**
- * Class OneClickShipment
+ * Class OneClickOrderParams
  *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>
