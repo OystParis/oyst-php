@@ -4,10 +4,22 @@ namespace Oyst\Test\Controller;
 
 use Oyst\Api\OystApiClientFactory;
 use Oyst\Api\OystOneClickApi;
+use Oyst\Classes\OneClickNotification;
 use Oyst\Classes\OystProduct;
+use Oyst\Test\Fixture\OneClickNotificationFixture;
+use Oyst\Test\Fixture\OneClickOrderContextFixture;
+use Oyst\Test\Fixture\OneClickOrderParamsFixture;
 use Oyst\Test\Fixture\ProductFixture;
 use Oyst\Test\TestSettings;
 
+/**
+ * Class OneClickControllerTest
+ *
+ * @category Oyst
+ * @author   Oyst <dev@oyst.com>
+ * @license  Copyright 2017, Oyst
+ * @link     http://www.oyst.com
+ */
 class OneClickControllerTest extends \PHPUnit_Framework_TestCase
 {
     /** @var  TestSettings */
@@ -18,6 +30,15 @@ class OneClickControllerTest extends \PHPUnit_Framework_TestCase
 
     /** @var  OystProduct */
     private $product;
+
+    /** @var  OneClickOrderParams */
+    private $oneClickOrderParams;
+
+    /** @var  OneClickOrderContext */
+    private $oneClickOrderContext;
+
+    /** @var  OneClickNotification */
+    private $oneClickNotification;
 
     protected function setUp()
     {
@@ -33,6 +54,9 @@ class OneClickControllerTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->product = ProductFixture::getOneClickOrder();
+        $this->oneClickOrderParams = OneClickOrderParamsFixture::getOrderParams();
+        $this->oneClickOrderContext = OneClickOrderContextFixture::getOrderContext();
+        $this->oneClickNotification = OneClickNotificationFixture::getNotification();
     }
 
     public function testNotifyImport()

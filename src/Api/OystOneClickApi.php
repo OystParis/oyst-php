@@ -2,8 +2,9 @@
 
 namespace Oyst\Api;
 
-use Oyst\Classes\OystProduct;
+use Oyst\Classes\OneClickNotification;
 use Oyst\Classes\OneClickOrderParams;
+use Oyst\Classes\OystProduct;
 use Oyst\Classes\OystUser;
 
 /**
@@ -27,7 +28,8 @@ class OystOneClickApi extends AbstractOystApiClient
      * @param int $version
      * @param OystProduct $product OystProduct for catalog less
      * @param OneClickOrderParams $orderParams
-     * @param array $context    Context is data about order which is received on order notification
+     * @param array $context Context is data about order which is received on order notification
+     * @param OneClickNotification $notification Allow to manage notification like order.shipments.get to get live shipment price
      *
      * @return mixed
      */
@@ -39,7 +41,8 @@ class OystOneClickApi extends AbstractOystApiClient
         $version = 1,
         OystProduct $product = null,
         OneClickOrderParams $orderParams = null,
-        $context = null
+        $context = null,
+        OneClickNotification $notification = null
     ) {
         $data = array(
             'product_reference' => (string)$productRef,
@@ -65,6 +68,10 @@ class OystOneClickApi extends AbstractOystApiClient
 
         if (is_array($context)) {
             $data['context'] = $context;
+        }
+
+        if (!is_null($notification)) {
+            $data['notification'] = $notification->toArray();
         }
 
         $response = $this->executeCommand('AuthorizeOrder', $data);

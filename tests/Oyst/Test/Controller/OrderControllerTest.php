@@ -8,6 +8,14 @@ use Oyst\Classes\Enum\AbstractOrderState;
 use Oyst\Classes\OystOrder;
 use Oyst\Test\TestSettings;
 
+/**
+ * Class OrderControllerTest
+ *
+ * @category Oyst
+ * @author   Oyst <dev@oyst.com>
+ * @license  Copyright 2017, Oyst
+ * @link     http://www.oyst.com
+ */
 class OrderControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**

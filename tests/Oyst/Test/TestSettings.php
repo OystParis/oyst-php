@@ -5,6 +5,14 @@ namespace Oyst\Test;
 use Oyst\Classes\OystUserAgent;
 use Symfony\Component\Yaml\Parser;
 
+/**
+ * Class TestSettings
+ *
+ * @category Oyst
+ * @author   Oyst <dev@oyst.com>
+ * @license  Copyright 2017, Oyst
+ * @link     http://www.oyst.com
+ */
 class TestSettings
 {
     /** @var string */

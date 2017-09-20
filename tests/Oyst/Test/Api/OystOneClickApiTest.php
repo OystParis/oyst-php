@@ -129,4 +129,49 @@ class OystOneClickApiTest extends OystApiContext
         $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
         $this->assertEquals($result['url'], 'http://localhost/success');
     }
+
+    /**
+     * Catalog less order with simple product and order params
+     *
+     * @dataProvider fakeData
+     */
+    public function testAuthorizeOrderForCatalogLessOrderWithSimpleProductAndOrderParams($apiKey, $userAgent, $product, $oneClickOrderParams)
+    {
+        /** @var OystOneClickAPI $oneClickApi */
+        $oneClickApi = $this->getApi($apiKey, $userAgent);
+
+        $result = $oneClickApi->authorizeOrder('test', 42, 'test', null, 1, $product, $oneClickOrderParams);
+        $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
+        $this->assertEquals($result['url'], 'http://localhost/success');
+    }
+
+    /**
+     * Catalog less order with simple product and context
+     *
+     * @dataProvider fakeData
+     */
+    public function testAuthorizeOrderForCatalogLessOrderWithSimpleProductAndContext($apiKey, $userAgent, $product, $oneClickOrderContext)
+    {
+        /** @var OystOneClickAPI $oneClickApi */
+        $oneClickApi = $this->getApi($apiKey, $userAgent);
+
+        $result = $oneClickApi->authorizeOrder('test', 42, 'test', null, 1, $product, null, $oneClickOrderContext);
+        $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
+        $this->assertEquals($result['url'], 'http://localhost/success');
+    }
+
+    /**
+     * Catalog less order with simple product and context
+     *
+     * @dataProvider fakeData
+     */
+    public function testAuthorizeOrderForCatalogLessOrderWithSimpleProductAndNotification($apiKey, $userAgent, $product, $oneClickOrderParams, $oneClickOrderContext, $oneClickNotification)
+    {
+        /** @var OystOneClickAPI $oneClickApi */
+        $oneClickApi = $this->getApi($apiKey, $userAgent);
+
+        $result = $oneClickApi->authorizeOrder('test', 42, 'test', null, 1, $product, null, null, $oneClickNotification);
+        $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
+        $this->assertEquals($result['url'], 'http://localhost/success');
+    }
 }
