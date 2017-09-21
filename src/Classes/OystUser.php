@@ -249,6 +249,8 @@ class OystUser implements OystArrayInterface
      */
     public function toArray()
     {
+        $oystCollectionHelper = new OystCollectionHelper();
+
         $user = array(
             'first_name' => $this->firstName,
             'last_name' => $this->lastName,
@@ -256,8 +258,8 @@ class OystUser implements OystArrayInterface
             'email' => $this->email,
             'phone' => $this->phone,
             'additional_data' => $this->additionalData,
-            'addresses' => OystCollectionHelper::collectionToArray($this->addresses),
-            'billing_addresses' => OystCollectionHelper::collectionToArray($this->billingAddresses),
+            'addresses' => $oystCollectionHelper->collectionToArray($this->addresses),
+            'billing_addresses' => $oystCollectionHelper->collectionToArray($this->billingAddresses),
         );
 
         return $user;

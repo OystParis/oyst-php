@@ -26,7 +26,7 @@ class OystApiClientFactoryTest extends \PHPUnit_Framework_TestCase
     public function clientUrlData()
     {
         return array(
-            array(OystApiClientFactory::ENTITY_CATALOG, OystApiClientFactory::ENV_PROD, 'https://localhost', 'https://localhost/catalog/v1'),
+            array(OystApiClientFactory::ENTITY_CATALOG, OystApiClientFactory::ENV_PROD, 'https://localhost', 'https://api.oyst.com/catalog/v1'),
             array(OystApiClientFactory::ENTITY_ORDER, null, 'https://localhost', 'https://localhost/order/v2'),
             array(OystApiClientFactory::ENTITY_ONECLICK, OystApiClientFactory::ENV_PROD, null, 'https://api.oyst.com/oneclick/v1'),
             array(OystApiClientFactory::ENTITY_PAYMENT, null, 'https://localhost', 'https://localhost/payment'),
@@ -150,7 +150,7 @@ class OystApiClientFactoryTest extends \PHPUnit_Framework_TestCase
         $reflectionMethod->setAccessible(true);
 
         /** @var Client $client */
-        $client = $reflectionMethod->invoke(null, $entityName, $env, $url);
+        $reflectionMethod->invoke(null, $entityName, $env, $url);
     }
 
     /**
@@ -158,7 +158,8 @@ class OystApiClientFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testOkGetClient($expectedClassName, $entityName, $apiKey, $userAgent, $env, $url)
     {
-        $clientApi = OystApiClientFactory::getClient($entityName, $apiKey, $userAgent, $env, $url);
+        $oystApiClientFactory = new OystApiClientFactory();
+        $clientApi = $oystApiClientFactory->getClient($entityName, $apiKey, $userAgent, $env, $url);
 
         $this->assertInstanceOf($expectedClassName, $clientApi);
     }
@@ -170,7 +171,8 @@ class OystApiClientFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testExceptionGetClient($entityName, $apiKey, $userAgent, $env, $url)
     {
-        OystApiClientFactory::getClient($entityName, $apiKey, $userAgent, $env, $url);
+        $oystApiClientFactory = new OystApiClientFactory();
+        $oystApiClientFactory->getClient($entityName, $apiKey, $userAgent, $env, $url);
     }
 
     /**

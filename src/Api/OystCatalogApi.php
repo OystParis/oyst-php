@@ -48,7 +48,8 @@ class OystCatalogApi extends AbstractOystApiClient
         foreach ($oystProducts as $oystProduct) {
             $oystProductArray = $oystProduct->toArray();
 
-            OystCollectionHelper::cleanData($oystProductArray);
+            $oystCollectionHelper = new OystCollectionHelper();
+            $oystCollectionHelper->cleanData($oystProductArray);
 
             $formattedData[] = $oystProductArray;
         }
@@ -157,7 +158,8 @@ class OystCatalogApi extends AbstractOystApiClient
         foreach ($shipments as $shipment) {
             $shipmentArray = $shipment->toArray();
 
-            OystCollectionHelper::cleanData($shipmentArray);
+            $oystCollectionHelper = new OystCollectionHelper();
+            $oystCollectionHelper->cleanData($shipmentArray);
 
             $formattedData[] = $shipmentArray;
         }

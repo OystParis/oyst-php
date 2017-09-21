@@ -20,7 +20,7 @@ class OystApiClientFactory
     private static $version = array(
         'major' => '1',
         'minor' => '8',
-        'patch' => '0',
+        'patch' => '1',
     );
 
     const ENTITY_CATALOG = 'catalog';
@@ -56,8 +56,13 @@ class OystApiClientFactory
      *
      * @throws \Exception
      */
-    public static function getClient($entityName, $apiKey, OystUserAgent $userAgent, $env = self::ENV_PROD, $customUrl = null)
-    {
+    public static function getClient(
+        $entityName,
+        $apiKey,
+        OystUserAgent $userAgent,
+        $env = self::ENV_PROD,
+        $customUrl = null
+    ) {
         $client = static::createClient($entityName, $env, $customUrl);
 
         switch ($entityName) {
@@ -139,7 +144,8 @@ class OystApiClientFactory
     private static function getApiDescription($entityName)
     {
         $configurationFile = __DIR__ . '/../Config/description_' . $entityName . '.json';
-        $description = ServiceDescription::factory($configurationFile);
+        $serviceDescription = new ServiceDescription();
+        $description = $serviceDescription->factory($configurationFile);
 
         return $description;
     }

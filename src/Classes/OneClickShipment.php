@@ -12,15 +12,14 @@ namespace Oyst\Classes;
  */
 class OneClickShipment implements OystArrayInterface
 {
-    const HOME_DELIVERY = 'home_delivery';
-    const PICKUP_DELIVERY = 'pickup';
-
     /**
      * @var int
      */
     private $freeShipping;
 
     /**
+     * Is the shipment the default one
+     *
      * @var bool
      */
     private $primary;
@@ -36,6 +35,8 @@ class OneClickShipment implements OystArrayInterface
     private $carrier;
 
     /**
+     * Value in hours
+     *
      * @var int
      */
     private $delay;
@@ -72,9 +73,19 @@ class OneClickShipment implements OystArrayInterface
     }
 
     /**
+     * @deprecated since 1.8.1.
+     *
      * @return bool
      */
     public function getPrimary()
+    {
+        return $this->primary;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPrimary()
     {
         return $this->primary;
     }

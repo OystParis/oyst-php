@@ -68,7 +68,7 @@ class OystApiConfiguration
     /**
      * @param $customUrl
      *
-     * @return $this
+     * @return OystApiConfiguration
      *
      */
     public function setCustomUrl($customUrl)
@@ -89,7 +89,7 @@ class OystApiConfiguration
     /**
      * @param string $environment
      *
-     * @return $this
+     * @return OystApiConfiguration
      */
     public function setEnvironment($environment)
     {
@@ -108,7 +108,9 @@ class OystApiConfiguration
 
     /**
      * @param string $entity
-     * @return $this
+     *
+     * @return OystApiConfiguration
+     *
      * @throws \Exception
      */
     public function setEntity($entity)
@@ -121,9 +123,9 @@ class OystApiConfiguration
     /**
      * Load the parameters
      *
-     * @throws \Exception
+     * @return OystApiConfiguration
      *
-     * @return $this
+     * @throws \Exception
      */
     public function load()
     {
@@ -135,16 +137,19 @@ class OystApiConfiguration
             $this->parameters = $this->yamlParser->parse(file_get_contents($this->parametersFile));
         }
 
-        if (!is_null($this->customUrl)) {
-            $baseUrl = trim($this->customUrl, '/');
-        } elseif (isset($this->parameters['api']['env'][$this->environment])) {
-            $baseUrl = $this->parameters['api']['env'][$this->environment];
-        } else {
+        if (is_null($this->customUrl) && !isset($this->parameters['api']['env'][$this->environment])) {
             throw new \Exception('Custom url or the environment is missing, did you forgot to set one of them ?');
         }
 
+        if (!is_null($this->customUrl)) {
+            $baseUrl = trim($this->customUrl, '/');
+        }
+        if (isset($this->parameters['api']['env'][$this->environment])) {
+            $baseUrl = $this->parameters['api']['env'][$this->environment];
+        }
+
         if (!isset($this->parameters['api']['path'][$this->entity])) {
-            throw new \Exception('Entity doesn\'t exist, please set a valid one');
+            throw new \Exception("Entity doesn't exist, please set a valid one");
         }
 
         $this->baseUrl = $baseUrl . '/' . trim($this->parameters['api']['path'][$this->entity], '/');

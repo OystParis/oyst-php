@@ -148,7 +148,7 @@ class OystCatalogApiTest extends OystApiContext
             }'
         );
         $catalogApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
-        $result = $catalogApi->getShipments();
+        $catalogApi->getShipments();
 
         $this->assertEquals($catalogApi->getLastHttpCode(), 200);
     }
@@ -228,7 +228,8 @@ class OystCatalogApiTest extends OystApiContext
         );
         $catalogApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
 
-        $shipments = OneClickShipmentFixture::getList();
+        $oneClickShipmentFixture = new OneClickShipmentFixture();
+        $shipments = $oneClickShipmentFixture->getList();
 
         $result = $catalogApi->postShipments($shipments);
 
