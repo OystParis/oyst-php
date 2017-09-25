@@ -8,7 +8,7 @@ use Oyst\Test\Fixture\UserFixture;
 use Oyst\Test\TestSettings;
 
 /**
- * Class PaymentControllerTest
+ * Class PaymentControllerTest for functional tests
  *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>

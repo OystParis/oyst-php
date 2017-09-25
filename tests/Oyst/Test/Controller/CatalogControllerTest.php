@@ -16,7 +16,7 @@ use Oyst\Test\Fixture\ProductFixture;
 use Oyst\Test\TestSettings;
 
 /**
- * Class CatalogControllerTest
+ * Class CatalogControllerTest for functional tests
  *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>
