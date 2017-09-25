@@ -49,7 +49,8 @@ class OystCollectionHelper
             if (is_array($value)) {
                 if (empty($value)) {
                     unset($data[$field]);
-                } else {
+                }
+                if (!empty($value)) {
                     self::cleanData($value);
                 }
             }

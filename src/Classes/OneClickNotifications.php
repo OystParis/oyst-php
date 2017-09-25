@@ -3,14 +3,14 @@
 namespace Oyst\Classes;
 
 /**
- * Class OneClickNotification
+ * Class OneClickNotifications
  *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
-class OneClickNotification implements OystArrayInterface
+class OneClickNotifications implements OystArrayInterface
 {
     /**
      * @var bool
@@ -59,11 +59,11 @@ class OneClickNotification implements OystArrayInterface
      */
     public function toArray()
     {
-        $notification = array(
+        $notifications = array(
             'should_ask_shipments' => $this->shouldAskShipments,
             'url' => $this->url,
         );
 
-        return $notification;
+        return $notifications;
     }
 }

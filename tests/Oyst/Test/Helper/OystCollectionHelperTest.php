@@ -179,7 +179,8 @@ class OystCollectionHelperTest extends \PHPUnit_Framework_TestCase
      */
     public function testCleanData($data, $expectedData)
     {
-        OystCollectionHelper::cleanData($data);
+        $oystCollectionHelper = new OystCollectionHelper();
+        $oystCollectionHelper->cleanData($data);
 
         $this->assertEquals($data, $expectedData);
     }
@@ -189,7 +190,8 @@ class OystCollectionHelperTest extends \PHPUnit_Framework_TestCase
      */
     public function testCollectionToArray($collection, $expectedData)
     {
-        $data = OystCollectionHelper::collectionToArray($collection);
+        $oystCollectionHelper = new OystCollectionHelper();
+        $data = $oystCollectionHelper->collectionToArray($collection);
 
         $this->assertEquals($data, $expectedData);
     }

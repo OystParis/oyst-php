@@ -31,15 +31,18 @@ class PaymentControllerTest extends \PHPUnit_Framework_TestCase
         $this->settings = new TestSettings();
         $this->settings->load();
 
+        $oystApiClientFactory = new OystApiClientFactory();
+
         /** @var OystPaymentApi $catalogApi */
-        $this->paymentApi = OystApiClientFactory::getClient(
-            OystApiClientFactory::ENTITY_PAYMENT,
+        $this->paymentApi = $oystApiClientFactory->getClient(
+            $oystApiClientFactory::ENTITY_PAYMENT,
             $this->settings->getApiKey(),
             $this->settings->getUserAgent(),
             $this->settings->getEnv()
         );
 
-        $this->user = UserFixture::getOne();
+        $userFixture = new UserFixture();
+        $this->user = $userFixture->getOne();
     }
 
     public function testPayment()

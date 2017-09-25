@@ -53,7 +53,8 @@ class OystUserAgent
      */
     public function __construct($platformName, $packageVersion, $platformVersion, $languageName, $languageVersion)
     {
-        $this->oystUserAgentPattern = 'Oyst%PLATFORM_NAME%/%PACKAGE_VERSION% %PLATFORM_NAME% %CMS_VERSION%, %LANGUAGE_NAME% %LANGUAGE_VERSION%)';
+        $this->oystUserAgentPattern = 'Oyst%PLATFORM_NAME%/%PACKAGE_VERSION% %PLATFORM_NAME% %CMS_VERSION%, ';
+        $this->oystUserAgentPattern .= '%LANGUAGE_NAME% %LANGUAGE_VERSION%)';
 
         $this->platformName = (string)trim($platformName);
         $this->packageVersion = (string)trim($packageVersion);

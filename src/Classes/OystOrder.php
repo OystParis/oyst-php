@@ -15,7 +15,7 @@ class OystOrder
     /**
      * @var string
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var string
@@ -102,17 +102,17 @@ class OystOrder
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
-     * @param string $id
+     * @param string $identifier
      *
      * @return OystOrder
      */
-    public function setId($id)
+    public function setId($identifier)
     {
-        $this->id = $id;
+        $this->identifier = (string)$identifier;
 
         return $this;
     }

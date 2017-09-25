@@ -165,12 +165,12 @@ class OystOneClickApiTest extends OystApiContext
      *
      * @dataProvider fakeData
      */
-    public function testAuthorizeOrderForCatalogLessOrderWithSimpleProductAndNotification($apiKey, $userAgent, $product, $oneClickOrderParams, $oneClickOrderContext, $oneClickNotification)
+    public function testAuthorizeOrderForCatalogLessOrderWithSimpleProductAndNotification($apiKey, $userAgent, $product, $oneClickOrderParams, $oneClickOrderContext, $oneClickNotifications)
     {
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
 
-        $result = $oneClickApi->authorizeOrder('test', 42, 'test', null, 1, $product, null, null, $oneClickNotification);
+        $result = $oneClickApi->authorizeOrder('test', 42, 'test', null, 1, $product, null, null, $oneClickNotifications);
         $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
         $this->assertEquals($result['url'], 'http://localhost/success');
     }

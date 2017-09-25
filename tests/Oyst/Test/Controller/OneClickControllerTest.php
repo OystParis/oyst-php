@@ -4,9 +4,9 @@ namespace Oyst\Test\Controller;
 
 use Oyst\Api\OystApiClientFactory;
 use Oyst\Api\OystOneClickApi;
-use Oyst\Classes\OneClickNotification;
+use Oyst\Classes\OneClickNotifications;
 use Oyst\Classes\OystProduct;
-use Oyst\Test\Fixture\OneClickNotificationFixture;
+use Oyst\Test\Fixture\OneClickNotificationsFixture;
 use Oyst\Test\Fixture\OneClickOrderContextFixture;
 use Oyst\Test\Fixture\OneClickOrderParamsFixture;
 use Oyst\Test\Fixture\ProductFixture;
@@ -37,37 +37,49 @@ class OneClickControllerTest extends \PHPUnit_Framework_TestCase
     /** @var  OneClickOrderContext */
     private $oneClickOrderContext;
 
-    /** @var  OneClickNotification */
-    private $oneClickNotification;
+    /** @var  OneClickNotifications */
+    private $oneClickNotifications;
 
     protected function setUp()
     {
         $this->settings = new TestSettings();
         $this->settings->load();
 
+        $oystApiClientFactory = new OystApiClientFactory();
+
         /** @var OystOneClickApi $catalogApi */
-        $this->oneClickApi = OystApiClientFactory::getClient(
-            OystApiClientFactory::ENTITY_ONECLICK,
+        $this->oneClickApi = $oystApiClientFactory->getClient(
+            $oystApiClientFactory::ENTITY_ONECLICK,
             $this->settings->getApiKey(),
             $this->settings->getUserAgent(),
             $this->settings->getEnv()
         );
 
-        $this->product = ProductFixture::getOneClickOrder();
-        $this->oneClickOrderParams = OneClickOrderParamsFixture::getOrderParams();
-        $this->oneClickOrderContext = OneClickOrderContextFixture::getOrderContext();
-        $this->oneClickNotification = OneClickNotificationFixture::getNotification();
+        $productFixture = new ProductFixture();
+        $this->product = $productFixture::getOneClickOrder();
+
+        $oneClickOrderParamsFixture = new OneClickOrderParamsFixture();
+        $this->oneClickOrderParams = $oneClickOrderParamsFixture::getOrderParams();
+
+        $oneClickOrderContextFixture = new OneClickOrderContextFixture();
+        $this->oneClickOrderContext = $oneClickOrderContextFixture::getOrderContext();
+
+        $oneClickNotificationsFixture = new OneClickNotificationsFixture();
+        $this->oneClickNotifications = $oneClickNotificationsFixture::getNotifications();
     }
 
     public function testNotifyImport()
     {
-        $apiVersion = 1;
+        $apiVersion = 2;
         $result = $this->oneClickApi->authorizeOrder(
             $this->product->getRef(),
             1,
             null,
             null,
             $apiVersion,
+            null,
+            null,
+            null,
             null
         );
 

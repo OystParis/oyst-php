@@ -36,7 +36,11 @@ class ProductFixture
             'subtitle' => 'test',
         );
         $product->setAvailableQuantity(5);
-        $product->setDescription('Lorem ipsum dolor sit amet, cetero delectus nec et, no ius nonumy ignota, vocent pertinax ei qui. No sit iudico feugiat ponderum, an mea enim aperiam scriptorem, pri te cibo quaeque disputando. Has ut meis adhuc vivendo, illud partem molestie vix in. An his dictas ceteros. Te quod graeco sit. Quod prima vim an, odio blandit pri ne.');
+        $description = 'Lorem ipsum dolor sit amet, cetero delectus nec et, no ius nonumy ignota, vocent pertinax ';
+        $description .= 'ei qui. No sit iudico feugiat ponderum, an mea enim aperiam scriptorem, pri te cibo quaeque ';
+        $description .= 'disputando. Has ut meis adhuc vivendo, illud partem molestie vix in. An his dictas ceteros. ';
+        $description .= 'Te quod graeco sit. Quod prima vim an, odio blandit pri ne.';
+        $product->setDescription($description);
         $product->setEan('my_ean_1');
         $product->setIsbn('my_isbn_1');
         $product->setActive(true);
@@ -44,7 +48,10 @@ class ProductFixture
         $product->setInformation($info);
         $product->setManufacturer('my manufacturer');
         $product->addRelatedProduct('ref_related');
-        $product->setShortDescription('Ut fuisset molestie vim, sed eu essent tamquam iudicabit. Ex amet commodo consequuntur eos. Amet mazim has id, id wisi deseruisse his. Modo liber inciderint ex his. Id natum laoreet detracto sed.');
+        $shortDescription = 'Ut fuisset molestie vim, sed eu essent tamquam iudicabit. Ex amet commodo consequuntur ';
+        $shortDescription .= 'eos. Amet mazim has id, id wisi deseruisse his. Modo liber inciderint ex his. Id natum ';
+        $shortDescription .= 'laoreet detracto sed.';
+        $product->setShortDescription($shortDescription);
         $product->setSize(new OystSize(42, 42, 42));
         $product->addTag('test');
         $product->setUpc('my_upc');

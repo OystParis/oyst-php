@@ -720,7 +720,7 @@ class OystProduct implements OystArrayInterface
      * @param $key
      * @param $value
      *
-     * @return $this
+     * @return OystProduct
      */
     public function addInformation($key, $value)
     {
@@ -800,6 +800,8 @@ class OystProduct implements OystArrayInterface
      */
     public function toArray()
     {
+        $oystCollectionHelper = new OystCollectionHelper();
+
         $product = array(
             'reference' => $this->ref,
             'is_active' => $this->active,
@@ -812,9 +814,9 @@ class OystProduct implements OystArrayInterface
             'amount_including_taxes' => $this->amountIncludingTax ? $this->amountIncludingTax->toArray() : array(),
             'amount_excluding_taxes' => $this->amountExcludingTax ? $this->amountExcludingTax->toArray() : array(),
             'url' => $this->url,
-            'categories' => OystCollectionHelper::collectionToArray($this->categories),
+            'categories' => $oystCollectionHelper->collectionToArray($this->categories),
             'manufacturer' => $this->manufacturer,
-            'shipments' => OystCollectionHelper::collectionToArray($this->shipments),
+            'shipments' => $oystCollectionHelper->collectionToArray($this->shipments),
             'size' => $this->size ? $this->size->toArray() : array(),
             'available_quantity' => $this->availableQuantity,
             'weight' => $this->weight,
@@ -825,7 +827,7 @@ class OystProduct implements OystArrayInterface
             'images' => $this->images,
             'informations' => $this->information ?: new \stdClass(),
             'related_products' => $this->relatedProducts,
-            'variations' => OystCollectionHelper::collectionToArray($this->variations),
+            'variations' => $oystCollectionHelper->collectionToArray($this->variations),
         );
 
         return $product;

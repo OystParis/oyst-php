@@ -12,10 +12,14 @@ namespace Oyst\Classes;
  */
 class OystCarrier implements OystArrayInterface
 {
+    const HOME_DELIVERY = 'home_delivery';
+    const MONDIAL_RELAY = 'mondial_relay';
+    const PICKUP_DELIVERY = 'pickup';
+
     /**
      * @var string
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var string
@@ -28,13 +32,13 @@ class OystCarrier implements OystArrayInterface
     private $type;
 
     /**
-     * @param string $id
+     * @param string $identifier
      * @param string $name
      * @param string $type
      */
-    public function __construct($id, $name, $type)
+    public function __construct($identifier, $name, $type)
     {
-        $this->id = $id;
+        $this->identifier = $identifier;
         $this->name = $name;
         $this->type = $type;
     }
@@ -44,17 +48,17 @@ class OystCarrier implements OystArrayInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
-     * @param string $id
+     * @param string $identifier
      *
      * @return OystCarrier
      */
-    public function setId($id)
+    public function setId($identifier)
     {
-        $this->id = $id;
+        $this->identifier = (string)$identifier;
 
         return $this;
     }
@@ -74,7 +78,7 @@ class OystCarrier implements OystArrayInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = (string)$name;
 
         return $this;
     }
@@ -91,10 +95,16 @@ class OystCarrier implements OystArrayInterface
      * @param string $type
      *
      * @return OystCarrier
+     *
+     * @throws \InvalidArgumentException
      */
     public function setType($type)
     {
-        $this->type = $type;
+        $shippingTypes = array(self::HOME_DELIVERY, self::MONDIAL_RELAY, self::PICKUP_DELIVERY);
+        if (!in_array($type, $shippingTypes)) {
+            throw new \InvalidArgumentException('Type ' . $type . ' is not in '. explode(',', $shippingTypes));
+        }
+        $this->type = (string)$type;
 
         return $this;
     }
@@ -105,7 +115,7 @@ class OystCarrier implements OystArrayInterface
     public function toArray()
     {
         $carrier = array(
-            'id' => $this->id,
+            'id' => $this->identifier,
             'name' => $this->name,
             'type' => $this->type,
         );

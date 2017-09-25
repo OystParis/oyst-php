@@ -27,7 +27,7 @@ script:
   ## PHP CodeSniffer disable error on exit
   - vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
   ## PHP CodeSniffer with PSR2
-  - vendor/bin/phpcs --standard=PSR2 --ignore=vendor .
+  - vendor/bin/phpcs --standard=PSR2 --ignore=vendor $TRAVIS_BUILD_DIR
   ## PHP Copy/Paste Detector
   - vendor/bin/phpcpd $TRAVIS_BUILD_DIR --exclude vendor
   ## PHP Mess Detector

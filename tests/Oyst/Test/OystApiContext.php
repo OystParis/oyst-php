@@ -8,7 +8,7 @@ use Guzzle\Service\Client;
 use Oyst\Api\AbstractOystApiClient;
 use Oyst\Api\OystApiConfiguration;
 use Oyst\Classes\OystUserAgent;
-use Oyst\Test\Fixture\OneClickNotificationFixture;
+use Oyst\Test\Fixture\OneClickNotificationsFixture;
 use Oyst\Test\Fixture\OneClickOrderContextFixture;
 use Oyst\Test\Fixture\OneClickOrderParamsFixture;
 use Oyst\Test\Fixture\ProductFixture;
@@ -41,11 +41,11 @@ abstract class OystApiContext extends \PHPUnit_Framework_TestCase
         $oneClickOrderContextFixture = new OneClickOrderContextFixture();
         $oneClickOrderContext = $oneClickOrderContextFixture->getOrderContext();
 
-        $oneClickNotificationFixture = new OneClickNotificationFixture();
-        $oneClickNotification = $oneClickNotificationFixture->getNotification();
-//var_dump(get_class($oneClickNotification));die;
+        $oneClickNotificationsFixture = new OneClickNotificationsFixture();
+        $oneClickNotifications = $oneClickNotificationsFixture->getNotifications();
+
         return array(
-            array('api_key', $userAgent, $product, $oneClickOrderParams, $oneClickOrderContext, $oneClickNotification)
+            array('api_key', $userAgent, $product, $oneClickOrderParams, $oneClickOrderContext, $oneClickNotifications)
         );
     }
 

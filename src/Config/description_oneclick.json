@@ -49,6 +49,18 @@
                     "type": "object",
                     "description": "The order params",
                     "required": false
+                },
+                "context": {
+                    "location": "json",
+                    "type": "object",
+                    "description": "Contextual elements about the order",
+                    "required": false
+                },
+                "notifications": {
+                    "location": "json",
+                    "type": "object",
+                    "description": "A bunch of notifications",
+                    "required": false
                 }
             }
         }

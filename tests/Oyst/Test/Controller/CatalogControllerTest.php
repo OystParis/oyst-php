@@ -45,16 +45,21 @@ class CatalogControllerTest extends \PHPUnit_Framework_TestCase
         $this->settings = new TestSettings();
         $this->settings->load();
 
+        $oystApiClientFactory = new OystApiClientFactory();
+
         /** @var OystCatalogApi $catalogApi */
-        $this->catalogApi = OystApiClientFactory::getClient(
-            OystApiClientFactory::ENTITY_CATALOG,
+        $this->catalogApi = $oystApiClientFactory->getClient(
+            $oystApiClientFactory::ENTITY_CATALOG,
             $this->settings->getApiKey(),
             $this->settings->getUserAgent(),
             $this->settings->getEnv()
         );
 
-        $this->products = ProductFixture::getList();
-        $this->shipments = OneClickShipmentFixture::getList();
+        $productFixture = new ProductFixture();
+        $this->products = $productFixture->getList();
+
+        $oneClickShipmentFixture = new OneClickShipmentFixture();
+        $this->shipments = $oneClickShipmentFixture->getList();
     }
 
     public function testNotifyImport()
@@ -66,7 +71,7 @@ class CatalogControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testPostProducts()
     {
-        $result = $this->catalogApi->postProducts($this->products);
+        $this->catalogApi->postProducts($this->products);
 
         $this->assertTrue(
             false === $this->catalogApi->getLastError() && 200 === $this->catalogApi->getLastHttpCode()

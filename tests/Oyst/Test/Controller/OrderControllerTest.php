@@ -33,9 +33,11 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
         $this->settings = new TestSettings();
         $this->settings->load();
 
+        $oystApiClientFactory = new OystApiClientFactory();
+
         /** @var OystOrderApi $catalogApi */
-        $this->orderApi = OystApiClientFactory::getClient(
-            OystApiClientFactory::ENTITY_ORDER,
+        $this->orderApi = $oystApiClientFactory->getClient(
+            $oystApiClientFactory::ENTITY_ORDER,
             $this->settings->getApiKey(),
             $this->settings->getUserAgent(),
             $this->settings->getEnv()
@@ -66,6 +68,7 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
 
         $currentState = $orderInfo['current_status'];
 
+        $nextStatus = AbstractOrderState::PENDING;
         if ($currentState == AbstractOrderState::WAITING) {
             $nextStatus = AbstractOrderState::PENDING;
         } elseif ($currentState == AbstractOrderState::PENDING) {
@@ -74,8 +77,6 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
             $nextStatus = AbstractOrderState::FINALIZED;
         } elseif ($currentState == AbstractOrderState::FINALIZED) {
             $nextStatus = AbstractOrderState::SHIPPED;
-        } else {
-            $nextStatus = AbstractOrderState::PENDING;
         }
 
         $result = $this->orderApi->updateStatus($this->settings->getOrderId(), $nextStatus);
