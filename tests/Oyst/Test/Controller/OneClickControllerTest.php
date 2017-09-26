@@ -13,7 +13,7 @@ use Oyst\Test\Fixture\ProductFixture;
 use Oyst\Test\TestSettings;
 
 /**
- * Class OneClickControllerTest
+ * Class OneClickControllerTest for functional tests
  *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>

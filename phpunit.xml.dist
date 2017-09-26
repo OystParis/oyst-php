@@ -4,6 +4,7 @@
     <testsuites>
         <testsuite name="unitary">
             <directory suffix="Test.php">./tests/Oyst/Test/Api</directory>
+            <directory suffix="Test.php">./tests/Oyst/Test/Entrypoint</directory>
             <directory suffix="Test.php">./tests/Oyst/Test/Helper</directory>
         </testsuite>
 

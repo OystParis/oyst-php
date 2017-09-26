@@ -8,14 +8,14 @@ use Oyst\Api\OystOneClickApi;
 use Oyst\Test\OystApiContext;
 
 /**
- * Class OystOneClickApiTest for unitary tests
+ * Class OneClickApiTest for unitary tests
  *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
-class OystOneClickApiTest extends OystApiContext
+class OneClickApiTest extends OystApiContext
 {
     /**
      * @param string $apiKey

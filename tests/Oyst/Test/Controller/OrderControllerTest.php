@@ -9,7 +9,7 @@ use Oyst\Classes\OystOrder;
 use Oyst\Test\TestSettings;
 
 /**
- * Class OrderControllerTest
+ * Class OrderControllerTest for functional tests
  *
  * @category Oyst
  * @author   Oyst <dev@oyst.com>
