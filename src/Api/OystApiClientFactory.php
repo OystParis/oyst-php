@@ -19,8 +19,8 @@ class OystApiClientFactory
 {
     private static $version = array(
         'major' => '1',
-        'minor' => '8',
-        'patch' => '1',
+        'minor' => '9',
+        'patch' => '0',
     );
 
     const ENTITY_CATALOG = 'catalog';
