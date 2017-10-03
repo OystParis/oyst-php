@@ -47,6 +47,7 @@
                 "order_params": {
                     "location": "json",
                     "type": "object",
+                    "sentAs": "order",
                     "description": "The order params",
                     "required": false
                 },
