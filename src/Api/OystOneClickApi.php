@@ -65,7 +65,7 @@ class OystOneClickApi extends AbstractOystApiClient
         }
 
         if (!is_null($orderParams)) {
-            $data['order'] = $orderParams->toArray();
+            $data['order_params'] = $orderParams->toArray();
         }
 
         if (is_array($context)) {
