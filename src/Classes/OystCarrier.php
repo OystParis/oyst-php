@@ -38,7 +38,7 @@ class OystCarrier implements OystArrayInterface
      */
     public function __construct($identifier, $name, $type)
     {
-        $this->identifier = $identifier;
+        $this->identifier = (string)$identifier;
         $this->name = $name;
         $this->type = $type;
     }
