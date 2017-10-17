@@ -17,11 +17,11 @@ use Symfony\Component\Yaml\Parser;
  */
 class OystApiClientFactory
 {
-    // 1.9.1
+    // 1.9.2
     private static $version = array(
         'major' => '1',
         'minor' => '9',
-        'patch' => '1',
+        'patch' => '2',
     );
 
     const ENTITY_CATALOG = 'catalog';
