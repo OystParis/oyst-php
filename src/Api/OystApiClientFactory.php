@@ -31,6 +31,7 @@ class OystApiClientFactory
 
     const ENV_PROD = 'prod';
     const ENV_PREPROD = 'preprod';
+    const ENV_CUSTOM = 'custom';
 
     /**
      * Gets the current version string

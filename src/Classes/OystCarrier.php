@@ -14,7 +14,7 @@ class OystCarrier implements OystArrayInterface
 {
     const HOME_DELIVERY = 'home_delivery';
     const MONDIAL_RELAY = 'mondial_relay';
-    const PICKUP_DELIVERY = 'pickup';
+    const PICKUP_DELIVERY = 'pick_up';
 
     /**
      * @var string

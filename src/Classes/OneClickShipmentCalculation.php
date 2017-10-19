@@ -41,10 +41,9 @@ class OneClickShipmentCalculation implements OystArrayInterface
      *
      * @param OneClickShipmentCatalogLess[] $shipments
      */
-    public function __construct(array $shipments)
+    public function __construct(array $shipments = null)
     {
         $this->setShipments($shipments);
-        //$this->items = array();
     }
 
     /**
@@ -65,7 +64,7 @@ class OneClickShipmentCalculation implements OystArrayInterface
         if (!empty($shipments)) {
             foreach ($shipments as $shipment) {
                 if (!$shipment instanceof OneClickShipmentCatalogLess) {
-                    throw new InvalidArgumentException('$shipment must be an array of
+                    throw new \InvalidArgumentException('$shipment must be an array of
                     Oyst\Classes\OneClickShipmentCatalogLess');
                 }
             }
@@ -106,7 +105,7 @@ class OneClickShipmentCalculation implements OystArrayInterface
         if (!empty($items)) {
             foreach ($items as $item) {
                 if (!$item instanceof OneClickItem) {
-                    throw new InvalidArgumentException('$item must be an array of Oyst\Classes\OneClickItem');
+                    throw new \InvalidArgumentException('$item must be an array of Oyst\Classes\OneClickItem');
                 }
             }
 
@@ -164,6 +163,36 @@ class OneClickShipmentCalculation implements OystArrayInterface
     public function setOrderAmount(OystPrice $orderAmount)
     {
         $this->orderAmount = $orderAmount;
+
+        return $this;
+    }
+
+    /**
+     * Force customer to have a primary shipment
+     *
+     * @param string $type One carrier of OystCarrier
+     *
+     * @return $this
+     */
+    public function setDefaultPrimaryShipmentByType($type = OystCarrier::HOME_DELIVERY)
+    {
+        $isPrimarySet = false;
+
+        // Set first shipment found with the type required.
+        foreach ($this->shipments as &$shipment) {
+            $shipment->setPrimary(false);
+
+            if ($shipment->getCarrier()->getType() === $type && !$isPrimarySet) {
+                $shipment->setPrimary(true);
+                $isPrimarySet = true;
+            }
+        }
+
+        if (!$isPrimarySet) {
+            throw new \LogicException('Shipment must have a primary shipment');
+        }
+
+        $this->setShipments($this->shipments);
 
         return $this;
     }
