@@ -23,7 +23,7 @@ class OneClickShipmentCatalogLess implements OystArrayInterface
     private $delay;
 
     /**
-     * @var bool    Define if shipping mode is primary
+     * @var bool Define if shipping mode is primary
      */
     private $primary;
 
