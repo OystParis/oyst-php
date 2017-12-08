@@ -50,7 +50,7 @@ class OneClickNotifications implements OystArrayInterface
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getEvents()
     {
@@ -62,11 +62,11 @@ class OneClickNotifications implements OystArrayInterface
      */
     public function setEvents($events)
     {
-        $this->events[] = $events;
+        $this->events = $events;
     }
 
     /**
-     * @param array $event
+     * @param string $event
      */
     public function addEvent($event)
     {
