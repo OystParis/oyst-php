@@ -54,38 +54,41 @@ class OystCatalogApiTest extends OystApiContext
 
         $products = array();
         $product = new OystProduct();
-        $product->setRef('sku1');
-        $product->setTitle('my title');
-        $product->setAmountIncludingTax(new OystPrice(25, 'EUR'));
-        $product->setCategories(array(new OystCategory('cat_ref', 'cat title', true)));
-        $product->setImages(array('http://localhost'));
+        $product->__set('reference', 'sku1');
+        $product->__set('title', 'my title');
+        $product->__set('amountIncludingTax', new OystPrice(42, 'EUR'));
+        $product->__set('quantity', 1);
 
+        $product->__set('categories', array(new OystCategory('cat_ref_1', 'cat title 1', true)));
+        $product->__set('images', array('http://localhost'));
         $info = array(
             'meta' => 'info en vrac',
-            'subtitle' => 'test'
+            'subtitle' => 'test',
         );
-        $product->setAvailableQuantity(5);
-        $product->setDescription('qdgsdfg');
-        $product->setEan('my_ean');
-        $product->setIsbn('my_isbn');
-        $product->setActive(true);
-        $product->setMaterialized(true);
-        $product->setInformation($info);
-        $product->setManufacturer('my manufacturer');
-        $product->addRelatedProduct('ref_related');
-        $product->setShortDescription('short description');
-        $product->setSize(new OystSize(42, 42, 42));
-        $product->addTag('test');
-        $product->setUpc('my_upc');
-        $product->setUrl('http://localhost');
+        $product->__set('availableQuantity', 5);
+        $product->__set('description', 'Lorem ipsum');
+        $product->__set('ean', 'my_ean');
+        $product->__set('isbn', 'my_isbn');
+        $product->__set('active', true);
+        $product->__set('materialized', true);
+        $product->__set('information', $info);
+        $product->__set('manufacturer', 'my manufacturer');
+        $product->__set('relatedProducts', array('ref_related'));
+        $product->__set('shortDescription', 'short description');
+        $product->__set('size', new OystSize(42, 42, 42));
+        $product->__set('tags', array('test'));
+        $product->__set('upc', 'my_upc');
+        $product->__set('url', 'http://localhost');
         $products[] = $product;
 
         $product = new OystProduct();
-        $product->setRef('sku2');
-        $product->setTitle('my title');
-        $product->setAmountIncludingTax(new OystPrice(25, 'EUR'));
-        $product->setCategories(array(new OystCategory('cat_ref', 'cat title', true)));
-        $product->setImages(array('http://localhost'));
+        $product->__set('reference', 'sku2');
+        $product->__set('title', 'my title');
+        $product->__set('amountIncludingTax', new OystPrice(1337, 'EUR'));
+        $product->__set('quantity', 2);
+
+        $product->__set('categories', array(new OystCategory('cat_ref_2', 'cat title_2', true)));
+        $product->__set('images', array('http://localhost'));
 
         $products[] = $product;
 

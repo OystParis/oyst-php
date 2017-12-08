@@ -72,7 +72,7 @@ class OneClickControllerTest extends \PHPUnit_Framework_TestCase
     {
         $apiVersion = 2;
         $result = $this->oneClickApi->authorizeOrder(
-            $this->product->getRef(),
+            $this->product->__get('reference'),
             1,
             null,
             null,

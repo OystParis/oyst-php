@@ -3,6 +3,7 @@
 namespace Oyst\Test\Helper;
 
 use Oyst\Classes\OystCategory;
+use Oyst\Classes\OystPrice;
 use Oyst\Classes\OystProduct;
 use Oyst\Helper\OystCollectionHelper;
 
@@ -97,19 +98,22 @@ class OystCollectionHelperTest extends \PHPUnit_Framework_TestCase
                 array(
                     new OystProduct(),
                     $product
-                        ->setRef('ref1')
-                        ->setTitle('title1')
-                        ->setDescription('description1')
-                        ->setCategories(array(new OystCategory('cat1_ref', 'my_cat1', true)))
-                        ->addCategory(new OystCategory('cat2_ref', 'my_cat2', false))
+                        ->__set('reference', 'ref1')
+                        ->__set('title', 'title1')
+                        ->__set('amountIncludingTax', new OystPrice(13.37, 'EUR'))
+                        ->__set('quantity', 'quantity1')
+                        ->__set('description', 'description1')
+                        ->__set('categories', array(new OystCategory('cat1_ref', 'my_cat1', true),
+                            new OystCategory('cat2_ref', 'my_cat2', false)))
                 ),
                 array(
                     array(
                         'reference' => null,
+                        'title' => null,
+                        'quantity' => null,
                         'is_active' => null,
                         'is_materialized' => null,
-                        'title' => null,
-                        'condition' => 'new',
+                        'condition' => null,
                         'short_description' => null,
                         'description' => null,
                         'tags' => array(),
@@ -133,14 +137,18 @@ class OystCollectionHelperTest extends \PHPUnit_Framework_TestCase
                     ),
                     array(
                         'reference' => 'ref1',
+                        'title' => 'title1',
+                        'quantity' => 'quantity1',
                         'is_active' => null,
                         'is_materialized' => null,
-                        'title' => 'title1',
-                        'condition' => 'new',
+                        'condition' => null,
                         'short_description' => null,
                         'description' => 'description1',
                         'tags' => array(),
-                        'amount_including_taxes' => array(),
+                        'amount_including_taxes' => array(
+                            'value' => 1337,
+                            'currency' => 'EUR',
+                        ),
                         'amount_excluding_taxes' => array(),
                         'url' => null,
                         'categories' => array(

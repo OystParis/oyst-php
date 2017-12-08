@@ -19,7 +19,29 @@ class OystProduct implements OystArrayInterface
      *
      * @var string
      */
-    private $ref;
+    private $reference;
+
+    /**
+     * Mandatory
+     *
+     * @var string
+     */
+    private $title;
+
+    /**
+     * Mandatory
+     *
+     * @var OystPrice
+     */
+    private $amountIncludingTax;
+
+    /**
+     * Mandatory
+     *
+     * @var int
+     */
+    private $quantity;
+
 
     /**
      * Optional
@@ -34,13 +56,6 @@ class OystProduct implements OystArrayInterface
      * @var bool
      */
     private $materialized;
-
-    /**
-     * Mandatory
-     *
-     * @var string
-     */
-    private $title;
 
     /**
      * Optional
@@ -71,13 +86,6 @@ class OystProduct implements OystArrayInterface
     private $tags;
 
     /**
-     * Mandatory
-     *
-     * @var OystPrice
-     */
-    private $amountIncludingTax;
-
-    /**
      * Optional
      *
      * @var OystPrice
@@ -92,9 +100,9 @@ class OystProduct implements OystArrayInterface
     private $url;
 
     /**
-     * Mandatory
+     * Optional
      *
-     * @var array
+     * @var OystCategory[]
      */
     private $categories;
 
@@ -108,7 +116,7 @@ class OystProduct implements OystArrayInterface
     /**
      * Optional
      *
-     * @var array
+     * @var OystShipment[]
      */
     private $shipments;
 
@@ -162,7 +170,7 @@ class OystProduct implements OystArrayInterface
     private $isbn;
 
     /**
-     * Mandatory
+     * Optional
      *
      * @var array
      */
@@ -191,7 +199,7 @@ class OystProduct implements OystArrayInterface
 
     public function __construct()
     {
-        $this->condition = 'new';
+        $this->condition = null;
         $this->discounted = false;
         $this->categories = array();
         $this->shipments = array();
@@ -203,594 +211,24 @@ class OystProduct implements OystArrayInterface
     }
 
     /**
-     * @return string
-     */
-    public function getRef()
-    {
-        return $this->ref;
-    }
-
-    /**
-     * @param string $ref
+     * @param $property
      *
-     * @return OystProduct
+     * @return mixed
      */
-    public function setRef($ref)
+    public function __get($property)
     {
-        $this->ref = (string)$ref;
-
-        return $this;
+        return $this->$property;
     }
 
     /**
-     * @return bool
-     */
-    public function isActive()
-    {
-        return $this->active;
-    }
-
-    /**
-     * @param bool $active
-     *
-     * @return OystProduct
-     */
-    public function setActive($active)
-    {
-        $this->active = (bool)$active;
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isMaterialized()
-    {
-        return $this->materialized;
-    }
-
-    /**
-     * @param bool $materialized
-     *
-     * @return OystProduct
-     */
-    public function setMaterialized($materialized)
-    {
-        $this->materialized = (bool)$materialized;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     *
-     * @return OystProduct
-     */
-    public function setTitle($title)
-    {
-        $this->title = (string)$title;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCondition()
-    {
-        return $this->condition;
-    }
-
-    /**
-     * @param string $condition Either 'new', 'reused' or 'refurbished'
-     *
-     * @return OystProduct
-     */
-    public function setCondition($condition)
-    {
-        $this->condition = (string)$condition;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getShortDescription()
-    {
-        return $this->shortDescription;
-    }
-
-    /**
-     * @param string $shortDescription
-     *
-     * @return OystProduct
-     */
-    public function setShortDescription($shortDescription)
-    {
-        $this->shortDescription = (string)$shortDescription;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param string $description
-     *
-     * @return OystProduct
-     */
-    public function setDescription($description)
-    {
-        $this->description = (string)$description;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * @param array $tags An array of string
-     *
-     * @return OystProduct
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-
-        return $this;
-    }
-
-    /**
-     * @param string $tag
-     *
-     * @return OystProduct
-     */
-    public function addTag($tag)
-    {
-        $this->tags[] = (string)$tag;
-
-        return $this;
-    }
-
-    /**
-     * @return OystPrice
-     */
-    public function getAmountIncludingTax()
-    {
-        return $this->amountIncludingTax;
-    }
-
-    /**
-     * @return OystPrice
-     */
-    public function getAmountExcludingTax()
-    {
-        return $this->amountExcludingTax;
-    }
-
-    /**
-     * @param OystPrice $amountIncludingTax
-     *
-     * @return OystProduct
-     */
-    public function setAmountIncludingTax($amountIncludingTax)
-    {
-        $this->amountIncludingTax = $amountIncludingTax;
-
-        return $this;
-    }
-
-    /**
-     * @param OystPrice $amountExcludingTax
-     *
-     * @return OystProduct
-     */
-    public function setAmountExcludingTax($amountExcludingTax)
-    {
-        $this->amountExcludingTax = $amountExcludingTax;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * @param string $url
-     *
-     * @return OystProduct
-     */
-    public function setUrl($url)
-    {
-        $this->url = (string)$url;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
-    /**
-     * @param array $categories An array of Category
-     *
-     * @return OystProduct
-     */
-    public function setCategories($categories)
-    {
-        $this->categories = $categories;
-
-        return $this;
-    }
-
-    /**
-     * @param OystCategory $category
-     *
-     * @return OystProduct
-     */
-    public function addCategory(OystCategory $category)
-    {
-        $this->categories[] = $category;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getManufacturer()
-    {
-        return $this->manufacturer;
-    }
-
-    /**
-     * @param string $manufacturer
-     *
-     * @return OystProduct
-     */
-    public function setManufacturer($manufacturer)
-    {
-        $this->manufacturer = (string)$manufacturer;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getShipments()
-    {
-        return $this->shipments;
-    }
-
-    /**
-     * Array of Shipment
-     *
-     * @param array $shipments
-     *
-     * @return OystProduct
-     */
-    public function setShipments($shipments)
-    {
-        $this->shipments = $shipments;
-
-        return $this;
-    }
-
-    /**
-     * @param OystShipment $shipment
-     *
-     * @return OystProduct
-     */
-    public function addShipment(OystShipment $shipment)
-    {
-        $this->shipments[] = $shipment;
-
-        return $this;
-    }
-
-    /**
-     * @return OystSize
-     */
-    public function getSize()
-    {
-        return $this->size;
-    }
-
-    /**
-     * @param OystSize $size
-     *
-     * @return OystProduct
-     */
-    public function setSize($size)
-    {
-        $this->size = $size;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAvailableQuantity()
-    {
-        return $this->availableQuantity;
-    }
-
-    /**
-     * @param int $availableQuantity
-     *
-     * @return OystProduct
-     */
-    public function setAvailableQuantity($availableQuantity)
-    {
-        $this->availableQuantity = (int)$availableQuantity;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getWeight()
-    {
-        return $this->weight;
-    }
-
-    /**
-     * @param string $weight
-     *
-     * @return OystProduct
-     */
-    public function setWeight($weight)
-    {
-        $this->weight = (string)$weight;
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isDiscounted()
-    {
-        return $this->discounted;
-    }
-
-    /**
-     * @param bool $discounted
-     *
-     * @return OystProduct
-     */
-    public function setDiscounted($discounted)
-    {
-        $this->discounted = (bool)$discounted;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEan()
-    {
-        return $this->ean;
-    }
-
-    /**
-     * @param string $ean
-     *
-     * @return OystProduct
-     */
-    public function setEan($ean)
-    {
-        $this->ean = (string)$ean;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUpc()
-    {
-        return $this->upc;
-    }
-
-    /**
-     * @param string $upc
-     *
-     * @return OystProduct
-     */
-    public function setUpc($upc)
-    {
-        $this->upc = (string)$upc;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getIsbn()
-    {
-        return $this->isbn;
-    }
-
-    /**
-     * @param string $isbn
-     *
-     * @return OystProduct
-     */
-    public function setIsbn($isbn)
-    {
-        $this->isbn = (string)$isbn;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getImages()
-    {
-        return $this->images;
-    }
-
-    /**
-     * Array of string
-     *
-     * @param array $images
-     *
-     * @return OystProduct
-     */
-    public function setImages($images)
-    {
-        $this->images = $images;
-
-        return $this;
-    }
-
-    /**
-     * @param string $url
-     *
-     * @return OystProduct
-     */
-    public function addImage($url)
-    {
-        $this->images[] = (string)$url;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getInformation()
-    {
-        return $this->information;
-    }
-
-    /**
-     * Custom array (with named keys)
-     *
-     * @param array $information
-     *
-     * @return OystProduct
-     */
-    public function setInformation($information)
-    {
-        $this->information = $information;
-
-        return $this;
-    }
-
-    /**
-     * @param $key
+     * @param $property
      * @param $value
      *
-     * @return OystProduct
+     * @return $this
      */
-    public function addInformation($key, $value)
+    public function __set($property, $value)
     {
-        $this->information[$key] = $value;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getRelatedProducts()
-    {
-        return $this->relatedProducts;
-    }
-
-    /**
-     * @param array $relatedProducts
-     *
-     * @return OystProduct
-     */
-    public function setRelatedProducts($relatedProducts)
-    {
-        $this->relatedProducts = $relatedProducts;
-
-        return $this;
-    }
-
-    /**
-     * @param string $ref
-     *
-     * @return OystProduct
-     */
-    public function addRelatedProduct($ref)
-    {
-        $this->relatedProducts[] = (string)$ref;
-
-        return $this;
-    }
-
-    /**
-     * @return OystProduct[]
-     */
-    public function getVariations()
-    {
-        return $this->variations;
-    }
-
-    /**
-     * Array of Product
-     *
-     * @param array $variations
-     *
-     * @return OystProduct
-     */
-    public function setVariations($variations)
-    {
-        $this->variations = $variations;
-
-        return $this;
-    }
-
-    /**
-     * @param OystProduct $variation
-     *
-     * @return OystProduct
-     */
-    public function addVariation(OystProduct $variation)
-    {
-        $this->variations[] = $variation;
+        $this->$property = $value;
 
         return $this;
     }
@@ -803,15 +241,17 @@ class OystProduct implements OystArrayInterface
         $oystCollectionHelper = new OystCollectionHelper();
 
         $product = array(
-            'reference' => $this->ref,
+            'reference' => $this->reference,
+            'title' => $this->title,
+            'amount_including_taxes' => $this->amountIncludingTax ? $this->amountIncludingTax->toArray() : array(),
+            'quantity' => $this->quantity,
+
             'is_active' => $this->active,
             'is_materialized' => $this->materialized,
-            'title' => $this->title,
             'condition' => $this->condition,
             'short_description' => $this->shortDescription,
             'description' => $this->description,
             'tags' => $this->tags,
-            'amount_including_taxes' => $this->amountIncludingTax ? $this->amountIncludingTax->toArray() : array(),
             'amount_excluding_taxes' => $this->amountExcludingTax ? $this->amountExcludingTax->toArray() : array(),
             'url' => $this->url,
             'categories' => $oystCollectionHelper->collectionToArray($this->categories),

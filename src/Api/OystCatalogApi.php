@@ -82,7 +82,7 @@ class OystCatalogApi extends AbstractOystApiClient
     public function putProduct(OystProduct $oystProduct)
     {
         $data = array(
-            'id' => $oystProduct->getRef(),
+            'id' => $oystProduct->__get('reference'),
             'product' => $oystProduct->toArray()
         );
         $response = $this->executeCommand('PutProduct', $data);
