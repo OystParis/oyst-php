@@ -1,11 +1,10 @@
 {
     "name": "API OneClick",
-    "apiVersion": "v1",
     "description": "Oyst API OneClick",
     "operations": {
         "AuthorizeOrder": {
             "httpMethod": "POST",
-            "uri": "orders/authorize",
+            "uri": "v1/orders/authorize",
             "summary": "Check if an order can be processed",
             "parameters": {
                 "product_reference": {
@@ -61,6 +60,50 @@
                     "location": "json",
                     "type": "object",
                     "description": "A bunch of notifications",
+                    "required": false
+                }
+            }
+        },
+        "AuthorizeOrderV2": {
+            "httpMethod": "POST",
+            "uri": "v2/orders/authorize",
+            "summary": "Check if an order can be processed",
+            "parameters": {
+                "context": {
+                    "location": "json",
+                    "type": "object",
+                    "description": "Contextual elements about the order",
+                    "required": false
+                },
+                "customization": {
+                    "location": "json",
+                    "type": "object",
+                    "description": "Customize a CTA post order",
+                    "required": false
+                },
+                "notifications": {
+                    "location": "json",
+                    "type": "object",
+                    "description": "A bunch of notifications",
+                    "required": false
+                },
+                "order_params": {
+                    "location": "json",
+                    "type": "object",
+                    "sentAs": "order",
+                    "description": "The order params",
+                    "required": false
+                },
+                "products": {
+                    "location": "json",
+                    "type": "array",
+                    "description": "An array of product",
+                    "required": true
+                },
+                "user": {
+                    "location": "json",
+                    "type": "object",
+                    "description": "The user who ordered the product",
                     "required": false
                 }
             }

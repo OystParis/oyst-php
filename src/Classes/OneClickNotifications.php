@@ -13,30 +13,25 @@ namespace Oyst\Classes;
 class OneClickNotifications implements OystArrayInterface
 {
     /**
-     * @var bool
-     */
-    private $shouldAskShipments;
-
-    /**
+     * Notification url (migration of notification passed in headers)
      * @var string
      */
-    private $url;
+    private $url = null;
 
     /**
-     * @return bool
+     * @var array
      */
-    public function isShouldAskShipments()
-    {
-        return $this->shouldAskShipments;
-    }
+    private $events = array();
 
     /**
-     * @param bool $shouldAskShipments
+     * @var bool
      */
-    public function setShouldAskShipments($shouldAskShipments)
-    {
-        $this->shouldAskShipments = (bool)$shouldAskShipments;
-    }
+    private $shouldAskShipments = null;
+
+    /**
+     * @var bool
+     */
+    private $shouldAskStock = null;
 
     /**
      * @return string
@@ -55,13 +50,71 @@ class OneClickNotifications implements OystArrayInterface
     }
 
     /**
+     * @return string
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * @param array $events
+     */
+    public function setEvents($events)
+    {
+        $this->events[] = $events;
+    }
+
+    /**
+     * @param array $event
+     */
+    public function addEvent($event)
+    {
+        $this->events[] = (string)$event;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShouldAskShipments()
+    {
+        return $this->shouldAskShipments;
+    }
+
+    /**
+     * @param bool $shouldAskShipments
+     */
+    public function setShouldAskShipments($shouldAskShipments)
+    {
+        $this->shouldAskShipments = (bool)$shouldAskShipments;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShouldAskStock()
+    {
+        return $this->shouldAskStock;
+    }
+
+    /**
+     * @param bool $shouldAskStock
+     */
+    public function setShouldAskStock($shouldAskStock)
+    {
+        $this->shouldAskStock = (bool)$shouldAskStock;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
     {
         $notifications = array(
-            'should_ask_shipments' => $this->shouldAskShipments,
             'url' => $this->url,
+            'events' => $this->events,
+            'should_ask_shipments' => $this->shouldAskShipments,
+            'should_ask_stock' => $this->shouldAskStock,
         );
 
         return $notifications;
