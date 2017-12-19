@@ -58,7 +58,10 @@ class OystOneClickApi extends AbstractOystApiClient
         }
 
         if (!is_null($user)) {
-            $data['user'] = $user->toArray();
+            $userArray = $user->toArray();
+            $oystCollectionHelper = new OystCollectionHelper();
+            $oystCollectionHelper->cleanData($userArray);
+            $data['user'] = $userArray;
         }
 
         if (!is_null($product)) {

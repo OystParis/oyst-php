@@ -17,7 +17,7 @@ use Oyst\Classes\ShipmentAmount;
 class OneClickShipmentFixture
 {
     /**
-     * @return OneClickShipment[]
+     * @return OneClickShipment[] $shipments
      */
     public static function getList()
     {

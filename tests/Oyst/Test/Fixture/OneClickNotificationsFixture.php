@@ -15,7 +15,7 @@ use Oyst\Classes\OneClickNotifications;
 class OneClickNotificationsFixture
 {
     /**
-     * @return OneClickNotifications
+     * @return OneClickNotifications $notifications
      */
     public static function getNotifications()
     {

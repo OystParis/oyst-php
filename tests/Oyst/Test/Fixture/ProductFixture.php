@@ -18,7 +18,7 @@ use Oyst\Classes\OystSize;
 class ProductFixture
 {
     /**
-     * @return OystProduct[]
+     * @return OystProduct[] $products
      */
     public static function getList()
     {

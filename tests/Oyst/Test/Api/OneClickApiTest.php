@@ -41,56 +41,11 @@ class OneClickApiTest extends OystApiContext
     }
 
     /**
-     * Catalog order with simple product
-     *
-     * @dataProvider fakeData
-     */
-    public function testAuthorizeOrderForCatalogOrderWithSimpleProduct($apiKey, $userAgent)
-    {
-        /** @var OystOneClickAPI $oneClickApi */
-        $oneClickApi = $this->getApi($apiKey, $userAgent);
-
-        $result = $oneClickApi->authorizeOrder('test', 42);
-        $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
-        $this->assertEquals($result['url'], 'http://localhost/success');
-    }
-
-    /**
-     * Catalog order with variation product
-     *
-     * @dataProvider fakeData
-     */
-    public function testAuthorizeOrderForCatalogOrderWithVariationProduct($apiKey, $userAgent)
-    {
-        /** @var OystOneClickAPI $oneClickApi */
-        $oneClickApi = $this->getApi($apiKey, $userAgent);
-
-        $result = $oneClickApi->authorizeOrder('test', 42, 'test');
-        $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
-        $this->assertEquals($result['url'], 'http://localhost/success');
-    }
-
-    /**
-     * Catalog order with simple product dematerialize
-     *
-     * @dataProvider fakeData
-     */
-    public function testAuthorizeOrderForCatalogOrderWithSimpleProductDematerialize($apiKey, $userAgent)
-    {
-        /** @var OystOneClickAPI $oneClickApi */
-        $oneClickApi = $this->getApi($apiKey, $userAgent);
-
-        $result = $oneClickApi->authorizeOrder('test', 42, null, null, 1, null, null);
-        $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
-        $this->assertEquals($result['url'], 'http://localhost/success');
-    }
-
-    /**
      * Catalog less order with simple product
      *
      * @dataProvider fakeData
      */
-    public function testAuthorizeOrderForCatalogLessOrderWithSimpleProduct($apiKey, $userAgent, $product)
+    public function testAuthorizeOrderWithSimpleProduct($apiKey, $userAgent, $product)
     {
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
@@ -105,7 +60,7 @@ class OneClickApiTest extends OystApiContext
      *
      * @dataProvider fakeData
      */
-    public function testAuthorizeOrderForCatalogLessOrderWithVariationProduct($apiKey, $userAgent, $product)
+    public function testAuthorizeOrderWithVariationProduct($apiKey, $userAgent, $product)
     {
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
@@ -120,7 +75,7 @@ class OneClickApiTest extends OystApiContext
      *
      * @dataProvider fakeData
      */
-    public function testAuthorizeOrderForCatalogLessOrderWithSimpleProductDematerialize($apiKey, $userAgent, $product)
+    public function testAuthorizeOrderWithSimpleProductDematerialize($apiKey, $userAgent, $product)
     {
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
@@ -135,7 +90,7 @@ class OneClickApiTest extends OystApiContext
      *
      * @dataProvider fakeData
      */
-    public function testAuthorizeOrderForCatalogLessOrderWithSimpleProductAndOrderParams($apiKey, $userAgent, $product, $oneClickOrderParams)
+    public function testAuthorizeOrderWithSimpleProductAndOrderParams($apiKey, $userAgent, $product, $oneClickOrderParams)
     {
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
@@ -150,7 +105,7 @@ class OneClickApiTest extends OystApiContext
      *
      * @dataProvider fakeData
      */
-    public function testAuthorizeOrderForCatalogLessOrderWithSimpleProductAndContext($apiKey, $userAgent, $product, $oneClickOrderContext)
+    public function testAuthorizeOrderWithSimpleProductAndContext($apiKey, $userAgent, $product, $oneClickOrderContext)
     {
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
@@ -165,12 +120,27 @@ class OneClickApiTest extends OystApiContext
      *
      * @dataProvider fakeData
      */
-    public function testAuthorizeOrderForCatalogLessOrderWithSimpleProductAndNotification($apiKey, $userAgent, $product, $oneClickOrderParams, $oneClickOrderContext, $oneClickNotifications)
+    public function testAuthorizeOrderWithSimpleProductAndNotification($apiKey, $userAgent, $product, $oneClickOrderParams, $oneClickOrderContext, $oneClickNotifications)
     {
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
 
         $result = $oneClickApi->authorizeOrder('test', 42, 'test', null, 1, $product, null, null, $oneClickNotifications);
+        $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
+        $this->assertEquals($result['url'], 'http://localhost/success');
+    }
+
+    /**
+     * Catalog less order with simple product
+     *
+     * @dataProvider fakeData
+     */
+    public function testAuthorizeOrderV2WithSimpleProduct($apiKey, $userAgent, $product, $oneClickOrderParams, $oneClickOrderContext, $oneClickNotifications, $user)
+    {
+        /** @var OystOneClickAPI $oneClickApi */
+        $oneClickApi = $this->getApi($apiKey, $userAgent);
+
+        $result = $oneClickApi->authorizeOrderv2(array($product), $oneClickNotifications, $user, $oneClickOrderParams, $oneClickOrderContext);
         $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
         $this->assertEquals($result['url'], 'http://localhost/success');
     }
