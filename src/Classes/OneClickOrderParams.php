@@ -15,22 +15,22 @@ class OneClickOrderParams implements OystArrayInterface
     /**
      * @var bool
      */
-    private $isMaterialized;
+    private $isMaterialized = null;
 
     /**
      * @var int
      */
-    private $delay;
+    private $delay = null;
 
     /**
      * @var bool
      */
-    private $manageQuantity;
+    private $manageQuantity = null;
 
     /**
      * @var bool
      */
-    private $shouldReinitBuffer;
+    private $shouldReinitBuffer = null;
 
     /**
      * @return bool

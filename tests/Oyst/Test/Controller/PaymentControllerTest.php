@@ -42,7 +42,7 @@ class PaymentControllerTest extends \PHPUnit_Framework_TestCase
         );
 
         $userFixture = new UserFixture();
-        $this->user = $userFixture->getOne();
+        $this->user = $userFixture->getOne()->toArray();
     }
 
     public function testPayment()

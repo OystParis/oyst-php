@@ -82,29 +82,29 @@ class CatalogControllerTest extends \PHPUnit_Framework_TestCase
     {
         $product = $this->products[0];
 
-        $product->setTitle('prod-001');
-        $product->setAmountIncludingTax(new OystPrice(35, 'EUR'));
-        $product->setCategories(array(new OystCategory('cat_ref_1', 'cat title 1', true)));
-        $product->setImages(array('http://localhost.local/product-001'));
+        $product->__set('title', 'prod-001');
+        $product->__set('amountIncludingTax', new OystPrice(35, 'EUR'));
+        $product->__set('categories', array(new OystCategory('cat_ref_1', 'cat title 1', true)));
+        $product->__set('images', array('http://localhost.local/product-001'));
 
         $info = array(
             'meta' => 'info misc.',
             'subtitle' => 'updated',
         );
-        $product->setAvailableQuantity(5);
-        $product->setDescription('New description');
-        $product->setEan('my_ean_001');
-        $product->setIsbn('my_isbn_001');
-        $product->setActive(true);
-        $product->setMaterialized(true);
-        $product->setInformation($info);
-        $product->setManufacturer('my manufacturer');
-        $product->addRelatedProduct('ref_related');
-        $product->setShortDescription('New short description');
-        $product->setSize(new OystSize(69, 69, 69));
-        $product->addTag('test');
-        $product->setUpc('my_upc');
-        $product->setUrl('http://localhost.local');
+        $product->__set('availableQuantity', 5);
+        $product->__set('description', 'New description');
+        $product->__set('ean', 'my_ean_001');
+        $product->__set('isbn', 'my_isbn_001');
+        $product->__set('active', true);
+        $product->__set('materialized', true);
+        $product->__set('information', $info);
+        $product->__set('manufacturer', 'my manufacturer');
+        $product->__set('relatedProducts', array('ref_related'));
+        $product->__set('shortDescription', 'New short description');
+        $product->__set('size', new OystSize(69, 69, 69));
+        $product->__set('tags', array('test'));
+        $product->__set('upc', 'my_upc');
+        $product->__set('url', 'http://localhost.local');
 
         $result = $this->catalogApi->putProduct($product);
 

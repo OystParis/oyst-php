@@ -15,16 +15,16 @@ use Oyst\Classes\OneClickOrderParams;
 class OneClickOrderParamsFixture
 {
     /**
-     * @return OneClickOrderParams
+     * @return OneClickOrderParams $orderParams
      */
     public static function getOrderParams()
     {
-        $oneClickOrderParams = new OneClickOrderParams();
-        $oneClickOrderParams->setDelay(5);
-        $oneClickOrderParams->setIsMaterialized(false);
-        $oneClickOrderParams->setManageQuantity(false);
-        $oneClickOrderParams->setShouldReinitBuffer(true);
+        $orderParams = new OneClickOrderParams();
+        $orderParams->setDelay(5);
+        $orderParams->setIsMaterialized(false);
+        $orderParams->setManageQuantity(false);
+        $orderParams->setShouldReinitBuffer(true);
 
-        return $oneClickOrderParams;
+        return $orderParams;
     }
 }

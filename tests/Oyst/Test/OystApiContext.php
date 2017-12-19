@@ -12,6 +12,7 @@ use Oyst\Test\Fixture\OneClickNotificationsFixture;
 use Oyst\Test\Fixture\OneClickOrderContextFixture;
 use Oyst\Test\Fixture\OneClickOrderParamsFixture;
 use Oyst\Test\Fixture\ProductFixture;
+use Oyst\Test\Fixture\UserFixture;
 
 /**
  * Class OystApiContext
@@ -44,8 +45,11 @@ abstract class OystApiContext extends \PHPUnit_Framework_TestCase
         $oneClickNotificationsFixture = new OneClickNotificationsFixture();
         $oneClickNotifications = $oneClickNotificationsFixture->getNotifications();
 
+        $userFixture = new UserFixture();
+        $user = $userFixture->getOne();
+
         return array(
-            array('api_key', $userAgent, $product, $oneClickOrderParams, $oneClickOrderContext, $oneClickNotifications)
+            array('api_key', $userAgent, $product, $oneClickOrderParams, $oneClickOrderContext, $oneClickNotifications, $user)
         );
     }
 

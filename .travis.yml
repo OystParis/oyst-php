@@ -40,7 +40,7 @@ script:
   ## PHPLOC
   - vendor/bin/phploc $TRAVIS_BUILD_DIR --exclude vendor
   ## LINT
-  - find $TRAVIS_BUILD_DIR/src $TRAVIS_BUILD_DIR/tests -type f -name \*.php -exec php -l {} \;
+  - '! find $TRAVIS_BUILD_DIR/src $TRAVIS_BUILD_DIR/tests -type f -name \*.php -exec php -l {} \; 2>&1 >&- | grep "^"'
   ## PHPCompatibility
   - rm -Rf vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/PHPCompatibility &&
     cp -a vendor/wimg/php-compatibility vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/PHPCompatibility &&

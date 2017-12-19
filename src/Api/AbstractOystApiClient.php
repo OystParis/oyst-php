@@ -80,6 +80,8 @@ abstract class AbstractOystApiClient
      */
     protected function executeCommand($commandName, $params = array())
     {
+        // Uncomment bellow line to see output
+        //file_put_contents('/tmp/oyst-php.log', json_encode($params));
         $this->response = null;
 
         try {
