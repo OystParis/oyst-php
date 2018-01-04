@@ -33,7 +33,7 @@ class OystPaymentApi extends AbstractOystApiClient
             'order_id' => (string)$cartId,
             'is_3d' => $is3d,
             'amount' => array(
-                'value' => (float)$amount,
+                'value' => (int)$amount,
                 'currency' => (string)$currency,
             ),
             'notification_url' => $urls['notification'],
