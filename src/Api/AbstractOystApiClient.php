@@ -168,7 +168,10 @@ abstract class AbstractOystApiClient
 
     /**
      * @param string $notifyUrl
+     *
      * @return AbstractOystApiClient
+     *
+     * @deprecated since version v2.0.0, to be removed in 3.0. Use OneClickNotifications->setUrl();
      */
     public function setNotifyUrl($notifyUrl)
     {

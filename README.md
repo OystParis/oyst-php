@@ -1,10 +1,10 @@
 # Oyst PHP API Wrapper
 
 [![Build Status](https://travis-ci.org/oystparis/oyst-php.svg?branch=master)](https://travis-ci.org/oystparis/oyst-php)
-[![Latest Stable Version](https://img.shields.io/badge/latest-2.0.1-green.svg)](https://github.com/oystparis/oyst-php/releases)
+[![Latest Stable Version](https://img.shields.io/badge/latest-3.0.0-green.svg)](https://github.com/oystparis/oyst-php/releases)
 [![PHP >= 5.3](https://img.shields.io/badge/php-%3E=5.3-green.svg)](#)
 
-You can sign up for an Oyst account at https://admin.free-pay.com.
+You can sign up for an Oyst account at https://backoffice.oyst.com.
 
 ## Installation
 
@@ -38,26 +38,21 @@ require_once('vendor/autoload.php');
 
 Simple usage looks like:
 ```php
-$userAgent = new \Oyst\Classes\OystUserAgent('MY_WEBSITE_NAME', 'MY_PACKAGE_VERSION', 'MY_PLATFORM_VERSION', 'PHP', phpversion());
+$userAgent = new \Oyst\Classes\OystUserAgent('MY_WEBSITE_NAME', 'MY_PACKAGE_VERSION', 'MY_PLATFORM_VERSION');
 $oystClient = new \Oyst\Api\OystApiClientFactory::getClient('oneclick', 'eFcaDouev63YVsJ3wM2ovY7ewCwrQMLHaw4tWHxXQT7cmErWKkZU4pTRt6npwb8p', $userAgent);
-$oystClient->setNotifyUrl('https://1click-demo.sandbox.oyst.eu/notification.php');
+
+$notification = new \Oyst\Classes\OneClickNotifications();
+$notification->setUrl('https://1click-demo.sandbox.oyst.eu/notification.php');
 
 // 1-click order
-$product = '{
-  "products":[{
-      "amount_including_taxes":{
-        "value":100,
-        "currency":"EUR"
-      },
-      "images":[
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Rubik%27s_cube.svg/langfr-480px-Rubik%27s_cube.svg.png"
-      ],
-      "reference":"rubikscube",
-      "title":"Rubiks Cube 3x3"
-    }]
-}';
+$oystProduct = new \Oyst\Classes\OystProduct();
+$oystProduct->__set('reference', 'rubikscube');
+$oystProduct->__set('title', 'Rubiks Cube 3x3');
+$price = new \Oyst\Classes\OystPrice(42, 'EUR');
+$oystProduct->__set('amountIncludingTax', $price);
+$oystProduct->__set('quantity', 1);
 
-$oystClient->authorizeOrder('rubikscube', 1, null, null, 1, $product);
+$oystClient->authorizeOrderV2(array($oystProduct), $notification);
 ```
 
 ## User guide
