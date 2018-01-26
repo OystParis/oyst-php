@@ -23,14 +23,22 @@ class OneClickShipmentCatalogLess implements OystArrayInterface
     private $delay;
 
     /**
+     * @var OystCarrier Details about carrier
+     */
+    private $carrier;
+
+    /**
      * @var bool Define if shipping mode is primary
      */
     private $primary;
 
-    /**
-     * @var OystCarrier Details about carrier
-     */
-    private $carrier;
+    public function __construct($amount, $delay, $carrier, $primary = false)
+    {
+        $this->amount = $amount;
+        $this->delay = $delay;
+        $this->carrier = $carrier;
+        $this->primary = $primary;
+    }
 
     /**
      * @return OystPrice
@@ -67,22 +75,6 @@ class OneClickShipmentCatalogLess implements OystArrayInterface
     }
 
     /**
-     * @return bool
-     */
-    public function isPrimary()
-    {
-        return $this->primary;
-    }
-
-    /**
-     * @param bool $primary
-     */
-    public function setPrimary($primary)
-    {
-        $this->primary = (bool)$primary;
-    }
-
-    /**
      * @return OystCarrier
      */
     public function getCarrier()
@@ -96,6 +88,22 @@ class OneClickShipmentCatalogLess implements OystArrayInterface
     public function setCarrier(OystCarrier $carrier)
     {
         $this->carrier = $carrier;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPrimary()
+    {
+        return $this->primary;
+    }
+
+    /**
+     * @param bool $primary
+     */
+    public function setPrimary($primary)
+    {
+        $this->primary = (bool)$primary;
     }
 
     /**

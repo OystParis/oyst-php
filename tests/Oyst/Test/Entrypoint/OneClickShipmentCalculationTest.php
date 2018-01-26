@@ -30,12 +30,12 @@ class OneClickShipmentCalculationTest extends \PHPUnit_Framework_TestCase
             '{"shipments":[{"amount":{"value":490,"currency":"EUR"},"delay":48,"primary":true,"carrier":{"id":"colissimo","name":"Colissimo","type":"home_delivery"}}]}'
         );
 
-        $colissimo = new OneClickShipmentCatalogLess();
-        $colissimo->setAmount(new OystPrice(4.90, 'EUR'));
-        $colissimo->setPrimary(true);
-        $colissimo->setDelay(48);
-        $colissimo->setCarrier(new OystCarrier('colissimo', 'Colissimo', 'home_delivery'));
-
+        $colissimo = new OneClickShipmentCatalogLess(
+            new OystPrice(4.90, 'EUR'),
+            48,
+            new OystCarrier('colissimo', 'Colissimo', 'home_delivery'),
+            true
+        );
         $shipments[] = $colissimo;
 
         $oneClickShipmentCalculation = new OneClickShipmentCalculation($shipments);
@@ -57,11 +57,12 @@ class OneClickShipmentCalculationTest extends \PHPUnit_Framework_TestCase
             '{"shipments":[{"amount":{"value":490,"currency":"EUR"},"delay":48,"primary":true,"carrier":{"id":"colissimo","name":"Colissimo","type":"home_delivery"}}],"items":[{"reference":"33245342","quantity":1,"amount":{"original":{"value":3800,"currency":"EUR"},"promotional":{"value":3000,"currency":"EUR"}}}],"order_amount":{"value":3490,"currency":"EUR"}}'
         );
 
-        $colissimo = new OneClickShipmentCatalogLess();
-        $colissimo->setAmount(new OystPrice(4.90, 'EUR'));
-        $colissimo->setPrimary(true);
-        $colissimo->setDelay(48);
-        $colissimo->setCarrier(new OystCarrier('colissimo', 'Colissimo', 'home_delivery'));
+        $colissimo = new OneClickShipmentCatalogLess(
+            new OystPrice(4.90, 'EUR'),
+            48,
+            new OystCarrier('colissimo', 'Colissimo', 'home_delivery'),
+            true
+        );
 
         $shipments[] = $colissimo;
 
@@ -91,11 +92,12 @@ class OneClickShipmentCalculationTest extends \PHPUnit_Framework_TestCase
             '{"shipments":[{"amount":{"value":490,"currency":"EUR"},"delay":48,"primary":true,"carrier":{"id":"colissimo","name":"Colissimo","type":"home_delivery"}}],"items":[{"reference":"33245342","quantity":1,"amount":{"original":{"value":3800,"currency":"EUR"},"promotional":{"value":3000,"currency":"EUR"}}}],"order_amount":{"value":3490,"currency":"EUR"}}'
         );
 
-        $colissimo = new OneClickShipmentCatalogLess();
-        $colissimo->setAmount(new OystPrice(4.90, 'EUR'));
-        $colissimo->setPrimary(false);
-        $colissimo->setDelay(48);
-        $colissimo->setCarrier(new OystCarrier('colissimo', 'Colissimo', 'home_delivery'));
+        $colissimo = new OneClickShipmentCatalogLess(
+            new OystPrice(4.90, 'EUR'),
+            48,
+            new OystCarrier('colissimo', 'Colissimo', 'home_delivery'),
+            true
+        );
 
         $shipments[] = $colissimo;
 
