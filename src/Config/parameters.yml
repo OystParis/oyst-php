@@ -1,7 +1,7 @@
 api:
     env:
         prod: https://api.oyst.com
-        preprod: https://api.staging.oyst.eu
+        sandbox: https://api.sandbox.oyst.eu
     path:
         catalog: /catalog
         order: /order
