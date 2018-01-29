@@ -4,6 +4,7 @@ namespace Oyst\Api;
 
 use Oyst\Classes\Enum\AbstractOrderState;
 use Oyst\Classes\OystOrder;
+use Oyst\Classes\OystPrice;
 use Oyst\Helper\OystCollectionHelper;
 
 /**
@@ -57,6 +58,7 @@ class OystOrderApi extends AbstractOystApiClient
     /**
      * @param $orderId
      * @param $status
+     *
      * @return mixed
      */
     public function updateStatus($orderId, $status)
@@ -72,6 +74,7 @@ class OystOrderApi extends AbstractOystApiClient
 
     /**
      * @param $orderId
+     *
      * @return mixed
      */
     public function deny($orderId)
@@ -81,6 +84,7 @@ class OystOrderApi extends AbstractOystApiClient
 
     /**
      * @param $orderId
+     *
      * @return mixed
      */
     public function accept($orderId)
@@ -90,6 +94,7 @@ class OystOrderApi extends AbstractOystApiClient
 
     /**
      * @param $orderId
+     *
      * @return mixed
      */
     public function pending($orderId)
@@ -99,10 +104,34 @@ class OystOrderApi extends AbstractOystApiClient
 
     /**
      * @param $orderId
+     *
      * @return mixed
      */
     public function shipped($orderId)
     {
         return $this->updateStatus($orderId, AbstractOrderState::SHIPPED);
+    }
+
+    /**
+     * Refund an order
+     *
+     * @param string $orderId
+     * @param OystPrice|null $price If $price is null then the refund is total
+     *
+     * @return mixed
+     */
+    public function refunds($orderId, OystPrice $price = null)
+    {
+        $data = array(
+            'id' => $orderId,
+        );
+
+        if (!is_null($price)) {
+            $data['amount'] = $price->toArray();
+        }
+
+        $response = $this->executeCommand('Refunds', $data);
+
+        return $response;
     }
 }
