@@ -53,6 +53,34 @@
                     "required": true
                 }
             }
+        },
+        "Refunds": {
+            "httpMethod": "POST",
+            "uri": "orders/{id}/refunds",
+            "summary": "Refund a payment",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "type": "string",
+                    "description": "The order id",
+                    "required": true
+                },
+                "amount": {
+                    "type": "object",
+                    "location": "json",
+                    "additionalProperties": false,
+                    "properties": {
+                        "value": {
+                            "type": "integer",
+                            "sentAs": "value"
+                        },
+                        "currency": {
+                            "type": "string",
+                            "sentAs": "currency"
+                        }
+                    }
+                }
+            }
         }
     },
     "models": {
