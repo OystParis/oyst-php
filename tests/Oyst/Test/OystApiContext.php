@@ -31,7 +31,7 @@ abstract class OystApiContext extends \PHPUnit_Framework_TestCase
      */
     public function fakeData()
     {
-        $userAgent = new OystUserAgent('test', '', '', 'php', phpversion());
+        $userAgent = new OystUserAgent('test', '', '');
 
         $productFixture = new ProductFixture();
         $product = $productFixture->getOneClickOrder();

@@ -53,7 +53,7 @@ class OystApiClientFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function clientDataOk()
     {
-        $userAgent = new OystUserAgent('user_agent', '', '', 'php', phpversion());
+        $userAgent = new OystUserAgent('user_agent', '', '');
 
         return array(
             array('Oyst\Api\OystCatalogApi', 'catalog', 'api_key', $userAgent, null, 'https://localhost'),
@@ -74,7 +74,7 @@ class OystApiClientFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function clientDataException()
     {
-        $userAgent = new OystUserAgent('user_agent', '', '', 'php', phpversion());
+        $userAgent = new OystUserAgent('user_agent', '', '');
 
         return array(
             array('unknown_entity', 'api_key', $userAgent, null, 'https://localhost')

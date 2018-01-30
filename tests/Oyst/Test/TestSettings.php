@@ -52,7 +52,7 @@ class TestSettings
         $this->apiKey = ($apiKey = getenv('API_KEY')) ? $apiKey : $this->apiKey;
         $this->env = ($env = getenv('API_ENV')) ? $env : $this->env;
         $userAgent = ($userAgentEnv = getenv('API_USER_AGENT')) ? $userAgentEnv : $userAgent;
-        $this->userAgent = new OystUserAgent($userAgent, '', '', 'php', phpversion());
+        $this->userAgent = new OystUserAgent($userAgent, '', '');
         $this->orderId = ($orderId = getenv('API_ORDER_ID')) ? $orderId : $this->orderId;
     }
 
