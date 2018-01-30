@@ -29,20 +29,20 @@ class OystApiClientFactory
     const ENTITY_PAYMENT = 'payment';
     const ENTITY_ONECLICK = 'oneclick';
 
+    const ENV_SANDBOX = 'sandbox';
     const ENV_PROD = 'prod';
-    const ENV_PREPROD = 'preprod';
     const ENV_CUSTOM = 'custom';
 
     /**
-     * Gets the current version string
+     * Get the current version string
      *
      * @return string
      */
     public static function getVersion()
     {
-        $ver = self::$version;
+        $version = self::$version;
 
-        return trim("{$ver['major']}.{$ver['minor']}.{$ver['patch']}");
+        return trim("{$version['major']}.{$version['minor']}.{$version['patch']}");
     }
 
     /**
@@ -150,5 +150,19 @@ class OystApiClientFactory
         $description = $serviceDescription->factory($configurationFile);
 
         return $description;
+    }
+
+    /**
+     * Server environments
+     *
+     * @return array
+     */
+    public static function getEnvironments()
+    {
+        return array(
+            self::ENV_SANDBOX,
+            self::ENV_PROD,
+            self::ENV_CUSTOM,
+        );
     }
 }
