@@ -1,7 +1,7 @@
 # Oyst PHP API Wrapper
 
 [![Build Status](https://travis-ci.org/oystparis/oyst-php.svg?branch=master)](https://travis-ci.org/oystparis/oyst-php)
-[![Latest Stable Version](https://img.shields.io/badge/latest-3.0.0-green.svg)](https://github.com/oystparis/oyst-php/releases)
+[![Latest Stable Version](https://img.shields.io/badge/latest-3.1.0-green.svg)](https://github.com/oystparis/oyst-php/releases)
 [![PHP >= 5.3](https://img.shields.io/badge/php-%3E=5.3-green.svg)](#)
 
 You can sign up for an Oyst account at https://backoffice.oyst.com.
