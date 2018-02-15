@@ -33,6 +33,11 @@ class OneClickOrderParams implements OystArrayInterface
     private $shouldReinitBuffer = null;
 
     /**
+     * @var bool
+     */
+    private $isCheckoutCart = false;
+
+    /**
      * @return bool
      */
     public function isMaterialized()
@@ -109,6 +114,24 @@ class OneClickOrderParams implements OystArrayInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isCheckoutCart()
+    {
+        return $this->isCheckoutCart;
+    }
+
+    /**
+     * Is order cart checkout
+     *
+     * @param bool $isCheckoutCart
+     */
+    public function setIsCheckoutCart($isCheckoutCart)
+    {
+        $this->isCheckoutCart = (bool)$isCheckoutCart;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
@@ -118,6 +141,7 @@ class OneClickOrderParams implements OystArrayInterface
             'delay' => $this->delay,
             'manage_quantity' => $this->manageQuantity,
             'should_reinit_buffer' => $this->shouldReinitBuffer,
+            'is_cart_checkout' => $this->isCheckoutCart,
         );
 
         return $orderParams;

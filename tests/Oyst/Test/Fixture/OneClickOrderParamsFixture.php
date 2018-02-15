@@ -24,6 +24,7 @@ class OneClickOrderParamsFixture
         $orderParams->setIsMaterialized(false);
         $orderParams->setManageQuantity(false);
         $orderParams->setShouldReinitBuffer(true);
+        $orderParams->setIsCheckoutCart(false);
 
         return $orderParams;
     }
