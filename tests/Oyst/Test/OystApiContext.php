@@ -49,7 +49,15 @@ abstract class OystApiContext extends \PHPUnit_Framework_TestCase
         $user = $userFixture->getOne();
 
         return array(
-            array('api_key', $userAgent, $product, $oneClickOrderParams, $oneClickOrderContext, $oneClickNotifications, $user)
+            array(
+                'api_key',
+                $userAgent,
+                $product,
+                $oneClickOrderParams,
+                $oneClickOrderContext,
+                $oneClickNotifications,
+                $user
+            )
         );
     }
 

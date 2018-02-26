@@ -50,7 +50,14 @@ class OneClickApiTest extends OystApiContext
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
 
-        $result = $oneClickApi->authorizeOrder('test', 42, null, null, 1, $product);
+        $result = $oneClickApi->authorizeOrder(
+            'test',
+            42,
+            null,
+            null,
+            1,
+            $product
+        );
         $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
         $this->assertEquals($result['url'], 'http://localhost/success');
     }
@@ -65,7 +72,14 @@ class OneClickApiTest extends OystApiContext
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
 
-        $result = $oneClickApi->authorizeOrder('test', 42, 'test', null, 1, $product);
+        $result = $oneClickApi->authorizeOrder(
+            'test',
+            42,
+            'test',
+            null,
+            1,
+            $product
+        );
         $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
         $this->assertEquals($result['url'], 'http://localhost/success');
     }
@@ -80,7 +94,15 @@ class OneClickApiTest extends OystApiContext
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
 
-        $result = $oneClickApi->authorizeOrder('test', 42, 'test', null, 1, $product, null);
+        $result = $oneClickApi->authorizeOrder(
+            'test',
+            42,
+            'test',
+            null,
+            1,
+            $product,
+            null
+        );
         $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
         $this->assertEquals($result['url'], 'http://localhost/success');
     }
@@ -95,7 +117,15 @@ class OneClickApiTest extends OystApiContext
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
 
-        $result = $oneClickApi->authorizeOrder('test', 42, 'test', null, 1, $product, $oneClickOrderParams);
+        $result = $oneClickApi->authorizeOrder(
+            'test',
+            42,
+            'test',
+            null,
+            1,
+            $product,
+            $oneClickOrderParams
+        );
         $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
         $this->assertEquals($result['url'], 'http://localhost/success');
     }
@@ -110,7 +140,16 @@ class OneClickApiTest extends OystApiContext
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
 
-        $result = $oneClickApi->authorizeOrder('test', 42, 'test', null, 1, $product, null, $oneClickOrderContext);
+        $result = $oneClickApi->authorizeOrder(
+            'test',
+            42,
+            'test',
+            null,
+            1,
+            $product,
+            null,
+            $oneClickOrderContext
+        );
         $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
         $this->assertEquals($result['url'], 'http://localhost/success');
     }
@@ -125,7 +164,17 @@ class OneClickApiTest extends OystApiContext
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
 
-        $result = $oneClickApi->authorizeOrder('test', 42, 'test', null, 1, $product, null, null, $oneClickNotifications);
+        $result = $oneClickApi->authorizeOrder(
+            'test',
+            42,
+            'test',
+            null,
+            1,
+            $product,
+            null,
+            null,
+            $oneClickNotifications
+        );
         $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
         $this->assertEquals($result['url'], 'http://localhost/success');
     }
@@ -140,7 +189,13 @@ class OneClickApiTest extends OystApiContext
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
 
-        $result = $oneClickApi->authorizeOrderv2(array($product), $oneClickNotifications, $user, $oneClickOrderParams, $oneClickOrderContext);
+        $result = $oneClickApi->authorizeOrderv2(
+            array($product),
+            $oneClickNotifications,
+            $user,
+            $oneClickOrderParams,
+            $oneClickOrderContext
+        );
         $this->assertEquals($oneClickApi->getLastHttpCode(), 200);
         $this->assertEquals($result['url'], 'http://localhost/success');
     }

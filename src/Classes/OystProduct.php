@@ -43,175 +43,16 @@ class OystProduct implements OystArrayInterface
     private $quantity;
 
 
-    /**
-     * Optional
-     *
-     * @var bool
-     */
-    private $active;
-
-    /**
-     * Optional
-     *
-     * @var bool
-     */
-    private $materialized;
-
-    /**
-     * Optional
-     *
-     * @var string
-     */
-    private $condition;
-
-    /**
-     * Optional
-     *
-     * @var string
-     */
-    private $shortDescription;
-
-    /**
-     * Optional
-     *
-     * @var string
-     */
-    private $description;
-
-    /**
-     * Optional
-     *
-     * @var array
-     */
-    private $tags;
-
-    /**
-     * Optional
-     *
-     * @var OystPrice
-     */
-    private $amountExcludingTax;
-
-    /**
-     * Optional
-     *
-     * @var string
-     */
-    private $url;
-
-    /**
-     * Optional
-     *
-     * @var OystCategory[]
-     */
-    private $categories;
-
-    /**
-     * Optional
-     *
-     * @var string
-     */
-    private $manufacturer;
-
-    /**
-     * Optional
-     *
-     * @var OystShipment[]
-     */
-    private $shipments;
-
-    /**
-     * Optional
-     *
-     * @var OystSize
-     */
-    private $size;
-
-    /**
-     * Optional
-     *
-     * @var int
-     */
-    private $availableQuantity;
-
-    /**
-     * Optional
-     *
-     * @var string
-     */
-    private $weight;
-
-    /**
-     * Optional
-     *
-     * @var bool
-     */
-    private $discounted;
-
-    /**
-     * Optional
-     *
-     * @var string
-     */
-    private $ean;
-
-    /**
-     * Optional
-     *
-     * @var string
-     */
-    private $upc;
-
-    /**
-     * Optional
-     *
-     * @var string
-     */
-    private $isbn;
-
-    /**
-     * Optional
-     *
-     * @var array
-     */
-    private $images;
-
-    /**
-     * Optional
-     *
-     * @var array
-     */
-    private $information;
-
-    /**
-     * Optional
-     *
-     * @var array
-     */
-    private $relatedProducts;
-
-    /**
-     * Optional
-     *
-     * @var array
-     */
-    private $variations;
-
-    public function __construct()
+    public function __construct($reference, $title, OystPrice $amountIncludingTax, $quantity)
     {
-        $this->condition = null;
-        $this->discounted = false;
-        $this->categories = array();
-        $this->shipments = array();
-        $this->tags = array();
-        $this->images = array();
-        $this->relatedProducts = array();
-        $this->variations = array();
-        $this->information = array();
+        $this->reference = (string)$reference;
+        $this->title = (string)$title;
+        $this->amountIncludingTax = $amountIncludingTax;
+        $this->quantity = (int)$quantity;
     }
 
     /**
-     * @param $property
+     * @param string $property
      *
      * @return mixed
      */
@@ -221,8 +62,8 @@ class OystProduct implements OystArrayInterface
     }
 
     /**
-     * @param $property
-     * @param $value
+     * @param string $property
+     * @param array|bool|int|string $value
      *
      * @return $this
      */
@@ -238,37 +79,20 @@ class OystProduct implements OystArrayInterface
      */
     public function toArray()
     {
-        $oystCollectionHelper = new OystCollectionHelper();
-
         $product = array(
             'reference' => $this->reference,
             'title' => $this->title,
-            'amount_including_taxes' => $this->amountIncludingTax ? $this->amountIncludingTax->toArray() : array(),
+            'amount_including_taxes' => $this->amountIncludingTax->toArray(),
             'quantity' => $this->quantity,
-
-            'is_active' => $this->active,
-            'is_materialized' => $this->materialized,
-            'condition' => $this->condition,
-            'short_description' => $this->shortDescription,
-            'description' => $this->description,
-            'tags' => $this->tags,
-            'amount_excluding_taxes' => $this->amountExcludingTax ? $this->amountExcludingTax->toArray() : array(),
-            'url' => $this->url,
-            'categories' => $oystCollectionHelper->collectionToArray($this->categories),
-            'manufacturer' => $this->manufacturer,
-            'shipments' => $oystCollectionHelper->collectionToArray($this->shipments),
-            'size' => $this->size ? $this->size->toArray() : array(),
-            'available_quantity' => $this->availableQuantity,
-            'weight' => $this->weight,
-            'is_discounted' => $this->discounted,
-            'ean' => $this->ean,
-            'upc' => $this->upc,
-            'isbn' => $this->isbn,
-            'images' => $this->images,
-            'informations' => $this->information ?: new \stdClass(),
-            'related_products' => $this->relatedProducts,
-            'variations' => $oystCollectionHelper->collectionToArray($this->variations),
         );
+
+        foreach (get_object_vars($this) as $property => $value) {
+            if (in_array($property, array('reference', 'title', 'amountIncludingTax', 'quantity',))) {
+                continue;
+            }
+
+            $product[$property] = $value;
+        }
 
         return $product;
     }

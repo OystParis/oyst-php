@@ -5,13 +5,10 @@ namespace Oyst\Test\Api;
 use Guzzle\Http\Message\Response;
 use Oyst\Api\OystApiClientFactory;
 use Oyst\Api\OystCatalogApi;
-use Oyst\Classes\OneClickShipment;
-use Oyst\Classes\OystCarrier;
 use Oyst\Classes\OystCategory;
 use Oyst\Classes\OystPrice;
 use Oyst\Classes\OystProduct;
 use Oyst\Classes\OystSize;
-use Oyst\Classes\ShipmentAmount;
 use Oyst\Test\Fixture\OneClickShipmentFixture;
 use Oyst\Test\OystApiContext;
 
@@ -53,13 +50,11 @@ class OystCatalogApiTest extends OystApiContext
         $catalogApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
 
         $products = array();
-        $product = new OystProduct();
-        $product->__set('reference', 'sku1');
-        $product->__set('title', 'my title');
-        $product->__set('amountIncludingTax', new OystPrice(42, 'EUR'));
-        $product->__set('quantity', 1);
+        $price = new OystPrice(42, 'EUR');
+        $product = new OystProduct('sku1', 'my title', $price, 1);
 
-        $product->__set('categories', array(new OystCategory('cat_ref_1', 'cat title 1', true)));
+        $category = new OystCategory('cat_ref_1', 'cat title 1', true);
+        $product->__set('categories', array($category->toArray()));
         $product->__set('images', array('http://localhost'));
         $info = array(
             'meta' => 'info en vrac',
@@ -75,19 +70,18 @@ class OystCatalogApiTest extends OystApiContext
         $product->__set('manufacturer', 'my manufacturer');
         $product->__set('relatedProducts', array('ref_related'));
         $product->__set('shortDescription', 'short description');
-        $product->__set('size', new OystSize(42, 42, 42));
+        $size = new OystSize(42, 42, 42);
+        $product->__set('size', $size->toArray());
         $product->__set('tags', array('test'));
         $product->__set('upc', 'my_upc');
         $product->__set('url', 'http://localhost');
         $products[] = $product;
 
-        $product = new OystProduct();
-        $product->__set('reference', 'sku2');
-        $product->__set('title', 'my title');
-        $product->__set('amountIncludingTax', new OystPrice(1337, 'EUR'));
-        $product->__set('quantity', 2);
+        $price = new OystPrice(1337, 'EUR');
+        $product = new OystProduct('sku2', 'my title', $price, 2);
 
-        $product->__set('categories', array(new OystCategory('cat_ref_2', 'cat title_2', true)));
+        $category2 = new OystCategory('cat_ref_2', 'cat title_2', true);
+        $product->__set('categories', array($category2->toArray()));
         $product->__set('images', array('http://localhost'));
 
         $products[] = $product;

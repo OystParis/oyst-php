@@ -4,13 +4,10 @@ namespace Oyst\Test\Controller;
 
 use Oyst\Api\OystApiClientFactory;
 use Oyst\Api\OystCatalogApi;
-use Oyst\Classes\OneClickShipment;
-use Oyst\Classes\OystCarrier;
 use Oyst\Classes\OystCategory;
 use Oyst\Classes\OystPrice;
 use Oyst\Classes\OystProduct;
 use Oyst\Classes\OystSize;
-use Oyst\Classes\ShipmentAmount;
 use Oyst\Test\Fixture\OneClickShipmentFixture;
 use Oyst\Test\Fixture\ProductFixture;
 use Oyst\Test\TestSettings;
@@ -84,14 +81,15 @@ class CatalogControllerTest extends \PHPUnit_Framework_TestCase
 
         $product->__set('title', 'prod-001');
         $product->__set('amountIncludingTax', new OystPrice(35, 'EUR'));
-        $product->__set('categories', array(new OystCategory('cat_ref_1', 'cat title 1', true)));
+        $category = new OystCategory('cat_ref_1', 'cat title 1', true);
+        $product->__set('categories', array($category->toArray()));
         $product->__set('images', array('http://localhost.local/product-001'));
 
         $info = array(
             'meta' => 'info misc.',
             'subtitle' => 'updated',
         );
-        $product->__set('availableQuantity', 5);
+        $product->__set('available_quantity', 5);
         $product->__set('description', 'New description');
         $product->__set('ean', 'my_ean_001');
         $product->__set('isbn', 'my_isbn_001');
@@ -99,9 +97,10 @@ class CatalogControllerTest extends \PHPUnit_Framework_TestCase
         $product->__set('materialized', true);
         $product->__set('information', $info);
         $product->__set('manufacturer', 'my manufacturer');
-        $product->__set('relatedProducts', array('ref_related'));
-        $product->__set('shortDescription', 'New short description');
-        $product->__set('size', new OystSize(69, 69, 69));
+        $product->__set('related_products', array('ref_related'));
+        $product->__set('short_description', 'New short description');
+        $size = new OystSize(69, 69, 69);
+        $product->__set('size', $size->toArray());
         $product->__set('tags', array('test'));
         $product->__set('upc', 'my_upc');
         $product->__set('url', 'http://localhost.local');
