@@ -24,13 +24,10 @@ class ProductFixture
     {
         $products = array();
 
-        $product = new OystProduct();
-        $product->__set('reference', 'prod-1');
-        $product->__set('title', 'My first product');
-        $product->__set('amountIncludingTax', new OystPrice(42, 'EUR'));
-        $product->__set('quantity', 1);
-
-        $product->__set('categories', array(new OystCategory('cat_ref-1', 'cat title 1', true)));
+        $price = new OystPrice(42, 'EUR');
+        $product = new OystProduct('prod-1', 'My first product', $price, 1);
+        $category = new OystCategory('cat_ref_1', 'cat title 1', true);
+        $product->__set('categories', array($category->toArray()));
         $product->__set('images', array('http://localhost.local/product-1'));
         $info = array(
             'meta' => 'info misc.',
@@ -53,7 +50,8 @@ class ProductFixture
         $shortDescription .= 'eos. Amet mazim has id, id wisi deseruisse his. Modo liber inciderint ex his. Id natum ';
         $shortDescription .= 'laoreet detracto sed.';
         $product->__set('shortDescription', $shortDescription);
-        $product->__set('size', new OystSize(42, 42, 42));
+        $size = new OystSize(42, 42, 42);
+        $product->__set('size', $size->toArray());
         $product->__set('tags', array('test'));
         $product->__set('upc', 'my_upc');
         $product->__set('url', 'http://localhost.local');
@@ -64,7 +62,8 @@ class ProductFixture
         $product->__set('amountIncludingTax', new OystPrice(1337, 'EUR'));
         $product->__set('quantity', 2);
 
-        $product->__set('categories', array(new OystCategory('cat_ref_2', 'cat title 2', true)));
+        $category2 = new OystCategory('cat_ref_2', 'cat title 2', true);
+        $product->__set('categories', array($category2->toArray()));
         $product->__set('images', array('http://localhost.local/product-2'));
         $products[] = clone $product;
 

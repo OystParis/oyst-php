@@ -1,7 +1,7 @@
 # Oyst PHP API Wrapper
 
 [![Build Status](https://travis-ci.org/oystparis/oyst-php.svg?branch=master)](https://travis-ci.org/oystparis/oyst-php)
-[![Latest Stable Version](https://img.shields.io/badge/latest-3.1.0-green.svg)](https://github.com/oystparis/oyst-php/releases)
+[![Latest Stable Version](https://img.shields.io/badge/latest-4.0.0-green.svg)](https://github.com/oystparis/oyst-php/releases)
 [![PHP >= 5.3](https://img.shields.io/badge/php-%3E=5.3-green.svg)](#)
 
 You can sign up for an Oyst account at https://backoffice.oyst.com.
@@ -45,12 +45,8 @@ $notification = new \Oyst\Classes\OneClickNotifications();
 $notification->setUrl('https://1click-demo.sandbox.oyst.eu/notification.php');
 
 // 1-click order
-$oystProduct = new \Oyst\Classes\OystProduct();
-$oystProduct->__set('reference', 'rubikscube');
-$oystProduct->__set('title', 'Rubiks Cube 3x3');
 $price = new \Oyst\Classes\OystPrice(42, 'EUR');
-$oystProduct->__set('amountIncludingTax', $price);
-$oystProduct->__set('quantity', 1);
+$oystProduct = new \Oyst\Classes\OystProduct('rubikscube', 'Rubiks Cube 3x3', $price, 1);
 
 $oystClient->authorizeOrderV2(array($oystProduct), $notification);
 ```
@@ -71,20 +67,20 @@ This method take several parameters as:
 
 * **entityName** (constants available in `Oyst\Api\OystApiClientFactory`), could be:
     * catalog
+    * oneclick
     * order
     * payment
-    * oneclick
 
 * **apiKey**
-    * The API key is the key that was given to you by Oyst (if you don't have one you can go to the https://admin.free-pay.com and create an account).
+    * The API key is the key that was given to you by Oyst (if you don't have one you can go to the https://backoffice.oyst.com and create an account).
 
 * **userAgent**
     * To know the origin of the request (PrestaShop / Magento / WooComerce / Elsewhere...).
     You have have to instantiate a new `Oyst\Classes\OystUserAgent`, the constructor will show you needed info, and pass it to `getClient`.
 
 * **environment** (Optional, by default prod ; constants available in `Oyst\Api\OystApiClientFactory`), takes two values:
+    * sandbox
     * prod
-    * preprod
 
 * **url** (Optional)
     * The custom URL with which the APIs are to be called (if you don't want to use the default one set for the environment)
