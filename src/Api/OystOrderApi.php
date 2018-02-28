@@ -52,7 +52,7 @@ class OystOrderApi extends AbstractOystApiClient
 
         $response = $this->executeCommand('GetOrder', $data);
 
-        return isset($response['order']) ? $response['order'] : false;
+        return isset($response['order']) ? $response : false;
     }
 
     /**
