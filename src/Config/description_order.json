@@ -81,6 +81,25 @@
                     }
                 }
             }
+        },
+        "updateOrder": {
+            "httpMethod": "PATCH",
+            "uri": "orders/{id}",
+            "summary": "Update specific order with merchant order reference",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "type": "string",
+                    "description": "The order id",
+                    "required": true
+                },
+                "order_reference": {
+                    "location": "json",
+                    "type": "string",
+                    "description": "New merchant order reference",
+                    "required": true
+                }
+            }
         }
     },
     "models": {
