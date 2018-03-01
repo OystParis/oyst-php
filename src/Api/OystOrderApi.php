@@ -134,4 +134,22 @@ class OystOrderApi extends AbstractOystApiClient
 
         return $response;
     }
+
+    /**
+     * @param string $orderId
+     * @param string $merchantOrderReference
+     *
+     * @return mixed
+     */
+    public function updateOrder($orderId, $merchantOrderReference)
+    {
+        $data = array(
+            'id' => $orderId,
+            'order_reference' => $merchantOrderReference,
+        );
+
+        $response = $this->executeCommand('updateOrder', $data);
+
+        return $response;
+    }
 }

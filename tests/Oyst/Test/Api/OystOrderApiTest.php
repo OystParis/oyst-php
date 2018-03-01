@@ -105,4 +105,24 @@ class OystOrderApiTest extends OystApiContext
         $this->assertEquals($result['order']['id'], '71e98840-028b-11e8-9727-53a142d36ff7');
         $this->assertEquals($result['order']['refunds'][0]['id'], '101eeca0-051e-11e8-8910-57362bbc7dea');
     }
+
+    /**
+     * @dataProvider fakeData
+     */
+    public function testUpdateOrders($apiKey, $userAgent)
+    {
+        $json = '{
+    "order": {
+        "merchant_order_reference": "test 68"
+    }
+}';
+        $fakeResponse = new Response(200, array('Content-Type' => 'application/json'), $json);
+        $orderApi = $this->getApi($fakeResponse, $apiKey, $userAgent);
+        /** @var Model $result */
+        $result = $orderApi->updateOrder('71e98840-028b-11e8-9727-53a142d36ff7', 'test 68');
+
+        $this->assertEquals($orderApi->getLastHttpCode(), 200);
+        $this->assertTrue(is_array($result['order']));
+        $this->assertEquals($result['order']['merchant_order_reference'], 'test 68');
+    }
 }
