@@ -15,13 +15,17 @@ use Oyst\Classes\OystArrayInterface;
 class OystCollectionHelper
 {
     /**
-     * @param $collection
+     * @param array $collection
      *
      * @return array
      */
     public static function collectionToArray($collection)
     {
         $data = array();
+
+        if (is_null($collection)) {
+            return '';
+        }
 
         /** @var OystArrayInterface $element */
         foreach ($collection as $element) {

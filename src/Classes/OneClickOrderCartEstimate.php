@@ -12,19 +12,25 @@ use Oyst\Helper\OystCollectionHelper;
  * @license  Copyright 2017, Oyst
  * @link     http://www.oyst.com
  */
-class OneClickShipmentCalculation implements OystArrayInterface
+class OneClickOrderCartEstimate implements OystArrayInterface
 {
     /**
+     * Mandatory
+     *
      * @var OneClickShipmentCatalogLess[]
      */
     private $shipments;
 
     /**
+     * Optional
+     *
      * @var OneClickItem[]
      */
     private $items = array();
 
     /**
+     * Optional
+     *
      * Promotional message
      *
      * @var string
@@ -32,9 +38,25 @@ class OneClickShipmentCalculation implements OystArrayInterface
     private $message;
 
     /**
+     * Optional
+     *
      * @var OystPrice
      */
     private $orderAmount;
+
+    /**
+     * Optional
+     *
+     * @var OneClickItem[]
+     */
+    private $freeItems;
+
+    /**
+     * Optional
+     *
+     * @var OneClickMerchantDiscount
+     */
+    private $merchantDiscounts;
 
     /**
      * Constructs a OneClickShipmentCalculation instance.
@@ -57,7 +79,7 @@ class OneClickShipmentCalculation implements OystArrayInterface
     /**
      * @param OneClickShipmentCatalogLess[] $shipments
      *
-     * @return OneClickShipmentCalculation
+     * @return $this
      */
     public function setShipments($shipments)
     {
@@ -78,7 +100,7 @@ class OneClickShipmentCalculation implements OystArrayInterface
     /**
      * @param OneClickShipmentCatalogLess $shipment
      *
-     * @return OneClickShipmentCalculation
+     * @return $this
      */
     public function addShipment(OneClickShipmentCatalogLess $shipment)
     {
@@ -98,7 +120,7 @@ class OneClickShipmentCalculation implements OystArrayInterface
     /**
      * @param OneClickItem[] $items
      *
-     * @return OneClickShipmentCalculation
+     * @return $this
      */
     public function setItems($items)
     {
@@ -118,7 +140,7 @@ class OneClickShipmentCalculation implements OystArrayInterface
     /**
      * @param OneClickItem $item
      *
-     * @return OneClickShipmentCalculation
+     * @return $this
      */
     public function addItem(OneClickItem $item)
     {
@@ -138,7 +160,7 @@ class OneClickShipmentCalculation implements OystArrayInterface
     /**
      * @param string $message
      *
-     * @return OneClickShipmentCalculation
+     * @return $this
      */
     public function setMessage($message)
     {
@@ -158,11 +180,83 @@ class OneClickShipmentCalculation implements OystArrayInterface
     /**
      * @param OystPrice $orderAmount
      *
-     * @return OneClickShipmentCalculation
+     * @return $this
      */
     public function setOrderAmount(OystPrice $orderAmount)
     {
         $this->orderAmount = $orderAmount;
+
+        return $this;
+    }
+
+    /**
+     * @return OneClickItem[]
+     */
+    public function getFreeItems()
+    {
+        return $this->freeItems;
+    }
+
+    /**
+     * @param OneClickItem[] $freeItems
+     *
+     * @return $this
+     */
+    public function setFreeItems($freeItems)
+    {
+        $this->freeItems = $freeItems;
+
+        return $this;
+    }
+
+    /**
+     * @param OneClickItem $freeItems
+     *
+     * @return $this
+     */
+    public function addFreeItems(OneClickItem $freeItems)
+    {
+        $this->freeItems[] = $freeItems;
+
+        return $this;
+    }
+
+    /**
+     * @return OneClickMerchantDiscount
+     */
+    public function getMerchantDiscounts()
+    {
+        return $this->merchantDiscounts;
+    }
+
+    /**
+     * @param OneClickMerchantDiscount[] $merchantDiscounts
+     *
+     * @return $this
+     */
+    public function setMerchantDiscounts($merchantDiscounts)
+    {
+        if (!empty($merchantDiscounts)) {
+            foreach ($merchantDiscounts as $merchantDiscount) {
+                if (!$merchantDiscount instanceof OneClickMerchantDiscount) {
+                    throw new \InvalidArgumentException('$merchantDiscounts must be an array of Oyst\Classes\OneClickMerchantDiscount');
+                }
+            }
+
+            $this->merchantDiscounts = $merchantDiscounts;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param OneClickMerchantDiscount $merchantDiscount
+     *
+     * @return $this
+     */
+    public function addMerchantDiscount(OneClickMerchantDiscount $merchantDiscount)
+    {
+        $this->merchantDiscounts[] = $merchantDiscount;
 
         return $this;
     }
@@ -204,14 +298,16 @@ class OneClickShipmentCalculation implements OystArrayInterface
     {
         $oystCollectionHelper = new OystCollectionHelper();
 
-        $oneClickShipmentCalculation = array(
+        $oneClickOrderCartEstimate = array(
             'shipments' => $oystCollectionHelper->collectionToArray($this->shipments),
             'items' => $oystCollectionHelper->collectionToArray($this->items),
-            'message' => $this->message,
             'order_amount' => $this->orderAmount instanceof OystPrice ? $this->orderAmount->toArray() : array(),
+            'free_items' => $oystCollectionHelper->collectionToArray($this->freeItems),
+            'merchant_discounts' => $oystCollectionHelper->collectionToArray($this->merchantDiscounts),
+            'message' => $this->message,
         );
 
-        return $oneClickShipmentCalculation;
+        return $oneClickOrderCartEstimate;
     }
 
     /**
@@ -219,10 +315,10 @@ class OneClickShipmentCalculation implements OystArrayInterface
      */
     public function toJson($params = null)
     {
-        $oneClickShipmentCalculation = $this->toArray();
+        $oneClickOrderCartEstimate = $this->toArray();
         $oystCollectionHelper = new OystCollectionHelper();
-        $oystCollectionHelper->cleanData($oneClickShipmentCalculation);
+        $oystCollectionHelper->cleanData($oneClickOrderCartEstimate);
 
-        return json_encode($oneClickShipmentCalculation, $params);
+        return json_encode($oneClickOrderCartEstimate, $params);
     }
 }
