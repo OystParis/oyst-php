@@ -129,29 +129,37 @@ class OystOneClickApi extends AbstractOystApiClient
         if (!is_null($notifications)) {
             $notificationsArray = $notifications->toArray();
             $oystCollectionHelper->cleanData($notificationsArray);
-            $data['notifications'] = $notificationsArray;
+            if (!empty($notificationsArray)) {
+                $data['notifications'] = $notificationsArray;
+            }
         }
 
         if (!is_null($user)) {
             $userArray = $user->toArray();
             $oystCollectionHelper->cleanData($userArray);
-            $data['user'] = $userArray;
+            if (!empty($userArray)) {
+                $data['user'] = $userArray;
+            }
         }
 
         if (!is_null($orderParams)) {
             $orderParamsArray = $orderParams->toArray();
             $oystCollectionHelper->cleanData($orderParamsArray);
-            $data['order_params'] = $orderParamsArray;
+            if (!empty($orderParamsArray)) {
+                $data['order_params'] = $orderParamsArray;
+            }
         }
 
-        if (is_array($context)) {
+        if (is_array($context) && !empty($context)) {
             $data['context'] = $context;
         }
 
         if (!is_null($customization)) {
             $customizationArray = $customization->toArray();
             $oystCollectionHelper->cleanData($customizationArray);
-            $data['customization'] = $customizationArray;
+            if (!empty($customizationArray)) {
+                $data['customization'] = $customizationArray;
+            }
         }
 
         $response = $this->executeCommand('AuthorizeOrderV2', $data);
