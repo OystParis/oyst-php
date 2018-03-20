@@ -13,12 +13,22 @@ namespace Oyst\Classes;
 class OneClickItem implements OystArrayInterface
 {
     /**
+     * Mandatory
      *
      * @var string
      */
     private $reference;
 
     /**
+     * Mandatory
+     *
+     * @var OystPrice
+     */
+    private $amount;
+
+    /**
+     * Mandatory
+     *
      * @var int
      */
     private $quantity;
@@ -26,132 +36,57 @@ class OneClickItem implements OystArrayInterface
     /**
      * Optional
      *
+     * @var array
+     */
+    private $images = array();
+
+    /**
+     * Optional
+     *
+     * @var OystPrice
+     */
+    private $crossedOutAmount;
+
+    /**
+     * Optional
+     *
      * @var string
      */
-    private $message;
+    private $message = '';
 
     /**
-     * Optional
-     *
-     * @var OystPrice
-     */
-    private $amountOriginal;
-
-    /**
-     * Optional
-     *
-     * @var OystPrice
-     */
-    private $amountPromotional;
-
-    /**
-     * Constructs a OneClickItem instance.
+     * Constructs a OneClickItem instance used as item/free_items from API.
      *
      * @param string $reference
+     * @param OystPrice $amount
      * @param int $quantity
      */
-    public function __construct($reference, $quantity)
-    {
-        $this->reference = $reference;
-        $this->quantity = $quantity;
-    }
-
-    /**
-     * @return string
-     */
-    public function getReference()
-    {
-        return $this->reference;
-    }
-
-    /**
-     * @param string $reference
-     *
-     * @return OneClickItem
-     */
-    public function setReference($reference)
+    public function __construct($reference, OystPrice $amount, $quantity)
     {
         $this->reference = (string)$reference;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
-
-    /**
-     * @param int $quantity
-     *
-     * @return OneClickItem
-     */
-    public function setQuantity($quantity)
-    {
+        $this->amount = $amount;
         $this->quantity = (int)$quantity;
-
-        return $this;
     }
 
     /**
-     * @return string
-     */
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    /**
-     * @param string $message
+     * @param string $property
      *
-     * @return OneClickItem
+     * @return mixed
      */
-    public function setMessage($message)
+    public function __get($property)
     {
-        $this->message = (string)$message;
-
-        return $this;
+        return $this->$property;
     }
 
     /**
-     * @return string
-     */
-    public function getAmountOriginal()
-    {
-        return $this->amountOriginal;
-    }
-
-    /**
-     * @param OystPrice $amountOriginal
+     * @param string $property
+     * @param array|bool|int|string $value
      *
-     * @return OneClickItem
+     * @return $this
      */
-    public function setAmountOriginal(OystPrice $amountOriginal)
+    public function __set($property, $value)
     {
-        $this->amountOriginal = $amountOriginal;
-
-        return $this;
-    }
-
-    /**
-     * @return OystPrice
-     */
-    public function getAmountPromotional()
-    {
-        return $this->amountPromotional;
-    }
-
-    /**
-     * @param OystPrice $amountPromotional
-     *
-     * @return OneClickItem
-     */
-    public function setAmountPromotional(OystPrice $amountPromotional)
-    {
-        $this->amountPromotional = $amountPromotional;
+        $this->$property = $value;
 
         return $this;
     }
@@ -163,14 +98,21 @@ class OneClickItem implements OystArrayInterface
     {
         $oneClickItem = array(
             'reference' => $this->reference,
+            'amount' => $this->amount->toArray(),
             'quantity' => $this->quantity,
+            'images' => is_array($this->images) ? $this->images : array(),
+            'crossed_out_amount' => $this->crossedOutAmount instanceof OystPrice ? $this->crossedOutAmount->toArray() :
+                array(),
             'message' => $this->message,
-            'amount' => array(
-                'original' => $this->amountOriginal instanceof OystPrice ? $this->amountOriginal->toArray() : array(),
-                'promotional' => $this->amountPromotional instanceof OystPrice ? $this->amountPromotional->toArray() :
-                    array(),
-            ),
         );
+
+        foreach (get_object_vars($this) as $property => $value) {
+            if (in_array($property, array('reference', 'amount', 'quantity', 'images', 'crossedOutAmount', 'message'))) {
+                continue;
+            }
+
+            $oneClickItem[$property] = $value;
+        }
 
         return $oneClickItem;
     }

@@ -2,8 +2,6 @@
 
 namespace Oyst\Classes;
 
-use Oyst\Helper\OystCollectionHelper;
-
 /**
  * Class OystProduct
  *
