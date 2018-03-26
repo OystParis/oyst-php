@@ -25,6 +25,7 @@ class OneClickOrderParamsFixture
         $orderParams->setManageQuantity(false);
         $orderParams->setShouldReinitBuffer(true);
         $orderParams->setIsCheckoutCart(false);
+        $orderParams->setAllowDiscountCoupon(false);
 
         return $orderParams;
     }
