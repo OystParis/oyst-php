@@ -38,6 +38,11 @@ class OneClickOrderParams implements OystArrayInterface
     private $isCheckoutCart = false;
 
     /**
+     * @var bool
+     */
+    private $allowDiscountCoupon = false;
+
+    /**
      * @return bool
      */
     public function isMaterialized()
@@ -132,6 +137,22 @@ class OneClickOrderParams implements OystArrayInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isAllowDiscountCoupon()
+    {
+        return $this->allowDiscountCoupon;
+    }
+
+    /**
+     * @param bool $allowDiscountCoupon
+     */
+    public function setAllowDiscountCoupon($allowDiscountCoupon)
+    {
+        $this->allowDiscountCoupon = $allowDiscountCoupon;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
@@ -142,6 +163,7 @@ class OneClickOrderParams implements OystArrayInterface
             'manage_quantity' => $this->manageQuantity,
             'should_reinit_buffer' => $this->shouldReinitBuffer,
             'is_cart_checkout' => $this->isCheckoutCart,
+            'allow_discount_coupon' => $this->allowDiscountCoupon,
         );
 
         return $orderParams;
