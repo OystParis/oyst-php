@@ -59,6 +59,15 @@ class OneClickOrderCartEstimate implements OystArrayInterface
     private $merchantDiscounts;
 
     /**
+     * Optional
+     *
+     * Discount coupon error message
+     *
+     * @var string
+     */
+    private $discountCouponError;
+
+    /**
      * Constructs a OneClickShipmentCalculation instance.
      *
      * @param OneClickShipmentCatalogLess[] $shipments
@@ -262,6 +271,26 @@ class OneClickOrderCartEstimate implements OystArrayInterface
     }
 
     /**
+     * @return string
+     */
+    public function getDiscountCouponError()
+    {
+        return $this->discountCouponError;
+    }
+
+    /**
+     * @param string $discountCouponError
+     *
+     * @return $this
+     */
+    public function setDiscountCouponError($discountCouponError)
+    {
+        $this->discountCouponError = $discountCouponError;
+
+        return $this;
+    }
+
+    /**
      * Force customer to have a primary shipment
      *
      * @param string $type One carrier of OystCarrier
@@ -305,6 +334,7 @@ class OneClickOrderCartEstimate implements OystArrayInterface
             'free_items' => $oystCollectionHelper->collectionToArray($this->freeItems),
             'merchant_discounts' => $oystCollectionHelper->collectionToArray($this->merchantDiscounts),
             'message' => $this->message,
+            'discount_coupon_error' => $this->discountCouponError,
         );
 
         return $oneClickOrderCartEstimate;
