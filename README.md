@@ -107,3 +107,5 @@ To run unit tests:
 ./vendor/bin/phpunit -c phpunit.xml.dist --testsuite unitary
 ./vendor/bin/phpunit -c phpunit.xml.dist --testsuite functional
 ```
+
+For ```functional``` tests, copy ```src/Config/parameters_api.sample.yml``` as ```src/Config/parameters_api.yml``` and fill ```apiKey```.
