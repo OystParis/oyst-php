@@ -55,7 +55,7 @@ class OneClickOrderCartEstimateTest extends \PHPUnit_Framework_TestCase
         $fakeResponse = new Response(
             200,
             array('Content-Type' => 'application/json'),
-            '{"shipments":[{"amount":{"value":490,"currency":"EUR"},"delay":48,"primary":true,"carrier":{"id":"colissimo","name":"Colissimo","type":"home_delivery"}}],"items":[{"reference":"33245342","amount":{"value":3490,"currency":"EUR"},"quantity":1,"crossed_out_amount":{"value":3800,"currency":"EUR"}}],"order_amount":{"value":3490,"currency":"EUR"},"free_items":[{"reference":"4323","amount":{"value":0,"currency":"EUR"},"quantity":1,"title":"Special gift"}],"merchant_discounts":[{"amount":{"value":1337,"currency":"EUR"},"name":"bday discount"}],"message":"Happy bday"}'
+            '{"shipments":[{"amount":{"value":490,"currency":"EUR"},"delay":48,"primary":true,"carrier":{"id":"colissimo","name":"Colissimo","type":"home_delivery"}}],"items":[{"reference":"33245342","amount":{"value":3490,"currency":"EUR"},"quantity":1,"crossed_out_amount":{"value":3800,"currency":"EUR"}}],"order_amount":{"value":3490,"currency":"EUR"},"free_items":[{"reference":"4323","amount":{"value":0,"currency":"EUR"},"quantity":1,"title":"Special gift"}],"merchant_discounts":[{"amount":{"value":1337,"currency":"EUR"},"name":"bday discount"}],"message":"Happy bday","discount_coupon_error":"Invalid coupon"}'
         );
 
         $colissimo = new OneClickShipmentCatalogLess(
@@ -83,6 +83,7 @@ class OneClickOrderCartEstimateTest extends \PHPUnit_Framework_TestCase
             array(new OneClickMerchantDiscount(new OystPrice(13.37, 'EUR'), 'bday discount'))
         );
         $oneClickOrderCartEstimate->setMessage('Happy bday');
+        $oneClickOrderCartEstimate->setDiscountCouponError('Invalid coupon');
 
         $this->assertEquals(
             $fakeResponse->getBody(true),
