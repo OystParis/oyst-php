@@ -149,7 +149,7 @@ class OneClickOrderParams implements OystArrayInterface
      */
     public function setAllowDiscountCoupon($allowDiscountCoupon)
     {
-        $this->allowDiscountCoupon = $allowDiscountCoupon;
+        $this->allowDiscountCoupon = (bool)$allowDiscountCoupon;
     }
 
     /**
