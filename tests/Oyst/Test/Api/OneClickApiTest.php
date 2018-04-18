@@ -112,8 +112,12 @@ class OneClickApiTest extends OystApiContext
      *
      * @dataProvider fakeData
      */
-    public function testAuthorizeOrderWithSimpleProductAndOrderParams($apiKey, $userAgent, $product, $oneClickOrderParams)
-    {
+    public function testAuthorizeOrderWithSimpleProductAndOrderParams(
+        $apiKey,
+        $userAgent,
+        $product,
+        $oneClickOrderParams
+    ) {
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
 
@@ -159,8 +163,14 @@ class OneClickApiTest extends OystApiContext
      *
      * @dataProvider fakeData
      */
-    public function testAuthorizeOrderWithSimpleProductAndNotification($apiKey, $userAgent, $product, $oneClickOrderParams, $oneClickOrderContext, $oneClickNotifications)
-    {
+    public function testAuthorizeOrderWithSimpleProductAndNotification(
+        $apiKey,
+        $userAgent,
+        $product,
+        $oneClickOrderParams,
+        $oneClickOrderContext,
+        $oneClickNotifications
+    ) {
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
 
@@ -184,8 +194,15 @@ class OneClickApiTest extends OystApiContext
      *
      * @dataProvider fakeData
      */
-    public function testAuthorizeOrderV2WithSimpleProduct($apiKey, $userAgent, $product, $oneClickOrderParams, $oneClickOrderContext, $oneClickNotifications, $user)
-    {
+    public function testAuthorizeOrderV2WithSimpleProduct(
+        $apiKey,
+        $userAgent,
+        $product,
+        $oneClickOrderParams,
+        $oneClickOrderContext,
+        $oneClickNotifications,
+        $user
+    ) {
         /** @var OystOneClickAPI $oneClickApi */
         $oneClickApi = $this->getApi($apiKey, $userAgent);
 

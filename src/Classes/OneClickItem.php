@@ -106,8 +106,9 @@ class OneClickItem implements OystArrayInterface
             'message' => $this->message,
         );
 
+        $oneClickItemProperty = array('reference', 'amount', 'quantity', 'images', 'crossedOutAmount', 'message');
         foreach (get_object_vars($this) as $property => $value) {
-            if (in_array($property, array('reference', 'amount', 'quantity', 'images', 'crossedOutAmount', 'message'))) {
+            if (in_array($property, $oneClickItemProperty)) {
                 continue;
             }
 
