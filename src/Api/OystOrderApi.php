@@ -38,9 +38,9 @@ class OystOrderApi extends AbstractOystApiClient
     }
 
     /**
-     * Get oneclick order
+     * Get oneclick order.
      *
-     * @param $orderId
+     * @param string $orderId Oyst order id
      *
      * @return string[]|false
      */
@@ -56,24 +56,32 @@ class OystOrderApi extends AbstractOystApiClient
     }
 
     /**
-     * @param $orderId
-     * @param $status
+     * Update order status.
+     *
+     * @param string $orderId Oyst order id
+     * @param string $status The order status (see constants AbstractOrderState)
+     * @param string $orderReference The e-commerce order reference
      *
      * @return mixed
      */
-    public function updateStatus($orderId, $status)
+    public function updateStatus($orderId, $status, $orderReference = null)
     {
         $data = array(
             'id' => $orderId,
-            'status' => $status
+            'status' => $status,
         );
+
+        if (!is_null($orderReference)) {
+            $data['order_reference'] = $orderReference;
+        }
+
         $response = $this->executeCommand('updateStatus', $data);
 
         return $response;
     }
 
     /**
-     * @param $orderId
+     * @param string $orderId Oyst order id
      *
      * @return mixed
      */
@@ -83,7 +91,7 @@ class OystOrderApi extends AbstractOystApiClient
     }
 
     /**
-     * @param $orderId
+     * @param string $orderId Oyst order id
      *
      * @return mixed
      */
@@ -93,7 +101,7 @@ class OystOrderApi extends AbstractOystApiClient
     }
 
     /**
-     * @param $orderId
+     * @param string $orderId Oyst order id
      *
      * @return mixed
      */
@@ -103,7 +111,7 @@ class OystOrderApi extends AbstractOystApiClient
     }
 
     /**
-     * @param $orderId
+     * @param string $orderId Oyst order id
      *
      * @return mixed
      */
@@ -115,7 +123,7 @@ class OystOrderApi extends AbstractOystApiClient
     /**
      * Refund an order
      *
-     * @param string $orderId
+     * @param string $orderId Oyst order id
      * @param OystPrice|null $price If $price is null then the refund is total
      *
      * @return mixed
@@ -136,7 +144,7 @@ class OystOrderApi extends AbstractOystApiClient
     }
 
     /**
-     * @param string $orderId
+     * @param string $orderId Oyst order id
      * @param string $merchantOrderReference
      *
      * @return mixed
