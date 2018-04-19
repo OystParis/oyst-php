@@ -219,13 +219,13 @@ class OneClickOrderCartEstimate implements OystArrayInterface
     }
 
     /**
-     * @param OneClickItem $freeItems
+     * @param OneClickItem $freeItem
      *
      * @return $this
      */
-    public function addFreeItems(OneClickItem $freeItems)
+    public function addFreeItems(OneClickItem $freeItem)
     {
-        $this->freeItems[] = $freeItems;
+        $this->freeItems[] = $freeItem;
 
         return $this;
     }
