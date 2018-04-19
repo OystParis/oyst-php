@@ -42,7 +42,7 @@ class OneClickOrderCartEstimate implements OystArrayInterface
      *
      * @var OystPrice
      */
-    private $orderAmount;
+    private $cartAmount;
 
     /**
      * Optional
@@ -181,19 +181,19 @@ class OneClickOrderCartEstimate implements OystArrayInterface
     /**
      * @return OystPrice
      */
-    public function getOrderAmount()
+    public function getCartAmount()
     {
-        return $this->orderAmount;
+        return $this->cartAmount;
     }
 
     /**
-     * @param OystPrice $orderAmount
+     * @param OystPrice $cartAmount
      *
      * @return $this
      */
-    public function setOrderAmount(OystPrice $orderAmount)
+    public function setCartAmount(OystPrice $cartAmount)
     {
-        $this->orderAmount = $orderAmount;
+        $this->cartAmount = $cartAmount;
 
         return $this;
     }
@@ -248,7 +248,9 @@ class OneClickOrderCartEstimate implements OystArrayInterface
         if (!empty($merchantDiscounts)) {
             foreach ($merchantDiscounts as $merchantDiscount) {
                 if (!$merchantDiscount instanceof OneClickMerchantDiscount) {
-                    throw new \InvalidArgumentException('$merchantDiscounts must be an array of Oyst\Classes\OneClickMerchantDiscount');
+                    throw new \InvalidArgumentException(
+                        '$merchantDiscounts must be an array of Oyst\Classes\OneClickMerchantDiscount'
+                    );
                 }
             }
 
@@ -330,7 +332,7 @@ class OneClickOrderCartEstimate implements OystArrayInterface
         $oneClickOrderCartEstimate = array(
             'shipments' => $oystCollectionHelper->collectionToArray($this->shipments),
             'items' => $oystCollectionHelper->collectionToArray($this->items),
-            'order_amount' => $this->orderAmount instanceof OystPrice ? $this->orderAmount->toArray() : array(),
+            'cart_amount' => $this->cartAmount instanceof OystPrice ? $this->cartAmount->toArray() : array(),
             'free_items' => $oystCollectionHelper->collectionToArray($this->freeItems),
             'merchant_discounts' => $oystCollectionHelper->collectionToArray($this->merchantDiscounts),
             'message' => $this->message,

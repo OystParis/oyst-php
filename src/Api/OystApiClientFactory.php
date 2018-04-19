@@ -17,10 +17,10 @@ use Symfony\Component\Yaml\Parser;
  */
 class OystApiClientFactory
 {
-    // 6.3.0
+    // 7.0.0
     private static $version = array(
-        'major' => '6',
-        'minor' => '3',
+        'major' => '7',
+        'minor' => '0',
         'patch' => '0',
     );
 
