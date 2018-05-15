@@ -51,6 +51,12 @@
                     "type": "string",
                     "description": "New order status",
                     "required": true
+                },
+                "order_reference": {
+                    "location": "json",
+                    "type": "string",
+                    "description": "The e-commerce order reference",
+                    "required": false
                 }
             }
         },
