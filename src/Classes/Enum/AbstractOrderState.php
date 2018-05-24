@@ -19,6 +19,7 @@ class AbstractOrderState
     const PENDING = 'pending';
     const REFUNDED = 'refunded';
     const SHIPPED = 'shipped';
+    const PAYMENT_FAILED = 'payment_failed';
 
     private function __construct()
     {
