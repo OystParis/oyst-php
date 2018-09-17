@@ -81,7 +81,7 @@
           "description": "A bunch of notifications",
           "required": false
         },
-        "order": {
+        "order_params": {
           "location": "json",
           "type": "object",
           "sentAs": "order",
