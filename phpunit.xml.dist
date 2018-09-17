@@ -7,10 +7,6 @@
             <directory suffix="Test.php">./tests/Oyst/Test/Entrypoint</directory>
             <directory suffix="Test.php">./tests/Oyst/Test/Helper</directory>
         </testsuite>
-
-        <testsuite name="functional">
-            <directory suffix="Test.php">./tests/Oyst/Test/Controller</directory>
-        </testsuite>
     </testsuites>
 
     <filter>

@@ -22,8 +22,6 @@ script:
   - mkdir -p build/logs
   ## Unit Tests
   - vendor/bin/phpunit -c phpunit.xml.dist --testsuite unitary
-  ## Functional Tests
-  - vendor/bin/phpunit -c phpunit.xml.dist --testsuite functional
   ## PHP CodeSniffer disable error on exit
   - vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
   ## PHP CodeSniffer with PSR2
