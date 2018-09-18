@@ -5,7 +5,7 @@
   "operations": {
     "GetOrders": {
       "httpMethod": "GET",
-      "uri": "merchants/orders",
+      "uri": "orders",
       "summary": "Get the orders list (paginated)",
       "parameters": {
         "per_page": {
@@ -24,7 +24,7 @@
     },
     "GetOrder": {
       "httpMethod": "GET",
-      "uri": "merchants/orders/{id}",
+      "uri": "orders/{id}",
       "summary": "Get an order",
       "parameters": {
         "id": {
@@ -37,7 +37,7 @@
     },
     "updateStatus": {
       "httpMethod": "PATCH",
-      "uri": "merchants/orders/{id}",
+      "uri": "orders/{id}",
       "summary": "Update specific order status",
       "parameters": {
         "id": {
@@ -62,7 +62,7 @@
     },
     "Refunds": {
       "httpMethod": "POST",
-      "uri": "merchants/orders/{id}/refunds",
+      "uri": "orders/{id}/refunds",
       "summary": "Refund a payment",
       "parameters": {
         "id": {
@@ -90,7 +90,7 @@
     },
     "updateOrder": {
       "httpMethod": "PATCH",
-      "uri": "merchants/orders/{id}",
+      "uri": "orders/{id}",
       "summary": "Update specific order with merchant order reference",
       "parameters": {
         "id": {
