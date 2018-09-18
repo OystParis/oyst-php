@@ -70,35 +70,41 @@
       "summary": "Check if an order can be processed",
       "parameters": {
         "context": {
-          "location": "json",
-          "type": "object",
-          "description": "Contextual elements about the order",
-          "required": false
+            "location": "json",
+            "type": "object",
+            "description": "Contextual elements about the order",
+            "required": false
+        },
+        "customization": {
+            "location": "json",
+            "type": "object",
+            "description": "Customize a CTA post order",
+            "required": false
         },
         "notifications": {
-          "location": "json",
-          "type": "object",
-          "description": "A bunch of notifications",
-          "required": false
+            "location": "json",
+            "type": "object",
+            "description": "A bunch of notifications",
+            "required": false
         },
         "order_params": {
-          "location": "json",
-          "type": "object",
-          "sentAs": "order",
-          "description": "The order params",
-          "required": false
+            "location": "json",
+            "type": "object",
+            "sentAs": "order",
+            "description": "The order params",
+            "required": false
         },
         "products": {
-          "location": "json",
-          "type": "array",
-          "description": "An array of product",
-          "required": true
+            "location": "json",
+            "type": "array",
+            "description": "An array of product",
+            "required": true
         },
         "user": {
-          "location": "json",
-          "type": "object",
-          "description": "The user who ordered the product",
-          "required": false
+            "location": "json",
+            "type": "object",
+            "description": "The user who ordered the product",
+            "required": false
         }
       }
     }
