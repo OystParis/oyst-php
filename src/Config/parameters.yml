@@ -1,9 +1,9 @@
 api:
-    env:
-        prod: https://api.oyst.com
-        sandbox: https://api.sandbox.oyst.eu
-    path:
-        catalog: /catalog
-        order: /order
-        payment: /payment
-        oneclick: /oneclick
+  env:
+    prod: https://api-gw.oyst.com
+    sandbox: https://api-gw.sandbox.oyst.eu
+  path:
+    catalog: /oneclick-api/merchants
+    order: /oneclick-api/merchants
+    payment: /oneclick-api
+    oneclick: /oneclick-api

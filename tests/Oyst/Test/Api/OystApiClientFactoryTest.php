@@ -27,11 +27,11 @@ class OystApiClientFactoryTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             // @codingStandardsIgnoreLine
-            array(OystApiClientFactory::ENTITY_CATALOG, OystApiClientFactory::ENV_PROD, 'https://localhost', 'https://api.oyst.com/catalog/v1'),
-            array(OystApiClientFactory::ENTITY_ORDER, null, 'https://localhost', 'https://localhost/order/v2'),
+            array(OystApiClientFactory::ENTITY_CATALOG, OystApiClientFactory::ENV_PROD, 'https://localhost', 'https://api-gw.oyst.com/oneclick-api/merchants'),
+            array(OystApiClientFactory::ENTITY_ORDER, null, 'https://localhost', 'https://localhost/oneclick-api/merchants'),
             // @codingStandardsIgnoreLine
-            array(OystApiClientFactory::ENTITY_ONECLICK, OystApiClientFactory::ENV_PROD, null, 'https://api.oyst.com/oneclick/'),
-            array(OystApiClientFactory::ENTITY_PAYMENT, null, 'https://localhost', 'https://localhost/payment'),
+            array(OystApiClientFactory::ENTITY_ONECLICK, OystApiClientFactory::ENV_PROD, null, 'https://api-gw.oyst.com/oneclick-api'),
+            array(OystApiClientFactory::ENTITY_PAYMENT, null, 'https://localhost', 'https://localhost/oneclick-api'),
         );
     }
 
@@ -92,10 +92,10 @@ class OystApiClientFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $url = 'https://localhost';
         return array(
-            array(OystApiClientFactory::ENTITY_CATALOG, null, $url, 'catalog', 'https://localhost/catalog'),
-            array(OystApiClientFactory::ENTITY_ORDER, null, $url, 'order', 'https://localhost/order'),
-            array(OystApiClientFactory::ENTITY_PAYMENT, null, $url, 'payment', 'https://localhost/payment'),
-            array(OystApiClientFactory::ENTITY_ONECLICK, null, $url, 'oneclick', 'https://localhost/oneclick'),
+            array(OystApiClientFactory::ENTITY_CATALOG, null, $url, 'catalog', 'https://localhost/oneclick-api/merchants'),
+            array(OystApiClientFactory::ENTITY_ORDER, null, $url, 'order', 'https://localhost/oneclick-api/merchants'),
+            array(OystApiClientFactory::ENTITY_PAYMENT, null, $url, 'payment', 'https://localhost/oneclick-api'),
+            array(OystApiClientFactory::ENTITY_ONECLICK, null, $url, 'oneclick', 'https://localhost/oneclick-api'),
         );
     }
 

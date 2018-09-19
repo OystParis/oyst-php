@@ -1,284 +1,284 @@
 {
-    "name": "API Order",
-    "apiVersion": "v2",
-    "description": "Oyst API Order",
-    "operations": {
-        "GetOrders": {
-            "httpMethod": "GET",
-            "uri": "orders",
-            "summary": "Get the orders list (paginated)",
-            "parameters": {
-                "per_page": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "The limit number of results to return per page",
-                    "required": false
-                },
-                "status": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "The statuses on which to filter",
-                    "required": false
-                }
-            }
+  "name": "API Order",
+  "apiVersion": "v2",
+  "description": "Oyst API Order",
+  "operations": {
+    "GetOrders": {
+      "httpMethod": "GET",
+      "uri": "orders",
+      "summary": "Get the orders list (paginated)",
+      "parameters": {
+        "per_page": {
+          "location": "query",
+          "type": "string",
+          "description": "The limit number of results to return per page",
+          "required": false
         },
-        "GetOrder": {
-            "httpMethod": "GET",
-            "uri": "orders/{id}",
-            "summary": "Get an order",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "type": "string",
-                    "description": "The order id",
-                    "required": true
-                }
-            }
-        },
-        "updateStatus": {
-            "httpMethod": "PATCH",
-            "uri": "orders/{id}",
-            "summary": "Update specific order status",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "type": "string",
-                    "description": "The order id",
-                    "required": true
-                },
-                "status": {
-                    "location": "json",
-                    "type": "string",
-                    "description": "New order status",
-                    "required": true
-                },
-                "order_reference": {
-                    "location": "json",
-                    "type": "string",
-                    "description": "The e-commerce order reference",
-                    "required": false
-                }
-            }
-        },
-        "Refunds": {
-            "httpMethod": "POST",
-            "uri": "orders/{id}/refunds",
-            "summary": "Refund a payment",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "type": "string",
-                    "description": "The order id",
-                    "required": true
-                },
-                "amount": {
-                    "type": "object",
-                    "location": "json",
-                    "additionalProperties": false,
-                    "properties": {
-                        "value": {
-                            "type": "integer",
-                            "sentAs": "value"
-                        },
-                        "currency": {
-                            "type": "string",
-                            "sentAs": "currency"
-                        }
-                    }
-                }
-            }
-        },
-        "updateOrder": {
-            "httpMethod": "PATCH",
-            "uri": "orders/{id}",
-            "summary": "Update specific order with merchant order reference",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "type": "string",
-                    "description": "The order id",
-                    "required": true
-                },
-                "order_reference": {
-                    "location": "json",
-                    "type": "string",
-                    "description": "New merchant order reference",
-                    "required": true
-                }
-            }
+        "status": {
+          "location": "query",
+          "type": "string",
+          "description": "The statuses on which to filter",
+          "required": false
         }
+      }
     },
-    "models": {
-        "amount": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "value": {
-                    "type": "integer",
-                    "sentAs": "value"
-                },
-                "currency": {
-                    "type": "string",
-                    "sentAs": "currency"
-                }
-            }
-        },
-        "order": {
-            "type": "object",
-            "additionalProperties": false,
-            "location": "json",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "sentAs": "id"
-                },
-                "productReference": {
-                    "type": "string",
-                    "sentAs": "product_reference"
-                },
-                "variationReference": {
-                    "type": "string",
-                    "sentAs": "variation_reference"
-                },
-                "productAmount": {
-                    "$ref": "amount",
-                    "sentAs": "product_amount"
-                },
-                "orderAmount": {
-                    "$ref": "amount",
-                    "sentAs": "order_amount"
-                },
-                "currentStatus": {
-                    "type": "string",
-                    "sentAs": "current_status"
-                },
-                "createdAt": {
-                    "type": "string",
-                    "sentAs": "created_at"
-                },
-                "merchantId": {
-                    "type": "string",
-                    "sentAs": "merchant_id"
-                },
-                "quantity": {
-                    "type": "integer",
-                    "sentAs": "quantity"
-                },
-                "shipment": {
-                    "type": "object",
-                    "sentAs": "shipment",
-                    "additionalProperties": false,
-                    "properties": {
-                        "amount": {
-                            "$ref": "amount",
-                            "sentAs": "amount"
-                        },
-                        "carrier": {
-                            "type": "string",
-                            "sentAs": "carrier"
-                        },
-                        "tracking": {
-                            "type": "string",
-                            "sentAs": "tracking"
-                        },
-                        "url": {
-                            "type": "string",
-                            "sentAs": "url"
-                        }
-                    }
-                },
-                "historicStatus": {
-                    "type": "array",
-                    "sentAs": "status",
-                    "items": {
-                        "type": "object",
-                        "additionalProperties": false,
-                        "properties": {
-                            "date": {
-                                "type": "string",
-                                "sentAs": "date"
-                            },
-                            "status": {
-                                "type": "string",
-                                "sentAs": "status"
-                            }
-                        }
-                    }
-                },
-                "updatedAt": {
-                    "type": "string",
-                    "sentAs": "updated_at"
-                },
-                "user": {
-                    "type": "object",
-                    "sentAs": "user",
-                    "additionalProperties": false,
-                    "properties": {
-                        "phone": {
-                            "type": "string",
-                            "sentAs": "phone_number"
-                        },
-                        "email": {
-                            "type": "string",
-                            "sentAs": "email"
-                        },
-                        "address": {
-                            "type": "object",
-                            "sentAs": "address",
-                            "additionalProperties": false,
-                            "properties": {
-                                "firstName": {
-                                    "type": "string",
-                                    "sentAs": "firstname"
-                                },
-                                "lastName": {
-                                    "type": "string",
-                                    "sentAs": "name"
-                                },
-                                "company": {
-                                    "type": "string",
-                                    "sentAs": "society"
-                                },
-                                "street": {
-                                    "type": "string",
-                                    "sentAs": "street"
-                                },
-                                "postalCode": {
-                                    "type": "string",
-                                    "sentAs": "postalcode"
-                                },
-                                "city": {
-                                    "type": "string",
-                                    "sentAs": "city"
-                                },
-                                "country": {
-                                    "type": "string",
-                                    "sentAs": "country"
-                                },
-                                "additional": {
-                                    "type": "string",
-                                    "sentAs": "additionnal"
-                                }
-                            }
-                        }
-                    }
-                },
-                "fees": {
-                    "type": "object",
-                    "sentAs": "fees",
-                    "additionalProperties": false,
-                    "properties": {
-                        "cpa": {
-                            "type": "integer",
-                            "sentAs": "cpa"
-                        }
-                    }
-                },
-                "commissionAmount": {
-                    "$ref": "amount",
-                    "sentAs": "amount"
-                }
-            }
+    "GetOrder": {
+      "httpMethod": "GET",
+      "uri": "orders/{id}",
+      "summary": "Get an order",
+      "parameters": {
+        "id": {
+          "location": "uri",
+          "type": "string",
+          "description": "The order id",
+          "required": true
         }
+      }
+    },
+    "updateStatus": {
+      "httpMethod": "PATCH",
+      "uri": "orders/{id}",
+      "summary": "Update specific order status",
+      "parameters": {
+        "id": {
+          "location": "uri",
+          "type": "string",
+          "description": "The order id",
+          "required": true
+        },
+        "status": {
+          "location": "json",
+          "type": "string",
+          "description": "New order status",
+          "required": true
+        },
+        "order_reference": {
+          "location": "json",
+          "type": "string",
+          "description": "The e-commerce order reference",
+          "required": false
+        }
+      }
+    },
+    "Refunds": {
+      "httpMethod": "POST",
+      "uri": "orders/{id}/refunds",
+      "summary": "Refund a payment",
+      "parameters": {
+        "id": {
+          "location": "uri",
+          "type": "string",
+          "description": "The order id",
+          "required": true
+        },
+        "amount": {
+          "type": "object",
+          "location": "json",
+          "additionalProperties": false,
+          "properties": {
+            "value": {
+              "type": "integer",
+              "sentAs": "value"
+            },
+            "currency": {
+              "type": "string",
+              "sentAs": "currency"
+            }
+          }
+        }
+      }
+    },
+    "updateOrder": {
+      "httpMethod": "PATCH",
+      "uri": "orders/{id}",
+      "summary": "Update specific order with merchant order reference",
+      "parameters": {
+        "id": {
+          "location": "uri",
+          "type": "string",
+          "description": "The order id",
+          "required": true
+        },
+        "order_reference": {
+          "location": "json",
+          "type": "string",
+          "description": "New merchant order reference",
+          "required": true
+        }
+      }
     }
+  },
+  "models": {
+    "amount": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "integer",
+          "sentAs": "value"
+        },
+        "currency": {
+          "type": "string",
+          "sentAs": "currency"
+        }
+      }
+    },
+    "order": {
+      "type": "object",
+      "additionalProperties": false,
+      "location": "json",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "sentAs": "id"
+        },
+        "productReference": {
+          "type": "string",
+          "sentAs": "product_reference"
+        },
+        "variationReference": {
+          "type": "string",
+          "sentAs": "variation_reference"
+        },
+        "productAmount": {
+          "$ref": "amount",
+          "sentAs": "product_amount"
+        },
+        "orderAmount": {
+          "$ref": "amount",
+          "sentAs": "order_amount"
+        },
+        "currentStatus": {
+          "type": "string",
+          "sentAs": "current_status"
+        },
+        "createdAt": {
+          "type": "string",
+          "sentAs": "created_at"
+        },
+        "merchantId": {
+          "type": "string",
+          "sentAs": "merchant_id"
+        },
+        "quantity": {
+          "type": "integer",
+          "sentAs": "quantity"
+        },
+        "shipment": {
+          "type": "object",
+          "sentAs": "shipment",
+          "additionalProperties": false,
+          "properties": {
+            "amount": {
+              "$ref": "amount",
+              "sentAs": "amount"
+            },
+            "carrier": {
+              "type": "string",
+              "sentAs": "carrier"
+            },
+            "tracking": {
+              "type": "string",
+              "sentAs": "tracking"
+            },
+            "url": {
+              "type": "string",
+              "sentAs": "url"
+            }
+          }
+        },
+        "historicStatus": {
+          "type": "array",
+          "sentAs": "status",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "date": {
+                "type": "string",
+                "sentAs": "date"
+              },
+              "status": {
+                "type": "string",
+                "sentAs": "status"
+              }
+            }
+          }
+        },
+        "updatedAt": {
+          "type": "string",
+          "sentAs": "updated_at"
+        },
+        "user": {
+          "type": "object",
+          "sentAs": "user",
+          "additionalProperties": false,
+          "properties": {
+            "phone": {
+              "type": "string",
+              "sentAs": "phone_number"
+            },
+            "email": {
+              "type": "string",
+              "sentAs": "email"
+            },
+            "address": {
+              "type": "object",
+              "sentAs": "address",
+              "additionalProperties": false,
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "sentAs": "firstname"
+                },
+                "lastName": {
+                  "type": "string",
+                  "sentAs": "name"
+                },
+                "company": {
+                  "type": "string",
+                  "sentAs": "society"
+                },
+                "street": {
+                  "type": "string",
+                  "sentAs": "street"
+                },
+                "postalCode": {
+                  "type": "string",
+                  "sentAs": "postalcode"
+                },
+                "city": {
+                  "type": "string",
+                  "sentAs": "city"
+                },
+                "country": {
+                  "type": "string",
+                  "sentAs": "country"
+                },
+                "additional": {
+                  "type": "string",
+                  "sentAs": "additionnal"
+                }
+              }
+            }
+          }
+        },
+        "fees": {
+          "type": "object",
+          "sentAs": "fees",
+          "additionalProperties": false,
+          "properties": {
+            "cpa": {
+              "type": "integer",
+              "sentAs": "cpa"
+            }
+          }
+        },
+        "commissionAmount": {
+          "$ref": "amount",
+          "sentAs": "amount"
+        }
+      }
+    }
+  }
 }
