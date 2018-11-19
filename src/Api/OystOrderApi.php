@@ -132,6 +132,7 @@ class OystOrderApi extends AbstractOystApiClient
     {
         $data = array(
             'id' => $orderId,
+            'status' => AbstractOrderState::REFUNDED,
         );
 
         if (!is_null($price)) {
