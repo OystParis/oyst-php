@@ -337,6 +337,7 @@ class OneClickOrderCartEstimate implements OystArrayInterface
             'merchant_discounts' => $oystCollectionHelper->collectionToArray($this->merchantDiscounts),
             'message' => $this->message,
             'discount_coupon_error' => $this->discountCouponError,
+            'newsletter_optin' => null,
         );
 
         return $oneClickOrderCartEstimate;
