@@ -68,6 +68,15 @@ class OneClickOrderCartEstimate implements OystArrayInterface
     private $discountCouponError;
 
     /**
+     * Optional
+     *
+     * Newsletter Optin
+     *
+     * @var string
+     */
+    private $newsletterOptin;
+
+    /**
      * Constructs a OneClickShipmentCalculation instance.
      *
      * @param OneClickShipmentCatalogLess[] $shipments
@@ -174,6 +183,26 @@ class OneClickOrderCartEstimate implements OystArrayInterface
     public function setMessage($message)
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNewsletterOptin()
+    {
+        return $this->newsletterOptin;
+    }
+
+    /**
+     * @param string $newsletterOptin
+     *
+     * @return $this
+     */
+    public function setNewsletterOptin($newsletterOptin)
+    {
+        $this->newsletterOptin = $newsletterOptin;
 
         return $this;
     }
@@ -337,7 +366,7 @@ class OneClickOrderCartEstimate implements OystArrayInterface
             'merchant_discounts' => $oystCollectionHelper->collectionToArray($this->merchantDiscounts),
             'message' => $this->message,
             'discount_coupon_error' => $this->discountCouponError,
-            'newsletter_optin' => null,
+            'newsletter_optin' => $this->newsletterOptin,
         );
 
         return $oneClickOrderCartEstimate;
